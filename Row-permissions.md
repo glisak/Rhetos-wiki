@@ -10,8 +10,8 @@ Table of contents:
 5. Client side - Reading data with row permissions
 6. Server side - Manually verifying row permissions
 
-1. Essential info
------------------
+
+## 1. Essential info
 
 Row permissions are based on filters that are applied when reading and writing entity's records:
 
@@ -20,8 +20,7 @@ Row permissions are based on filters that are applied when reading and writing e
 * Row permissions are **ignored** inside a server-side functions (inside an **Action** or a **FilterBy**, e.g.). To explicitly verify user's permissions in a sever action, see "Manually verifying row permissions" below.
 
 
-2. Simple row permission rules
-------------------------------
+## 2. Simple row permission rules
 
 ### Example requirements
 
@@ -83,8 +82,7 @@ Each rule has the following parameters:
     * This function is formatted as a lambda expression of type: `Func<Common.ExecutionContext, Expression<Func<TEntity, bool>>>`.
 
 
-3. Combining multiple rules
----------------------------
+## Combining multiple rules
 
 ### Example requirements
 
@@ -176,8 +174,7 @@ Note that the `SupervisedRegions` rule implements an additional **optimization**
 * Similarly, if an `Allow*` rule returns filter expression `item => true` (all items are selected), the other `Allow*` rules will be ignored, and the final SQL query will not contain any rule-specific filtering.
 
 
-4. Inheriting row permissions
------------------------------
+## 4. Inheriting row permissions
 
 ### Example requirements
 
@@ -288,8 +285,7 @@ Instead of using `AutoInheritRowPermissions` (see the previous solution), row pe
 * **InheritFrom** concept's parameter is the full name of `DocumentComment` entity's reference property (`Reference Document`) that references the "parent" entity with row permissions that will be inherited.
 
 
-5. Client side - Reading data with row permissions
---------------------------------------------------
+## 5. Client side - Reading data with row permissions
 
 *The following examples use the test data from Rhetos unit tests. To prepare the data, open the `CommonConceptsTest.sln` solution in the Rhetos source and run the tests in the `RowPermissionsDemo` class.*
 
@@ -323,8 +319,7 @@ Response example:
     }
 
 
-6. Server side - Manually verifying row permissions
----------------------------------------------------
+## 6. Server side - Manually verifying row permissions
 
 Row permissions are automatically checked for client's read and write requests. Row permissions are ignored inside a server-side functions that use ServerDom repositories the read and write data (inside an **Action** or a report, for example). To explicitly verify the current user's permissions inside the server code, use one of the following methods:
 
