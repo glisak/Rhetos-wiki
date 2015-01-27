@@ -3,12 +3,12 @@ Row permissions
 
 Table of contents:
 
-1. Essential info
-2. Simple row permission rules
-3. Combining multiple rules
-4. Inheriting row permissions
-5. Client side - Reading data with row permissions
-6. Server side - Manually verifying row permissions
+1. [Essential info](#1-essential-info)
+2. [Simple row permission rules](#2-simple-row-permission-rules)
+3. [Combining multiple rules](#3-combining-multiple-rules)
+4. [Inheriting row permissions](#4-inheriting-row-permissions)
+5. [Client code - Reading data with row permissions](#5-client-code---reading-data-with-row-permissions)
+6. [Server code - Manually verifying row permissions](#6-server-code---manually-verifying-row-permissions)
 
 
 ## 1. Essential info
@@ -285,7 +285,7 @@ Instead of using `AutoInheritRowPermissions` (see the previous solution), row pe
 * **InheritFrom** concept's parameter is the full name of `DocumentComment` entity's reference property (`Reference Document`) that references the "parent" entity with row permissions that will be inherited.
 
 
-## 5. Client side - Reading data with row permissions
+## 5. Client code - Reading data with row permissions
 
 *The following examples use the test data from Rhetos unit tests. To prepare the data, open the `CommonConceptsTest.sln` solution in the Rhetos source and run the tests in the `RowPermissionsDemo` class.*
 
@@ -319,7 +319,7 @@ Response example:
     }
 
 
-## 6. Server side - Manually verifying row permissions
+## 6. Server code - Manually verifying row permissions
 
 Row permissions are automatically checked for client's read and write requests. Row permissions are ignored inside a server-side functions that use ServerDom repositories the read and write data (inside an **Action** or a report, for example). To explicitly verify the current user's permissions inside the server code, use one of the following methods:
 
