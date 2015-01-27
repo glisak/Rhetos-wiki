@@ -82,7 +82,7 @@ Each rule has the following parameters:
     * This function is formatted as a lambda expression of type: `Func<Common.ExecutionContext, Expression<Func<TEntity, bool>>>`.
 
 
-## Combining multiple rules
+## 3. Combining multiple rules
 
 ### Example requirements
 
