@@ -10,12 +10,14 @@ Table of contents:
 
 ## 1. Essential info
 
+Row permissions are intended for implementing business requirements that can be formed in rules of the following format: *Some subset of employees may access (read or write) some subset of records.*
+Row permissions are **not intended** for limiting access to specific **actions**, or filtering out some records in one part of the application while allowing the user to access those records in another part of the application.
+
 Row permissions are based on filters that are applied when reading and writing entity's records:
 
 * The user will be **denied read or write command** if the involved records do not pass the given row permissions filter.
 * A client may **explicitly apply** the row permissions filter (`Common.RowPermissionsReadItems`) when reading data from the Rhetos server, in order to avoid any access-denied errors.
 * Row permissions are **ignored** inside a server-side functions (inside an **Action** or a **FilterBy**, e.g.). To explicitly verify user's permissions in a sever action, see "Manually verifying row permissions" below.
-
 
 ## 2. Simple row permission rules
 
