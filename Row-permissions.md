@@ -1,6 +1,3 @@
-Row permissions
-===============
-
 Table of contents:
 
 1. [Essential info](#1-essential-info)
