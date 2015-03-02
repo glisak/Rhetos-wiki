@@ -1,6 +1,3 @@
-SqlObject concept
-=================
-
 Allows creating any SQL object as a part of generated application.
 **SqlObject** is intended to be used as a workaround when existing DSL concepts (**Unique**, **SqlIndex**, **SqlView**, **SqlTrigger**, etc) are not sufficient.
 
