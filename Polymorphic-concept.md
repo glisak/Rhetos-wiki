@@ -1,11 +1,11 @@
 Table of contents:
 
-* [Essential info](#essential-info)
-* [Usage](#usage)
-* [Referencing or extending a polymorphic entity](#referencing-or-extending-a-polymorphic-entity)
-* [Multiple interface implementations](#multiple-interface-implementations)
-* [Specific implementation with SQL query](#specific-implementation-with-sql-query)
-* [Writing efficient queries from client application](#writing-efficient-queries-from-client-application)
+1. [Essential info](#essential-info)
+2. [Usage](#usage)
+3. [Referencing or extending a polymorphic entity](#referencing-or-extending-a-polymorphic-entity)
+4. [Multiple interface implementations](#multiple-interface-implementations)
+5. [Specific implementation with SQL query](#specific-implementation-with-sql-query)
+6. [Writing efficient queries from client application](#writing-efficient-queries-from-client-application)
 
 ## Essential info
 
