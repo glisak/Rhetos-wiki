@@ -7,7 +7,6 @@ Table of contents:
 5. [Client code - Reading data with row permissions](#5-client-code---reading-data-with-row-permissions)
 6. [Server code - Manually verifying row permissions](#6-server-code---manually-verifying-row-permissions)
 
-
 ## 1. Essential info
 
 Row permissions are intended for implementing business requirements that can be formed in rules of the following format: *Some subset of employees may access (read or write) some subset of records.*
