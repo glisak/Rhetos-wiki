@@ -3,16 +3,14 @@ Allows creating any SQL object as a part of generated application.
 
 Implemented in Rhetos package: *CommonConcepts*.
 
-Features
---------
+##Features
 
 * Set custom SQL script to create the object in the database.
 * Set custom SQL script to remove the object from the database.
 * Define creation order of dependent SQL object.
 * Create SQL objects without transaction (full-text search index, e.g.). 
 
-Dependencies and creation order of SQL objects
-----------------------------------------------
+##Dependencies and creation order of SQL objects
 
 Use any of the **SqlDependsOn...** concepts in an **SqlObject** to define other objects (entites, views, etc) that need to be created before the **SqlObject**.
 
@@ -38,8 +36,7 @@ If another object (**SqlQueryable**, for example) depends on the **SqlObject**, 
         }
     }
 
-Creating SQL objects without transaction
-----------------------------------------
+##Creating SQL objects without transaction
 
 Some SQL object cannot be created in a trasaction (**full-text search index** on SQL Server, e.g.).
 
