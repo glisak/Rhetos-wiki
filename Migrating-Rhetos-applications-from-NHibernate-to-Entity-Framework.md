@@ -134,6 +134,7 @@ Table of contents:
 * `The specified cast from a materialized 'System.Int64' type to a nullable 'System.Int32' type is not valid.`
     - => EntityFramework will not automatically convert the data when loading a `bigint` column from database into an `int` property. Use CAST(.. AS INT) in the SQL query to match database column and C# property type.
 * Using your own method in LINQ query results with NotSupportedException: `LINQ to Entities does not recognize the method '...'`.
-    - A) Use an alternative method that is supported in LINQ to EntityFramework (see the examples above)
+    - A) Use an alternative method that is supported in LINQ to EntityFramework (see the examples above).
+      See [Rhetos DatabaseExtensionFunctions](https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/Plugins/Rhetos.Dom.DefaultConcepts.Interfaces/DatabaseExtensionFunctions.cs) for some available helper methods.
     - B) Load the queried data before using the method. For example: `query.Select(item => MyFunction(item))` => `query.ToList().Select(item => MyFunction(item))`.
       Note than loading all items may degrade performance. Use `ToSimple()` or load a subset of records/properties if possible.
