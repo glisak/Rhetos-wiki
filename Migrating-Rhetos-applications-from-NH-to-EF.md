@@ -1,4 +1,4 @@
-# Migrating Rhetos applications from NH to EF
+# Migrating Rhetos applications from NHibernate to Entity Framework
 
 When upgrading from **Rhetos v0.9** to **Rhetos v1.0**, the ORM framework is changed from *NHibernate* to *Entity Framework*.
 The following text describes breaking changes that require modifications in the application's DSL scripts and C# code.
