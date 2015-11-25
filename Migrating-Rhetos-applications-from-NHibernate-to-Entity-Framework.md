@@ -1,5 +1,5 @@
 When upgrading from **Rhetos v0.9** to **Rhetos v1.0**, the ORM framework is changed from *NHibernate* to *Entity Framework*.
-The following text describes breaking changes that require modifications in the application's DSL scripts and C# code.
+The following text describes the breaking changes that require modifications in your application's DSL scripts and C# code.
 
 **NOTE:** Some incompatibilities between NH and EF will result with run-time errors when executing LINQ queries.
 This means that whole application will have to be tested in order to validate that the migration is successful.
