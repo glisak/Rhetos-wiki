@@ -11,11 +11,25 @@ How to use this document:
 
 Table of contents:
 
+3. [Querying data](#querying-data)
 1. [Heisenbugs](#heisenbugs)
 2. [Direct use of NHibernate](#direct-use-of-nhibernate)
-3. [Querying data](#querying-data)
 4. [Using repositories](#using-repositories)
 5. [Troubleshooting](#troubleshooting)
+
+## Querying data
+
+* Simple instances of a data structure class do not have navigation properties, such as references, Base, Extends_, and similar.
+  The navigation properties are available in LINQ queries only. Simple instances are typically used in FilterBy and Computed, or created with the "new" operator.
+* Use `repository.Load(filter)` or `repository.Query(filter).ToSimple()` to avoid memory/cpu overhead of EF proxy objects when loading data.
+* **Computed** concept is no longer queryable and it doesn't automatically implement `IEnumerable<Guid>` filter. Both features resulted with poor performance.
+* `IQueryable<{module}.{entity}>` => `IQueryable<Common.Queryable.{module}_{entity}>`
+* Calling `AsQueryable()` on a list or an array of items:
+    - To query data from database: `listOfItems.AsQuerayble()` => `entityRepository.QueryPersisted(listOfItems)`
+    - To query loaded data, without using navigation properties: `listOfItems.AsQueryable()` => `entityRepository.QueryLoaded(listOfItems)`
+    - Additionally, to use lazy evaluation of navigation properties (such as references) in the loaded data, add `LazyLoadReferences` to the data structure in the .rhe script.
+* `Guid.Parse("...")` => `new Guid("...")`
+* `SqlLike` => `Like`
 
 ## Heisenbugs
 
@@ -42,18 +56,6 @@ Table of contents:
     - `var sql = "SELECT * FROM mod.ent(:dateTime)"; return _executionContext.NHibernateSession.CreateSQLQuery(sql).AddEntity(typeof(mod.ent)).SetTimestamp("dateTime", parameter).List<mod.end>();`
     - => `context.SqlExecuter.ExecuteReader(...)`
     - or => `var sql = "SELECT * FROM {2}.{3}(@p0)"; return _executionContext.EntityFrameworkContext.Database.SqlQuery<{0}.{1}>(sql, parameter).ToList();`
-
-## Querying data
-
-* Simple instances of a data structure class do not have navigation properties, such as references, Base, Extends_, and similar.
-  The navigation properties are available in LINQ queries only. Simple instances are typically used in FilterBy and Computed, or created with the "new" operator.
-* `IQueryable<{module}.{entity}>` => `IQueryable<Common.Queryable.{module}_{entity}>`
-* Calling `AsQueryable()` on a list or an array of items:
-    - To query data from database: `listOfItems.AsQuerayble()` => `entityRepository.QueryPersisted(listOfItems)`
-    - To query loaded data, without using navigation properties: `listOfItems.AsQueryable()` => `entityRepository.QueryLoaded(listOfItems)`
-    - Additionally, to use lazy evaluation of navigation properties (such as references) in the loaded data, add `LazyLoadReferences` to the data structure in the .rhe script.
-* `Guid.Parse("...")` => `new Guid("...")`
-* `SqlLike` => `Like`
 
 ## Using repositories
 
