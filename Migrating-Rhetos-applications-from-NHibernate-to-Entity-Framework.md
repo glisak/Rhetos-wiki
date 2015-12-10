@@ -11,9 +11,9 @@ How to use this document:
 
 Table of contents:
 
-3. [Querying data](#querying-data)
-1. [Heisenbugs](#heisenbugs)
-2. [Direct use of NHibernate](#direct-use-of-nhibernate)
+1. [Querying data](#querying-data)
+2. [Heisenbugs](#heisenbugs)
+3. [Direct use of NHibernate](#direct-use-of-nhibernate)
 4. [Using repositories](#using-repositories)
 5. [Troubleshooting](#troubleshooting)
 
@@ -21,9 +21,9 @@ Table of contents:
 
 * Simple instances of a data structure class do not have navigation properties, such as references, Base, Extends_, and similar.
   The navigation properties are available in LINQ queries only. Simple instances are typically used in FilterBy and Computed, or created with the "new" operator.
+* `IQueryable<{module}.{entity}>` => `IQueryable<Common.Queryable.{module}_{entity}>`
 * Use `repository.Load(filter)` or `repository.Query(filter).ToSimple()` to avoid memory/cpu overhead of EF proxy objects when loading data.
 * **Computed** concept is no longer queryable and it doesn't automatically implement `IEnumerable<Guid>` filter. Both features resulted with poor performance.
-* `IQueryable<{module}.{entity}>` => `IQueryable<Common.Queryable.{module}_{entity}>`
 * Calling `AsQueryable()` on a list or an array of items:
     - To query data from database: `listOfItems.AsQuerayble()` => `entityRepository.QueryPersisted(listOfItems)`
     - To query loaded data, without using navigation properties: `listOfItems.AsQueryable()` => `entityRepository.QueryLoaded(listOfItems)`
