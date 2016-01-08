@@ -114,11 +114,10 @@ Table of contents:
     - `PersistenceTransaction.ClearCache()` => `EntityFrameworkContext.ClearCache()`
     - Or => `context.EntityFrameworkContext.ClearCache()`
     - Or => `container.Resolve<IPersistenceCache>.ClearCache()`
-* Error `There is already an open DataReader associated with this Command which must be closed first.` This can happen if you execute a query while iterating over the results from another query. Possible solutions:
+* Error `There is already an open DataReader associated with this Command which must be closed first.` This can happen if you execute a query while iterating over the results from another query. Suggested solutions:
     - A) Don't use lazy evaluation of references. Load the needed referenced data at the beginning, in the initial LINQ query. This will also improve performance.
-    - B) If the lazy evaluation of references cannot be avoided, modify the loop to run on the loaded data instead of the LINQ query. For example: `foreach (var item in somequery)` => `foreach (var item in somequery.ToList())`.
+    - B) If the lazy evaluation of references cannot be avoided, modify the loop to run on the loaded data instead of the LINQ query. For example: `foreach (var item in repository.SomeEntity.Query())` => `foreach (var item in repository.SomeEntity.Query().ToList())`. For better performance use `Query().ToSimple().ToList()` is possible.
         Use `ComposableFilter` instead of `ItemFilter` to allow more complex implementation.
-    - C) Enable MARS in the database connection string.
 * Error `Only parameterless constructors and initializers are supported in LINQ to Entities.`
     - Remove the constructor with a parameter from the LINQ query. For example: `item => item.Created < new DateTime(DateTime.Today.Year, 1, 1)` => `{ var thisYear = new DateTime(DateTime.Today.Year, 1, 1); return item => item.Created < thisYear; }`
 * Error `NotSupportedException: The specified type member 'Base' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported.`
