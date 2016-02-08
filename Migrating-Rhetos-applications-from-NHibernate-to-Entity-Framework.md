@@ -30,6 +30,7 @@ Table of contents:
     - Additionally, to use lazy evaluation of navigation properties (such as references) in the loaded data, add `LazyLoadReferences` to the data structure in the .rhe script.
 * `Guid.Parse("...")` => `new Guid("...")`
 * `SqlLike` => `Like`
+* `item.FullTextSearch(...)` => `DatabaseExtensionFunctions.FullTextSearch(item.ID, ...)`
 
 ## Heisenbugs
 
