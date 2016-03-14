@@ -12,7 +12,7 @@ How to use this document:
 Table of contents:
 
 1. [Querying data](#querying-data)
-2. [Heisenbugs](#heisenbugs)
+2. [Hard-to-Detect incompatibilities](#hard-to-detect-incompatibilities)
 3. [Direct use of NHibernate](#direct-use-of-nhibernate)
 4. [Using repositories](#using-repositories)
 5. [Troubleshooting](#troubleshooting)
@@ -32,7 +32,7 @@ Table of contents:
 * `SqlLike` => `Like`
 * `item.FullTextSearch(...)` => `DatabaseExtensionFunctions.FullTextSearch(item.ID, ...)`
 
-## Heisenbugs
+## Hard-to-Detect incompatibilities
 
 * Using `updatedOld.Zip(updated` in **OnSaveUpdate** or **OnSaveValidate** concept
   (or other concepts that inject code at OnSave1Tag or OnSave2Tag)
