@@ -316,7 +316,7 @@ Response example:
         ]
     }
 
-Note that if multiple filters are given, the RowPermissionsReadItems filter should be listed last for performance reasons. If the filter is applied last, it will guarantee that the returned records all pass the filter, and the server will skip the verification if the user has access to returned records.
+Note that if multiple filters are given, the RowPermissionsReadItems filter should be listed last for performance reasons. If the filter is applied last, it will guarantee that the returned records all pass the filter, and the server will skip the permissions verification of the returned records.
 
 ## 6. Server code - Manually verifying row permissions
 
