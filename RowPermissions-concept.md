@@ -292,22 +292,21 @@ and inherits the row permissions from the `Document`.
         "SELECT
             ID,
             Title2 = Title + '_2',
-            DivisionID
+            Division2ID = DivisionID
         FROM
             DemoRowPermissions2.Document"
     {
         Extends DemoRowPermissions2.Document;
         ShortString Title2;
-        Reference Division;
+        Reference Division2 DemoRowPermissions2.Division;
 
         RowPermissions { InheritFromBase; }
-
-        SamePropertyValue Division.'Base' DemoRowPermissions2.Document.Division;
+        SamePropertyValue Division2.'Base' DemoRowPermissions2.Document.Division;
     }
 
 When querying the `DocumentInfo` with row permissions, the generated SQL query should `JOIN` the `DocumentInfo` view to the `Document` table, and use the `Document.DivisionID` column to check the row permissions as seen before.
 
-Since `DocumentInfo` view also contains the `DivisionID` column, this column could be used directly and there is no need to JOIN the `Document` table. This optimization can be achieved in Rhetos by using **SamePropertyValue** concept; it will inform the engine that the inherited property can be used without referencing the base entity in the SQL query.
+Since `DocumentInfo` view contains the `Division2ID` column, this column could be used directly and there is no need to join the `Document` table. This optimization can be achieved in Rhetos by using the **SamePropertyValue** concept; it will inform the engine that the inherited property can be used without referencing the base entity in the SQL query.
 
 While this concept is useful on **SqlQueryable**, there is no use of putting **SamePropertyValue** inside **Browse** since **Browse** does not generate SQL view that might be used instead of the base table.
 Also note that this is a minor optimization in most cases, and there is no need to use the **SamePropertyValue** concept unless there are performance issues.
