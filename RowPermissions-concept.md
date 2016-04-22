@@ -282,6 +282,35 @@ Instead of using `AutoInheritRowPermissions` (see the previous solution), row pe
 * **InheritFromBase** can be used on a **Browse** data structures and on entities with **Extends** concept.
 * **InheritFrom** concept's parameter is the full name of `DocumentComment` entity's reference property (`Reference Document`) that references the "parent" entity with row permissions that will be inherited.
 
+### Optimizing inherited row permissions
+
+Consider the following example:
+`DocumentInfo` is an extension of the `Document` entity,
+and inherits the row permissions from the `Document`.
+
+    SqlQueryable DocumentInfo
+        "SELECT
+            ID,
+            Title2 = Title + '_2',
+            DivisionID
+        FROM
+            DemoRowPermissions2.Document"
+    {
+        Extends DemoRowPermissions2.Document;
+        ShortString Title2;
+        Reference Division;
+
+        RowPermissions { InheritFromBase; }
+
+        SamePropertyValue Division.'Base' DemoRowPermissions2.Document.Division;
+    }
+
+When querying the `DocumentInfo` with row permissions, the generated SQL query should `JOIN` the `DocumentInfo` view to the `Document` table, and use the `Document.DivisionID` column to check the row permissions as seen before.
+
+Since `DocumentInfo` view also contains the `DivisionID` column, this column could be used directly and there is no need to JOIN the `Document` table. This optimization can be achieved in Rhetos by using **SamePropertyValue** concept; it will inform the engine that the inherited property can be used without referencing the base entity in the SQL query.
+
+While this concept is useful on **SqlQueryable**, there is no use of putting **SamePropertyValue** inside **Browse** since **Browse** does not generate SQL view that might be used instead of the base table.
+Also note that this is a minor optimization in most cases, and there is no need to use the **SamePropertyValue** concept unless there are performance issues.
 
 ## 5. Client code - Reading data with row permissions
 
