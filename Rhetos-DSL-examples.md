@@ -1,3 +1,16 @@
+Table of contents:
+
+1. [Create a new entity](#Create-a-new-entity)
+2. [Extending an entity with computed data](#Extending-an-entity-with-computed-data)
+3. [Implementing simple business rules](#Implementing-simple-business-rules)
+4. [Row permissions business rules](#Row-permissions-business-rules)
+5. [Implementing entity inheritance and common interfaces](#Implementing-entity-inheritance-and-common-interfaces)
+6. [Database objects](#Database-objects)
+7. [Action concept](#Action-concept)
+8. [Reports](#Reports)
+9. [Entity with change history](#Entity-with-change-history)
+10. [Persisting the computed data](#Persisting-the-computed-data)
+
 ## Create a new entity
 
 The Rhetos platform allows simple and fast development of new entities. All you need to do is define its properties and their types.
