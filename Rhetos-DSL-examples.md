@@ -1,15 +1,15 @@
 Table of contents:
 
-1. [Create a new entity](#Create-a-new-entity)
-2. [Extending an entity with computed data](#Extending-an-entity-with-computed-data)
-3. [Implementing simple business rules](#Implementing-simple-business-rules)
-4. [Row permissions business rules](#Row-permissions-business-rules)
-5. [Implementing entity inheritance and common interfaces](#Implementing-entity-inheritance-and-common-interfaces)
-6. [Database objects](#Database-objects)
-7. [Action concept](#Action-concept)
-8. [Reports](#Reports)
-9. [Entity with change history](#Entity-with-change-history)
-10. [Persisting the computed data](#Persisting-the-computed-data)
+1. [Create a new entity](#create-a-new-entity)
+2. [Extending an entity with computed data](#extending-an-entity-with-computed-data)
+3. [Implementing simple business rules](#implementing-simple-business-rules)
+4. [Row permissions business rules](#row-permissions-business-rules)
+5. [Implementing entity inheritance and common interfaces](#implementing-entity-inheritance-and-common-interfaces)
+6. [Database objects](#database-objects)
+7. [Action concept](#action-concept)
+8. [Reports](#reports)
+9. [Entity with change history](#entity-with-change-history)
+10. [Persisting the computed data](#persisting-the-computed-data)
 
 ## Create a new entity
 
