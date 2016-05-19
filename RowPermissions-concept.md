@@ -9,8 +9,9 @@ Table of contents:
 
 ## 1. Essential info
 
-Row permissions are intended for implementing business requirements that can be formed in rules of the following format: *Some subset of employees may access (read or write) some subset of records.*
-Row permissions are **not intended** for limiting access to specific **actions**, or filtering out some records in one part of the application while allowing the user to access those records in another part of the application.
+Row permissions are intended for implementing business requirements that can be formed in rules of the following format:
+*Some employees are allowed to access (read or write) some subset of records.*
+Row permissions are **not intended** for limiting access to specific **actions**, or **filtering** out some records in one part of the application while allowing the user to access those records in another part of the application.
 
 Row permissions are based on filters that are applied when reading and writing entity's records:
 
