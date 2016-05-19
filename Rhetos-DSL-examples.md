@@ -415,7 +415,7 @@ Example for the `ExtAction` concept:
 
 ## Reports
 
-Simple reports can be created using Spire templater, while complex reports are usually created using Reporting Services
+Simple reports can be created using a commercial Rhetos plugin *TemplaterReport*, while complex reports are usually created using Reporting Services
 (view and SQL procedures used for those reports are also written in the Rhetos scripts).
 
 The following example contains a report that uses SQL query SqlInvoiceReport as a main data source, and SqlInvoiceProductReport for details.
