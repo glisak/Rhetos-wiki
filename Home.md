@@ -13,6 +13,7 @@ Recommended documentation:
 * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
 * [Forms Authentication plugin](https://github.com/Rhetos/Rhetos/blob/master/AspNetFormsAuth/Readme.md)
 * [Active Directory integration plugin](https://github.com/Rhetos/Rhetos/blob/master/ActiveDirectorySync/Readme.md), if not using Forms Authentication
+* [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
 
 Recommended plugins:
 
