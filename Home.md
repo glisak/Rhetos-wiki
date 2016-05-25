@@ -18,7 +18,7 @@ Recommended documentation:
 Recommended plugins:
 
 * [CommonConcepts](https://github.com/Rhetos/Rhetos/tree/master/CommonConcepts) contains basic concepts for building applications.
-* [ActiveDirectorySync](https://github.com/Rhetos/Rhetos/tree/master/ActiveDirectorySync) synchronizes the Rhetos principals and roles with Active Directory by automatically adding or removing principal-role and role-role membership relations. Note then Rhetos supports Windows Authentication out-of-the-box, event without this package.
+* [ActiveDirectorySync](https://github.com/Rhetos/Rhetos/tree/master/ActiveDirectorySync). Rhetos supports Windows Authentication by default. This package synchronizes Rhetos user roles with Active Directory, allowing user permissions to be defined by AD user groups.
 * [AspNetFormsAuth](https://github.com/Rhetos/Rhetos/tree/master/AspNetFormsAuth), provides Forms Authentication to Rhetos server applications.
 * [RestGenerator](https://github.com/Rhetos/RestGenerator) automatically generates RESTful web API for all entities and other readable or writable data structures that are defined in a Rhetos application. Additionally allows executing actions and downloading reports.
 * [MvcModelGenerator](https://github.com/Rhetos/MvcModelGenerator) generates ASP.NET MVC model for all entities and other queryable data structures, for use in other web application when accessing the Rhetos server.
