@@ -126,6 +126,8 @@ See the generated SQL view `Demo.LendMoney_As_MoneyTransaction_TotalAddendum` to
 
 The `Where` concept can be used to limit the items when will be incluced in the polymorphic implementation. The filter is defined by an SQL expression for the SQL query *WHERE part*.
 
+* If multiple `Where` concepts are provided in the same `Is` block, the `AND` operation will be applied between them.
+
 In the following example, only items from `BorrowMoney` that are not `Forgotten` will be included in the `MoneyTransaction`.
 
     Entity BorrowMoney
