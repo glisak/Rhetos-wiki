@@ -117,10 +117,13 @@ For example, one `LendMoney` instance can have multiple additions (`LendMoneyAdd
         Is Demo.MoneyTransaction 'TotalAddendum'
         {
             Implements Demo.MoneyTransaction.Amount '(SELECT -SUM(AdditionalAmount) FROM Demo.LendMoneyAddendum)';
+            SqlDependsOn Demo.LendMoneyAddendum;
         }
     }
 
 See the generated SQL view `Demo.LendMoney_As_MoneyTransaction_TotalAddendum` to check the impact of the subquery.
+
+`SqlDependsOn` is a dependency information that is used when creating database objects: `Demo.LendMoneyAddendum` table must be created *before* the subtype's SQL view that contains this SQL query.
 
 ## Limit the implementation with filter (where)
 
