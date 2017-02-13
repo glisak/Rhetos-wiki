@@ -631,7 +631,7 @@ Persisting the computed data is done by developing the data source that computed
 and saving the result into the database table.
 
 Rhetos contains concepts that help automate the implementation:
-`KeepSynchronized`, `ChangesOnLinkedItems`, `ChangesOnChangedItems` and `ChangesOnBaseItem`.
+`KeepSynchronized`, `ChangesOnLinkedItems`, `ChangesOnChangedItems`, `ChangesOnBaseItem` and `ChangesOnReferenced`.
 
 Example:
 
@@ -643,7 +643,7 @@ Module Demo
     "
         SELECT
             s.ID,
-            NrlCode = CAST(s.NrlCode AS NVARCHAR(100)),
+            NrlCode = g.Code + '.' + CAST(s.NrlCode AS NVARCHAR(100)),
             subjectLastVersion.RnkAsc,
             subjectLastVersion.RnkDesc,
             IsFirstVersion = CAST(CASE WHEN subjectLastVersion.RnkAsc = 1 THEN 1 ELSE 0 END AS BIT),
@@ -669,6 +669,7 @@ Module Demo
                 FROM
                     Demo.Subject s
             ) subjectLastVersion ON subjectLastVersion.ID = s.ID
+            LEFT JOIN Demo.Group g ON s.GroupID = g.ID
             LEFT JOIN Demo.StatusProduct ss
                 WITH (INDEX(IX_StatusProduct_ID_Includes))
                 ON ss.ID = subjectLastVersion.StatusProductID
@@ -676,6 +677,8 @@ Module Demo
     "
     {
         Extends Demo.Subject;
+
+        ChangesOnReferenced 'Base.Group';
         
         ChangesOnLinkedItems Demo.StatusSubjectHistory.Subject;
 
