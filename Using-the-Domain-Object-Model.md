@@ -102,12 +102,113 @@ repository.TestComputedFrom.PersistComplex.RecomputeFromSource(); // The recompu
 
 Modify `ConsoleLogger.MinLevel = EventType.Info` to `EventType.Trace`, to see the steps of the recompute analysis: Initialize new items, Load old items, Diff, Save.
 
+### Reading the DSL model
+
+This example uses the methods of the `IDslModel` interface for performance-efficient search on the DSL model: `FindByType`, `FindByKey` and `FindByReference`.
+
+```C#
+var dslModel = container.Resolve<IDslModel>();
+
+// List all entities:
+var entities = dslModel.FindByType<EntityInfo>().Select(entity => entity.Module.Name + "." + entity.Name);
+entities.Dump("Entities");
+
+// Find a specific entity by concept's key:
+// Entity inherits DataStructure, and the concept's key always contains the base concept's type name.
+var principalEntity = (DataStructureInfo)dslModel.FindByKey("DataStructureInfo Common.Principal");
+principalEntity.GetUserDescription().Dump("Common.Principal entity");
+
+// Find all ShortString properties that match `property => property.DataStructure == principalEntity`
+var properties = dslModel.FindByReference<ShortStringPropertyInfo>(property => property.DataStructure, principalEntity);
+properties.Select(p => p.GetUserDescription()).Dump("Common.Principal ShortString properties");
+```
+
 ## Helpers for writing code snippets
 
 ### FilterBy code snippet
 
+```C#
+// This FilterBy will filter the records by prefix from the 'Common.Claim' table.
+
+// The FilterBy's properties: `ShortString Prefix;`
+var parameter = new
+{
+    Prefix = "Common.Prin"
+};
+
+var query = repository.Common.Claim.Query();
+
+Common.Claim[] filteredItems =
+    // Uncomment the first line of the code snippet when copying to .rhe script.
+    // The FilterBy's code snippet BEGIN
+    //(repository, parameter) =>
+        repository.Common.Claim.Query()
+            .Where(item => item.ClaimResource.StartsWith(parameter.Prefix))
+            .ToSimple().ToArray()
+    // The FilterBy's code snippet END
+    ;
+filteredItems.Dump("FilterBy items");
+```
+
 ### ComposableFilterBy code snippet
+
+```C#
+// This ComposableFilterBy will filter the records by prefix from the 'Common.Claim' table.
+
+// The ComposableFilterBy's properties: `ShortString Prefix;`
+var parameter = new
+{
+    Prefix = "Common.Prin"
+};
+
+var query = repository.Common.Claim.Query();
+
+IQueryable<Common.Queryable.Common_Claim> filteredQuery =
+    // Uncomment the first line of the code snippet when copying to .rhe script.
+    // The ComposableFilterBy's code snippet BEGIN
+    //(query, repository, parameter) =>
+        query.Where(item => item.ClaimResource.StartsWith(parameter.Prefix))
+    // The ComposableFilterBy's code snippet END
+    ;
+filteredQuery.ToSimple().Dump("ComposableFilterBy query");
+```
 
 ### ItemFilter code snippet
 
+```C#
+// This ItemFilter will return the records with prefix "Common.Prin" from the 'Common.Claim' table.
+
+repository.Common.Claim.Query(
+    // The ItemFilter's code snippet BEGIN
+    item => item.ClaimResource.StartsWith("Common.Prin")
+    // The ItemFilter's code snippet END
+).ToSimple().Dump("ItemFilter query");
+```
+
 ### Action code snippet
+
+```C#
+// This Action will insert a new record to the `Common.Claim` table:
+
+// The Action's properties: `ShortString Resource;` and `ShortString Right;`.
+var parameter = new
+{
+    Resource = "TestResource", // ShortString property of the action.
+    Right = "TestRight" // ShortString property of the action.
+};
+
+var userInfo = context.UserInfo;
+
+// Uncomment the first line of the code snippet when copying to .rhe script.
+// The Action's code snippet BEGIN
+// (parameter, repository, userInfo) =>
+{
+    repository.Common.Claim.Insert(new Common.Claim
+    {
+        ClaimResource = parameter.Resource,
+        ClaimRight = parameter.Right,
+        Active = true
+    });
+}
+// The Action's code snippet END
+```
