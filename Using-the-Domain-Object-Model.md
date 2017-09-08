@@ -125,7 +125,7 @@ properties.Select(p => p.GetUserDescription()).Dump("Common.Principal ShortStrin
 
 ## Helpers for writing code snippets
 
-The scripts in the following chapters will help you with development and testing of code snippets for filters and actions. The code snippet can then be copied to in the *.rhe* script.
+The scripts in the following chapters will help you with development and testing of code snippets for filters and actions. The code snippet can then be copied to the *.rhe* script.
 
 ### ComposableFilterBy code snippet
 
