@@ -130,7 +130,7 @@ properties.Select(p => p.GetUserDescription()).Dump("Common.Principal ShortStrin
 ```C#
 // This ComposableFilterBy will filter the records by prefix from the 'Common.Claim' table.
 
-// The ComposableFilterBy's properties: `ShortString Prefix;`
+// The filter has parameter: `ShortString Prefix;`
 var parameter = new
 {
     Prefix = "Common.Prin"
@@ -183,7 +183,7 @@ repository.Common.Claim.Query(
 ```C#
 // This FilterBy will filter the records by prefix from the 'Common.Claim' table.
 
-// The FilterBy's properties: `ShortString Prefix;`
+// The filter has parameter: `ShortString Prefix;`
 var parameter = new
 {
     Prefix = "Common.Prin"
@@ -208,7 +208,7 @@ filteredItems.Dump("FilterBy items");
 ```C#
 // This Action will insert a new record to the `Common.Claim` table:
 
-// The Action's properties: `ShortString Resource;` and `ShortString Right;`.
+// The action has parameters: `ShortString Resource;` and `ShortString Right;`.
 var parameter = new
 {
     Resource = "TestResource", // ShortString property of the action.
