@@ -125,31 +125,6 @@ properties.Select(p => p.GetUserDescription()).Dump("Common.Principal ShortStrin
 
 ## Helpers for writing code snippets
 
-### FilterBy code snippet
-
-```C#
-// This FilterBy will filter the records by prefix from the 'Common.Claim' table.
-
-// The FilterBy's properties: `ShortString Prefix;`
-var parameter = new
-{
-    Prefix = "Common.Prin"
-};
-
-var query = repository.Common.Claim.Query();
-
-Common.Claim[] filteredItems =
-    // Uncomment the first line of the code snippet when copying to .rhe script.
-    // The FilterBy's code snippet BEGIN
-    //(repository, parameter) =>
-        repository.Common.Claim.Query()
-            .Where(item => item.ClaimResource.StartsWith(parameter.Prefix))
-            .ToSimple().ToArray()
-    // The FilterBy's code snippet END
-    ;
-filteredItems.Dump("FilterBy items");
-```
-
 ### ComposableFilterBy code snippet
 
 ```C#
@@ -173,6 +148,24 @@ IQueryable<Common.Queryable.Common_Claim> filteredQuery =
 filteredQuery.ToSimple().Dump("ComposableFilterBy query");
 ```
 
+After developing and testing the ComposableFilterBy's code snippet, use it to put the filter (`DemoFilter`) in the *.rhe* script:
+
+```
+Module Common
+{
+    Entity Claim
+    {
+        ComposableFilterBy DemoFilter '(query, repository, parameter) =>
+            query.Where(item => item.ClaimResource.StartsWith(parameter.Prefix))';
+    }
+
+    Parameter DemoFilter
+    {
+        ShortString Prefix;
+    }
+}
+```
+
 ### ItemFilter code snippet
 
 ```C#
@@ -183,6 +176,31 @@ repository.Common.Claim.Query(
     item => item.ClaimResource.StartsWith("Common.Prin")
     // The ItemFilter's code snippet END
 ).ToSimple().Dump("ItemFilter query");
+```
+
+### FilterBy code snippet
+
+```C#
+// This FilterBy will filter the records by prefix from the 'Common.Claim' table.
+
+// The FilterBy's properties: `ShortString Prefix;`
+var parameter = new
+{
+    Prefix = "Common.Prin"
+};
+
+var query = repository.Common.Claim.Query();
+
+Common.Claim[] filteredItems =
+    // Uncomment the first line of the code snippet when copying to .rhe script.
+    // The FilterBy's code snippet BEGIN
+    //(repository, parameter) =>
+        repository.Common.Claim.Query()
+            .Where(item => item.ClaimResource.StartsWith(parameter.Prefix))
+            .ToSimple().ToArray()
+    // The FilterBy's code snippet END
+    ;
+filteredItems.Dump("FilterBy items");
 ```
 
 ### Action code snippet
