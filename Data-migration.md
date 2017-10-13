@@ -124,11 +124,12 @@ The `DeployPackages.exe` utility will automatically execute the data-migration s
 * Rhetos will check the tag from the script's header to verify if the script is already executed.
   This allows developers to later reorganize and rename the old data-migration scripts without executing them again.
 
-### Using migration tables
+### Automatic use of the migration tables when dropping and creating columns
 
 * If a property, an entity or a module is removed in a new version of the application being deployed,
   Rhetos will keep a backup of its data in the migration tables.
-* If the property/entity/module is brought back in a next version, Rhetos will restore the data.
+* If the property/entity/module is brought back later, Rhetos will automatically restore the data
+  from the corresponding data migration table.
 * During deployment, Rhetos keeps track of the data that is copied from the original tables to the migration tables.
   If multiple migration scripts execute the `Rhetos.DataMigrationUse` procedure for a same table, the data will
   be copied only on a fist call.
@@ -140,12 +141,14 @@ The `DeployPackages.exe` utility will automatically execute the data-migration s
     - First, the old column will be removed from the table, automatically keeping the backup in the migration table.
     - New property will be created and the data will be restored from the migration table.
     - When restoring the data, SQL Server will try to automatically convert the data type.
-    - If SQL Server does not support implicit conversion of the these type, the developer should create a data-migration script
-      that modifies the column type in the migration table.
+    - If SQL Server does not support implicit conversion of the these type, the developer should create
+      a data-migration script that modifies the data or the column type in the migration table.
 
 ### Cleanup
 
-* After upgrading the database, `DeployPackages.exe` will delete the migration columns and tables that are copies to the original tables.
+* After upgrading the database, `DeployPackages.exe` will delete the migration columns and tables
+  that are copied to the original tables.
 * The migration table and columns that don't exist in the new version of the application will be kept as a backup.
-* You can optionally delete the backup data by running `CleanupOldData.exe`; it will delete everything in database schemas
-  that start with an underscore ("_").
+* You can optionally delete the backup data by running `CleanupOldData.exe`;
+  it will delete everything in database schemas that start with an underscore ("_").
+  This is not recommended if the last deployment failed, because it could result with a data loss.
