@@ -113,20 +113,16 @@ EXEC Rhetos.DataMigrationApplyMultiple 'Demo', 'E2', 'ID, P';
 
 The `DeployPackages.exe` utility will automatically execute the data-migration scripts.
 
-* The previously executed scripts are logged in `Rhetos.DataMigrationScript` table.
-* Rhetos will check the tag from the script's header to verify if the script is already executed.
-  This allows developers to later reorganize old data-migration scripts without executing them again.
-* If a Rhetos package depends on another package (dependencies are defined in .nuspec),
-  migration scripts from the other package will be executed first.
-* After finding the last executed migration script, Rhetos will execute all newer scripts in alphabetical order.
-* If there is a script that alphabetically come *before* the last executed script, Rhetos will not execute it.
-  It is assumed that this script fixes an issue in the old version of the application, but that old version was
-  already deployed the this database.
-  Even if that script were executed, it would be executed out of order on that database.
 * `DeployPackages.exe` executes the data-migration scripts before upgrading the database structure.
 * If `DeployPackages.exe` fails while upgrading the database structure, it will execute those data-migration scripts
   again on next deployment. This means that the migration scripts should be written in such way that allows a script
   to be executed multiple times without negative consequences.
+* If a Rhetos package depends on another package (dependencies are defined in .nuspec),
+  migration scripts from the other package will be executed first.
+* DateMigration scripts within a package are executed ordered by folder name, then by file name. [Natural sort](https://en.wikipedia.org/wiki/Natural_sort_order) is used to order the scripts.
+* The previously executed scripts are logged in `Rhetos.DataMigrationScript` table.
+* Rhetos will check the tag from the script's header to verify if the script is already executed.
+  This allows developers to later reorganize and rename the old data-migration scripts without executing them again.
 
 ### Using migration tables
 
