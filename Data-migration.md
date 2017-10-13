@@ -107,6 +107,16 @@ FROM
 EXEC Rhetos.DataMigrationApplyMultiple 'Demo', 'E2', 'ID, P';
 ```
 
+### Changing a property's type
+
+If a property's type is changed, deployment of the new version will to the following
+
+* First, the old column will be removed from the table, automatically keeping the backup in the migration table.
+* New property will be created and the data will be restored from the migration table.
+* When restoring the data, SQL Server will try to automatically convert the data type.
+* If SQL Server does not support implicit conversion of the these type, the developer should create
+  a data-migration script that modifies the data or the column type in the migration table.
+
 ## Advanced Topics
 
 ### Deploying migration scripts
@@ -134,15 +144,6 @@ The `DeployPackages.exe` utility will automatically execute the data-migration s
   If multiple migration scripts execute the `Rhetos.DataMigrationUse` procedure for a same table, the data will
   be copied only on a fist call.
   This ensures that later script will not overwrite data modification of a previous script.
-
-### Modifying database structure
-
-* If a property's type is changed, deployment of the new version will to the following
-    - First, the old column will be removed from the table, automatically keeping the backup in the migration table.
-    - New property will be created and the data will be restored from the migration table.
-    - When restoring the data, SQL Server will try to automatically convert the data type.
-    - If SQL Server does not support implicit conversion of the these type, the developer should create
-      a data-migration script that modifies the data or the column type in the migration table.
 
 ### Cleanup
 
