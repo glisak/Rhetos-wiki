@@ -9,8 +9,8 @@ Recommended documentation:
 
 * Infrastructure:
   * [Installation instructions](https://github.com/Rhetos/Rhetos/blob/master/Readme.md)
-  * [Forms Authentication plugin](https://github.com/Rhetos/Rhetos/blob/master/AspNetFormsAuth/Readme.md)
-  * [Active Directory integration plugin](https://github.com/Rhetos/Rhetos/blob/master/ActiveDirectorySync/Readme.md), if not using Forms Authentication
+  * [Forms Authentication plugin](https://github.com/Rhetos/AspNetFormsAuth/blob/master/Readme.md)
+  * [Active Directory integration plugin](https://github.com/Rhetos/ActiveDirectorySync/blob/master/Readme.md), if not using Forms Authentication
 * Application development:
   * [Rhetos DSL examples](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-examples)
   * [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
@@ -21,8 +21,8 @@ Recommended documentation:
 Recommended plugins:
 
 * [CommonConcepts](https://github.com/Rhetos/Rhetos/tree/master/CommonConcepts) contains basic concepts for building applications.
-* [ActiveDirectorySync](https://github.com/Rhetos/Rhetos/tree/master/ActiveDirectorySync). Rhetos supports Windows Authentication by default. This package synchronizes Rhetos user roles with Active Directory, allowing user permissions to be defined by AD user groups.
-* [AspNetFormsAuth](https://github.com/Rhetos/Rhetos/tree/master/AspNetFormsAuth), provides Forms Authentication to Rhetos server applications.
+* [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync). Rhetos supports Windows Authentication by default. This package synchronizes Rhetos user roles with Active Directory, allowing user permissions to be defined by AD user groups.
+* [AspNetFormsAuth](https://github.com/Rhetos/AspNetFormsAuth), provides Forms Authentication to Rhetos server applications.
 * [RestGenerator](https://github.com/Rhetos/RestGenerator) automatically generates RESTful web API for all entities and other readable or writable data structures that are defined in a Rhetos application. Additionally allows executing actions and downloading reports.
 * [MvcModelGenerator](https://github.com/Rhetos/MvcModelGenerator) generates ASP.NET MVC model for all entities and other queryable data structures, for use in other web application when accessing the Rhetos server.
 * [ODataGenerator](https://github.com/Rhetos/ODataGenerator) generates OData interface (Open Data Protocol) for all entities and other queryable data structures that are defined in a Rhetos application.
