@@ -132,7 +132,6 @@ The `Where` concept can be used to limit the items when will be incluced in the 
 * If multiple `Where` concepts are provided in the same `Is` block, the `AND` operation will be applied between them.
 
 This example is an alternative implementation of the `BorrowMoney` subtype (see the original implementation above).
-
 In the following example, only items from `BorrowMoney2` that are not `Forgotten` will be included in the `MoneyTransaction`.
 
     Entity BorrowMoney2
