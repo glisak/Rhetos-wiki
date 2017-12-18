@@ -34,25 +34,25 @@ Example:
             DateTime EventDate;
             Money Amount;
         }
-        
+
         Entity BorrowMoney
         {
             ShortString FromWhom;
             Money Amount;
-            
+
             Is Demo.MoneyTransaction;
-            // EventDate will be automatically added.
+            // The EventDate will be automatically added. The Amount is automatically mapped.
         }
-        
+
         Entity LendMoney
         {
             ShortString ToWhom;
             Money Amount;
-            
+
             Is Demo.MoneyTransaction
             {
                 Implements Demo.MoneyTransaction.Amount '-Amount';
-                // Amount in the MoneyTransaction related to the LendMoney record will have negative value.  
+                // The Amount in the MoneyTransaction related to the LendMoney record will have negative value.
             }
         }
     }
@@ -86,12 +86,12 @@ For example, the `TransferMoney` entity record may represent two money transacti
 
     Entity TransferMoney
     {
-        ShortString From;
-        ShortString To;
+        ShortString TransferFrom;
+        ShortString TransferTo;
         Money Amount;
-        
-        Is Demo.MoneyTransaction; // Adding money using the 'Amount' value.
-        
+
+        Is Demo.MoneyTransaction; // Implicitly using the 'Amount' value.
+
         Is Demo.MoneyTransaction 'Subtract'
         {
             Implements Demo.MoneyTransaction.Amount '-Amount';
@@ -111,8 +111,8 @@ For example, one `LendMoney` instance can have multiple additions (`LendMoneyAdd
         Reference LendMoney;
         Money AdditionalAmount;
     }
-    
-    Entity LendMoney
+
+    Entity LendMoney // Adding new features to the existing entity.
     {
         Is Demo.MoneyTransaction 'TotalAddendum'
         {
@@ -131,36 +131,40 @@ The `Where` concept can be used to limit the items when will be incluced in the 
 
 * If multiple `Where` concepts are provided in the same `Is` block, the `AND` operation will be applied between them.
 
-In the following example, only items from `BorrowMoney` that are not `Forgotten` will be included in the `MoneyTransaction`.
+This example is an alternative implementation of the `BorrowMoney` subtype (see the original implementation above).
 
-    Entity BorrowMoney
+In the following example, only items from `BorrowMoney2` that are not `Forgotten` will be included in the `MoneyTransaction`.
+
+    Entity BorrowMoney2
     {
         ShortString FromWhom;
         Money Amount;
         Bool Forgotten;
-        
+
         Is Demo.MoneyTransaction
         {
-            Where 'Forgotten = 0';
+            Where 'Forgotten = 0'; // SQL snippet, the "Forgotten" column is a "bit".
         }
     }
 
-See the generated SQL view `Demo.BorrowMoney_As_MoneyTransaction` to check the impact of the `Where` concept.
+See the generated SQL view `Demo.BorrowMoney2_As_MoneyTransaction` to check the impact of the `Where` concept.
 
 ## Subtype implementation using SQL query
 
 Instead of using property implementations (`Implements` keyword), a specific SQL query may be provided to implement the mapping between the subtype and the polymorphic entity.
 
-This example is an alternative implementation of the `LendMoney` subtype (see the original implementation above):
+This example is an alternative implementation of the `LendMoney` subtype (see the original implementation above).
 
-    Entity LendMoney
+    Entity LendMoney2
     {
         ShortString ToWhom;
+        // When using SqlImplementation, the properties are not automatically inherited from the polymorphic.
+        DateTime EventDate;
         Money Amount;
-        
+
         Is Demo.MoneyTransaction
         {
-            SqlImplementation "SELECT lm.ID, lm.EventDate, Amount = -lm.Amount FROM Demo.LendMoney lm"
+            SqlImplementation "SELECT lm.ID, lm.EventDate, Amount = -lm.Amount FROM Demo.LendMoney2 lm"
             {
                 AutoDetectSqlDependencies;
             }
