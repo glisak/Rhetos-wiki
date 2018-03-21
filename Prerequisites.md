@@ -1,5 +1,3 @@
-# Prerequisites
-
 This article describes how to setup the development environment for developing applications with Rhetos framework.
 
 ## Install prerequisites
