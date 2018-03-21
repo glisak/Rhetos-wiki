@@ -52,5 +52,5 @@ Verify the SQL Server and your development database:
 Verify building Rhetos from source:
 1. Use git to clone the repository `https://github.com/Rhetos/Rhetos.git` to a new source folder.
 2. Start "Developer Command Prompt for VS 2017" (or "VS2015"). In the command prompt do the following:
-  * Change working directory to the Rhetos source folder.
-  * Type `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
+    * Change working directory to the Rhetos source folder.
+    * Type `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
