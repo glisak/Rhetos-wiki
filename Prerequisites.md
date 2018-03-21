@@ -48,3 +48,9 @@ Verify the SQL Server and your development database:
 2. Create and new empty database that will be used for developing the Rhetos application.
     * Note: Each developer must have his/her own database for Rhetos application development, to avoid conflicts of deploying multiple Rhetos applications to the same database.
 3. Open a new query window on the created database and execute query: `print user_name()`. The query should output `dbo`, meaning that the user has full permissions on the database.
+
+Verify building Rhetos from source:
+1. Use git to clone the repository `https://github.com/Rhetos/Rhetos.git` to a new source folder.
+2. Start "Developer Command Prompt for VS 2017" (or "VS2015"). In the command prompt do the following:
+  * Change working directory to the Rhetos source folder.
+  * Type `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
