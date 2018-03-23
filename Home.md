@@ -9,7 +9,7 @@ Recommended documentation:
 
 * Setup the Application Development Environment
   * [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
-  * [Installation instructions](https://github.com/Rhetos/Rhetos/blob/master/Readme.md)
+  * [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
 * Application development
   * [Rhetos DSL examples](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-examples)
   * [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
