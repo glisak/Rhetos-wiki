@@ -75,5 +75,6 @@ Syntax highlight for Notepad++:
 
 Syntax highlight for SublimeText3:
 
-1. Install the *PackageControl* plugin by following the instructions at <https://packagecontrol.io/installation> .
+1. Install the *PackageControl* plugin by following the instructions at <https://packagecontrol.io/installation>.
 2. Install the *RhetosDSL* sublime text package: Ctrl-Shift-P, select "install package", select "RhetosDSL".
+    * Note: The source code is available at <https://github.com/Hugibeer/RhetosDSLSyntax>.
