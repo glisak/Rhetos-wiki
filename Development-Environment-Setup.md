@@ -59,20 +59,22 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
     * Write permissions to the RhetosServer logs folder ("RhetosServer\Logs", or directly "RhetosServer" folder).
 6. Open "Rhetos\Web.config" file and set the "BuiltinAdminOverride" value to "True" (it is set by default).
 
-## Configure text editor for DSL scripts (*.rhe)
+## Configure your text editor for DSL scripts (*.rhe)
 
-Syntax highlight for Visual Studio Code:
+The **syntax highlighting** plugins are available for the following text editors.
+
+Visual Studio Code:
 
 1. Open Visual Studio Code => Press Ctrl-Shift-P => Select "Extensions: Open Extensions Folder".
 2. In the opened folder, use git to clone the <https://github.com/Rhetos/RhetosVSCode> repository to the subfolder "RhetosVSCode".
 3. Restart Visual Studio Code.
 
-Syntax highlight for Notepad++:
+Notepad++:
 
 1. Download the [RhetosNppSyntaxHighlight.xml](https://raw.githubusercontent.com/Rhetos/RhetosNPP/master/RhetosNppSyntaxHighlight.xml) file from <https://github.com/Rhetos/RhetosNPP>.
 2. Open "Notepad++" => Menu "Language" => "Define your language" => Click "Import..." => Select the downloaded XML file.
 
-Syntax highlight for SublimeText3:
+SublimeText3:
 
 1. Install the *PackageControl* plugin by following the instructions at <https://packagecontrol.io/installation>.
 2. Install the *RhetosDSL* sublime text package: Ctrl-Shift-P, select "install package", select "RhetosDSL".
