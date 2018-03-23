@@ -1,6 +1,6 @@
 This article describes how to setup the development environment for developing applications with Rhetos framework.
 
-Before following the instructions this article, **make sure that all the [Prerequisites.md](Prerequisites.md) are installed**.
+Before following the instructions this article, **make sure that all the [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites) are installed**.
 
 ## Get Rhetos server binaries
 
@@ -48,7 +48,7 @@ Rhetos packages define the content of the Rhetos server. This section describes 
     * *Disable* all other authentication options.
 6. Start your browser, and then type <http://localhost/RhetosServer/> in the address. Verify that the web site is working and the Rhetos server status is displayed on the web page.
 
-## IIS setup without the Windows domain
+## IIS setup without a Windows domain
 
 If is is not possible to use Windows domain account, the server in development environment can be set up to use ApplicationPoolIdentity:
 
