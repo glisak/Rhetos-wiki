@@ -1,4 +1,4 @@
-This article describes how to setup the development environment for developing applications with Rhetos framework.
+This article describes how to install and verify the prerequisites for developing applications with Rhetos framework. This is generally a standard C#/ASP.NET development environment.
 
 ## Install prerequisites
 
@@ -50,5 +50,6 @@ Verify the SQL Server and your development database:
 3. Open a new query window on the created database and execute query: `print user_name()`. The query should output `dbo`, meaning that the user has full permissions on the database.
 
 Verify building Rhetos from source:
-1. Use git to clone the repository `https://github.com/Rhetos/Rhetos.git` to a new source folder.
-2. Open command prompt in the Rhetos source folder and run `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
+1. Use git to clone the repository <https://github.com/Rhetos/Rhetos.git> to a new source folder on your disk:
+    * In the command prompt run `git clone https://github.com/Rhetos/Rhetos.git RhetosSource`
+2. Open the command prompt in the created Rhetos source folder and run `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
