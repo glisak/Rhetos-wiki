@@ -48,8 +48,6 @@ Rhetos packages define the content of the Rhetos server. This section describes 
     * *Disable* all other authentication options.
 6. Start your browser, and then type <http://localhost/RhetosServer/> in the address. Verify that the web site is working and the Rhetos server status is displayed on the web page.
 
-## IIS setup without a Windows domain
-
 If is is not possible to use Windows domain account, the server in development environment can be set up to use ApplicationPoolIdentity:
 
 1. Modify the *RhetosAppPool* to use built-in account "ApplicationPoolIdentity", instead of the developers domain account (Advanced Settings => Identity). This is the default user for a new app pool.
