@@ -48,15 +48,16 @@ Rhetos packages define the content of the Rhetos server. This section describes 
     * *Disable* all other authentication options.
 6. Start your browser, and then type <http://localhost/RhetosServer/> in the address. Verify that the web site is working and the Rhetos server status is displayed on the web page.
 
-If is is not possible to use Windows domain account, the server in development environment can be set up to use ApplicationPoolIdentity:
+If is is not possible to use Windows domain account, the Rhetos service can be set up to use ApplicationPoolIdentity in a development environment:
 
-1. Modify the *RhetosAppPool* to use built-in account "ApplicationPoolIdentity", instead of the developers domain account (Advanced Settings => Identity). This is the default user for a new app pool.
-2. On the SQL Server add a Security => Logins => New Login... => Enter "BUILTIN\IIS_IUSRS".
-3. Open the created  login entry (BUILTIN\IIS_IUSRS) => Open "User Mapping" => Select the Rhetos database and mark the "db_owner" checkbox.
-4. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
+1. **Skip these steps** if you are using a Windows domain account.
+2. Modify the *RhetosAppPool* to use built-in account "ApplicationPoolIdentity", instead of the developers domain account (Advanced Settings => Identity). This is the default user for a new app pool.
+3. On the SQL Server add a Security => Logins => New Login... => Enter "BUILTIN\IIS_IUSRS".
+4. Open the created  login entry (BUILTIN\IIS_IUSRS) => Open "User Mapping" => Select the Rhetos database and mark the "db_owner" checkbox.
+5. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
     * Read permissions to the RhetosServer folder.
     * Write permissions to the RhetosServer logs folder ("RhetosServer\Logs", or directly "RhetosServer" folder).
-5. Open "Rhetos\Web.config" file and set the "BuiltinAdminOverride" value to "True" (it is set by default).
+6. Open "Rhetos\Web.config" file and set the "BuiltinAdminOverride" value to "True" (it is set by default).
 
 ## Configure text editor for DSL scripts (*.rhe)
 
