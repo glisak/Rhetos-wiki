@@ -37,7 +37,7 @@ Rhetos packages define the content of the Rhetos server. This section describes 
     * NET framework version: "v4.x"
     * Manged pipeline mode: "Integrated"
 3. Select the "RhetosAppPool" => "Advanced settings" => "Process Model" => Change "Identity" => Select "Custom account"
-    * Enter a domain user account that will be used for Rhetos server (on a development computer enter the **developer's account**).
+    * Enter a domain user account that will be used for Rhetos server (on a development computer enter the **developer's account**). If you are **not using** a Windows domain account, see the next paragraph for further instructions.
     * Note: This account must have *db_owner* rights for the Rhetos database (see Database setup).
 4. Select "Sites" => Right click "Default Web Site" => "Add application...", enter the following data:
     * Enter Alias: "RhetosServer"
@@ -50,14 +50,14 @@ Rhetos packages define the content of the Rhetos server. This section describes 
 
 If is is not possible to use Windows domain account, the Rhetos service can be set up to use ApplicationPoolIdentity in a development environment:
 
-1. **Skip these steps** if you are using a Windows domain account.
+1. **Skip the following steps** if you are using a Windows domain account.
 2. Modify the *RhetosAppPool* to use built-in account "ApplicationPoolIdentity", instead of the developers domain account (Advanced Settings => Identity). This is the default user for a new app pool.
 3. On the SQL Server add a Security => Logins => New Login... => Enter "BUILTIN\IIS_IUSRS".
 4. Open the created  login entry (BUILTIN\IIS_IUSRS) => Open "User Mapping" => Select the Rhetos database and mark the "db_owner" checkbox.
 5. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
     * Read permissions to the RhetosServer folder.
     * Write permissions to the RhetosServer logs folder ("RhetosServer\Logs", or directly "RhetosServer" folder).
-6. Open "Rhetos\Web.config" file and set the "BuiltinAdminOverride" value to "True" (it is set by default).
+6. Open "RhetosServer\Web.config" file and set the "Security.AllClaimsForUsers" value to your username and compute name, formatted "username@computername". Note that your username may include the domain name prefix.
 
 ## Configure your text editor for DSL scripts (*.rhe)
 
