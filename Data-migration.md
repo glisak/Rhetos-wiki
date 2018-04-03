@@ -12,10 +12,12 @@ This article describes how to develop and deploy data migration scripts that are
 
 Data-migration scripts are regular SQL scripts, with the code following specific rules as describes in this article.
 The scripts are placed in a DataMigration subfolder in the Rhetos package.
-When deploying the Rhetos package, the scripts will be executed in the alphabetical order, skipping the scripts that were already executed in previous deployments.
+When deploying the Rhetos package, the scripts will be executed in the alphabetical order (by folder name, than file name), skipping the scripts that were already executed in previous deployments.
 
-The data-migration scripts inside DataMigration folder should be grouped in subfolders by the package release version.
-Each script in the subfolder should have numbered prefix (starting with "1 "), to ensure the correct order when executing the scripts.
+The recommended naming conception:
+
+* The data-migration scripts inside DataMigration folder should be grouped in subfolders by the package release version.
+* Each script in the subfolder should have numbered prefix (starting with "1 "), to ensure the correct order when executing the scripts.
 
 For example:
 
