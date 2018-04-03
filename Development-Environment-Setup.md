@@ -1,6 +1,6 @@
 This article describes how to setup the development environment for developing applications with Rhetos framework.
 
-Before following the instructions this article, **make sure that all the [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites) are installed**.
+Before following the instructions in this article, **make sure that all the [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites) are installed**.
 
 ## Get Rhetos server binaries
 
