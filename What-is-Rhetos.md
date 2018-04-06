@@ -65,7 +65,7 @@ Developers write the business application's code in the DSL scripts:
 * DSL scripts often include SQL and C# code snippets.
 * DSL scripts can contain calls to external dlls.
 
-Rhetos works as compiler to generate the final application from the DSL scripts.
+Rhetos works as a compiler to generate the final application from the DSL scripts.
 
 * Rhetos generates the human-readable C# code for the server application, and compiles it to create the web application.
 * The generated application uses Entity Framework to access the generated database.
