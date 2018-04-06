@@ -15,7 +15,7 @@ Enterprise business applications can be hard to develop and maintain because the
 1. Rhetos allows fast development of standard business patterns in the application, by simply **declaring the features**.
 2. Rhetos framework puts emphasis on principles that increase maintainability of the complex applications.
 
-The Rhetos principles:
+The basic principles:
 
 * **Standardization** of business and technology patterns implementation:
   * Write high-quality implementations of standard patterns and reuse them.
@@ -26,24 +26,24 @@ The Rhetos principles:
   * DSL concept are able to encapsulate a much larger scope of patterns then just writing a class or a function. The implemented pattern can affect any part of the system, from the database structure to the web API, extend other existing features or implement the crosscutting concerns.
 * Code decoupling and Extensibility:
   * Each feature is implemented as a DSL concept with minimal number of dependencies.
-  * Additional features are added as an extension from outside, not increasing complexity of the existing feature's implementation.
+  * Additional features are added as an extension from outside, not increasing complexity of the existing features' implementation.
 
 ## What does the Rhetos platform contain
 
 1. Programming language development tools:
-  * A framework for developing DSL concepts (as plugins) and code generators.
+    * A framework for developing DSL concepts (as plugins) and code generators.
 2. Ready-to-use DSL libraries:
-  * Implementations of standard business and design patterns
-  * Web API generators (SOAP, REST, OData)
-  * Authentication plugins
-  * Reporting
-  * Internationalization
-  * ...
+    * Implementations of standard business and design patterns
+    * Web API generators (SOAP, REST, OData)
+    * Authentication plugins
+    * Reporting
+    * Internationalization
+    * ...
 3. Application development & deployment:
-  * Setup the Rhetos server
-  * Use existing libraries with DSL concepts and technology-specific solutions (NuGet packages)
-  * Develop your application: Write DSL scripts, custom DSL concept (generate new NuGet packages)
-  * Deploy all the packages to the Rhetos server to generate the application's business layer, database, web service and other features.
+    * Setup the Rhetos server
+    * Use existing libraries with DSL concepts and technology-specific solutions (NuGet packages)
+    * Develop your application: Write DSL scripts, custom DSL concept (generate new NuGet packages)
+    * Deploy all the packages to the Rhetos server to generate the application's business layer, database, web service and other features.
 
 ## Rhetos DSL
 
