@@ -12,7 +12,7 @@ Rhetos works as a compiler that **generates the business application** from the 
 
 ## Why was Rhetos created
 
-Enterprise business applications can be hard to develop and maintain because they typically contain a huge number of features that must work together.
+Enterprise business applications can be hard to develop and maintain because they typically contain a very large number of features that work together.
 
 1. Rhetos allows fast development of standard business patterns in the application, by simply **declaring the features**.
 2. Rhetos framework puts emphasis on principles that increase maintainability of the complex applications.
@@ -40,7 +40,7 @@ The basic principles:
     * Authentication plugins
     * Reporting
     * Internationalization
-    * ...
+    * and others
 3. Application development & deployment:
     * Setup the Rhetos server
     * Use existing libraries with DSL concepts and technology-specific solutions (NuGet packages)
@@ -53,17 +53,17 @@ The basic principles:
 
 Rhetos DSL (a programming language) is a set of **concepts**.
 
-* Each concept represent a business patterns or a software design pattern.
-* Each concept has defined syntax (DSL grammar).
+* Each concept represent a business pattern or a software design pattern.
+* Each concept has a **keyword** and a list of parameters.
 * Each concept has code generators that generate the application code, database structure, other concepts, web API and other stuff.
 * Existing libraries include many standard concepts, but the application developers can easily add new concepts to extend the programming language.
 
 Developers write the business application's code in the DSL scripts:
 
-* A DSL script can be understood as a set of **statements**.
-* Each statement declares a feature of the application.
+* A DSL script can be understood as a set of **statements**: Each statement declares **a feature** of the application.
+* Statements are instances of the concepts, starting with concept keyword followed by parameter values.
 * DSL scripts often include SQL and C# code snippets.
-* DSL scripts can contain calls to external dlls.
+* DSL scripts can also contain calls to external dlls.
 
 Rhetos works as a compiler to generate the final application from the DSL scripts.
 
