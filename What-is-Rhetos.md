@@ -3,10 +3,12 @@ Rhetos is a DSL platform for Enterprise Application Development.
 * It enables developers to create a **Domain-Specific Programming Language** and use it to write their applications.
 * There are libraries available with ready-to-use implementations of many standard business and design patterns or technology integrations.
 
-Rhetos works as a compiler that generates the business application from the source written in the DSL scripts.
+Rhetos works as a compiler that **generates the business application** from the source written in the DSL scripts.
 
 * It is focused on the back-end development: It generates the business logic layer and the database.
 * Rhetos application generator can be used for application scaffolding, but its real strength is utilized when using DSL scripts as the *source* and never manually modify the generated code.
+
+[[images/Rhetos-4tier.png|Rhetos 4tier]]
 
 ## Why was Rhetos created
 
