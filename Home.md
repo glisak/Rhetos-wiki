@@ -7,6 +7,7 @@ business layer object model (C#) and web API (REST and SOAP).
 
 Recommended documentation:
 
+* [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos)
 * Setup the application development environment
   * [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
   * [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
