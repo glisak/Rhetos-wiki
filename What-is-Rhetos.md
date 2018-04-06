@@ -49,6 +49,8 @@ The basic principles:
 
 ## Rhetos DSL
 
+[[images/dsl-example.png|DSL example]]
+
 Rhetos DSL (a programming language) is a set of **concepts**.
 
 * Each concept represent a business patterns or a software design pattern.
