@@ -21,7 +21,7 @@ The basic principles:
 
 * **Standardization** of business and technology patterns implementation
   * Write high-quality implementations of standard patterns and reuse them.
-* **Declarative programming**
+* **Declarative programming** helps reduce the difference between the requirements and the code, and separate business logic from technology details.
   * Try to develop most of the application's business logic by simply declaring the features.
   * Reduce the amount if the imperative code in order to decrease code coupling and increase long-term maintainability.
   * Developers are encouraged to recognize business and technology patterns, and create DSL concepts to simplify the use for those patterns in the business application development.
