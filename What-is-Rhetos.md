@@ -25,7 +25,7 @@ The basic principles:
   * Try to develop most of the application's business logic by simply declaring the features.
   * Reduce the amount if the imperative code in order to decrease code coupling and increase long-term maintainability.
   * Developers are encouraged to recognize business and technology patterns, and create DSL concepts to simplify the use for those patterns in the business application development.
-  * DSL concept are able to encapsulate a much larger scope of patterns then just writing a class or a function. The implemented pattern can affect any part of the system, from the database structure to the web API, extend other existing features or implement the crosscutting concerns.
+>   Rhetos DSL concept are able to encapsulate a much larger scope of patterns than just writing a reusable class or a function. The implemented pattern can affect any part of the system, from the database structure to the web API, extend other existing features or implement the crosscutting concerns.
 * **Code decoupling and Extensibility**
   * Each feature is implemented as a DSL concept with minimal number of dependencies.
   * Additional features are added as an extension from outside, not increasing complexity of the existing features' implementation.
