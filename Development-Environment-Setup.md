@@ -14,7 +14,7 @@ The Rhetos server binaries can be built from source:
 ## Database setup
 
 1. Create an empty database (SQL Server 2008 or newer, Developer Edition is recommended) named "Rhetos" or "&lt;MyApplicationName&gt;Rhetos".
-2. Open folder **RhetosServer\bin** and copy the template file "Template.ConnectionStrings.config" to "ConnectionStrings.config".
+2. Open folder **RhetosServer\bin** and copy the template file "Template.ConnectionStrings.config" to "ConnectionStrings.config" in the same folder.
 3. Edit the existing configuration line in the **ConnectionStrings.config** file to reference the created database. For example, if your database is named "Rhetos" on the local SQL Server with default instance name, simply replace "theServer" to "localhost" and "theDatabase" to "Rhetos".
 
 ## Packages configuration
