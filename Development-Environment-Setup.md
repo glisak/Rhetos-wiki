@@ -26,7 +26,7 @@ Rhetos packages define the content of the Rhetos server. This section describes 
     * Copy "Template.RhetosPackageSources.config" file to "RhetosPackageSources.config", if the target does not already exist.
 2. Verify that the RhetosServer is configured correctly by opening command prompt at **RhetosServer\bin** folder and running `DeployPackages.exe`.
     * The last printed line should be "*[Trace] DeployPackages: Done.*".
-    * The output may include "*WARNING: Empty assembly is generated.*", because no packages are provided in the "RhetosPackages.config".
+    * The output may include "*[Error] DeploymentConfiguration: No packages*" and "*[Error] DeployPackages: WARNING: Empty assembly...*", because no packages are provided in the "RhetosPackages.config".
       This is ok for now.
 
 ## IIS setup
@@ -52,8 +52,9 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
 
 1. **Skip the following steps** if you are using a Windows domain account.
 2. Modify the *RhetosAppPool* to use built-in account "ApplicationPoolIdentity", instead of the developers domain account (Advanced Settings => Identity). This is the default user for a new app pool.
-3. On the SQL Server add a Security => Logins => New Login... => Enter "BUILTIN\IIS_IUSRS".
-4. Open the created  login entry (BUILTIN\IIS_IUSRS) => Open "User Mapping" => Select the Rhetos database and mark the "db_owner" checkbox.
+3. Open SQL Server Management Studio:
+    * On the SQL Server add a Security => Logins => New Login... => Enter "BUILTIN\IIS_IUSRS".
+    * Open the created  login entry (BUILTIN\IIS_IUSRS) => Open "User Mapping" => Select the Rhetos database and mark the "db_owner" checkbox.
 5. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
     * Read permissions to the RhetosServer folder.
     * Write permissions to the RhetosServer logs folder ("RhetosServer\Logs", or directly "RhetosServer" folder).
