@@ -41,7 +41,7 @@ The basic principles:
     * Reporting
     * Internationalization
     * and others
-3. Application development & deployment:
+3. Application development & deployment process:
     * Setup the Rhetos server
     * Use existing libraries with DSL concepts and technology-specific solutions (NuGet packages)
     * Develop your application: Write DSL scripts, custom DSL concept (generate new NuGet packages)
