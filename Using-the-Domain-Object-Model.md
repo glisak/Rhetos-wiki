@@ -34,7 +34,6 @@ void Main()
 ### Rhetos notes
 
 * Note that this scripts contains `commitChanges: false`. This means that all changes in database will be rolled back at the end of the script.
-* All Rhetos commands will throw an exceptions and rollback the database transaction in case of on error.
 
 ## Examples
 
