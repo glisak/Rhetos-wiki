@@ -5,18 +5,21 @@ After an application developer describes the application in that language (DSL s
 use it to generate the application server, including the application's database,
 business layer object model (C#) and web API (REST and SOAP).
 
-Recommended documentation:
+Introduction:
 
 * [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos)
-* Setup the application development environment
-  * [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
-  * [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
-* Application development
-  * [Rhetos DSL examples](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-examples)
-  * [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
-  * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
-  * [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
-  * [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
+
+Setup the application development environment:
+* [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
+* [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
+
+Application development:
+
+* [Rhetos DSL examples](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-examples)
+* [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
+* [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
+* [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
+* [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
 
 Recommended plugins:
 
