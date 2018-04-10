@@ -1,3 +1,5 @@
+## Introduction
+
 Welcome to the Rhetos wiki!
 
 Rhetos is a DSL framework that enables you to create your own *domain-specific language* to build server applications.
@@ -5,23 +7,33 @@ After an application developer describes the application in that language (DSL s
 use it to generate the application server, including the application's database,
 business layer object model (C#) and web API (REST and SOAP).
 
-Introduction:
-
 * [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos)
 
+## Application development
+
 Setup the application development environment:
-* [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
-* [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
 
-Application development:
+1. [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
+2. [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
 
-* [Rhetos DSL examples](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-examples)
+Rhetos DSL examples:
+1. How to create a data model: [Data structures and simple business rules](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-simple-business-rules)
+2. Row permissions business rules: [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
+3. Implementing entity inheritance and common interfaces: [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
+4. Low-level database development: [Database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects)
+5. How to implement complex server commands: [Action concept](https://github.com/Rhetos/Rhetos/wiki/Action-concept)
+6. Reports: [TemplaterReport](https://github.com/Rhetos/Rhetos/wiki/TemplaterReport)
+7. [Temporal data and change history](https://github.com/Rhetos/Rhetos/wiki/Temporal-data-and-change-history)
+8. [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
+
+Recommended documentation:
+
 * [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
 * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
 * [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
 * [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
 
-Recommended plugins:
+## Recommended plugins
 
 * [CommonConcepts](https://github.com/Rhetos/Rhetos/tree/master/CommonConcepts) contains basic concepts for building applications, such as entities, validation and computations.
 * [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync). Rhetos supports Windows Authentication by default. This package synchronizes Rhetos user roles with Active Directory, allowing user permissions to be defined by AD user groups.
