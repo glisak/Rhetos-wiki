@@ -27,9 +27,10 @@ void Main()
 
 ### LinqPad notes
 
-* Downloaded LinqPad from https://www.linqpad.net/.
+* Downloaded LinqPad from <https://www.linqpad.net/>.
 * The examples use the LinqPad's method `Dump()` to print the results in a grid.
-* The following code examples can be executed with Visual Studio project referencing ServerDom.dll (and the dlls it uses) if the `Dump()` method is removed.
+* LinqPad keeps the Rhetos server's process active between executions.
+* The following code examples can be executed with Visual Studio project referencing ServerDom.*.dll (and the dlls it uses) if the `Dump()` method is removed.
 
 ### Rhetos notes
 
