@@ -48,10 +48,9 @@ Example for the `ExtAction` concept:
     ```
     Module Demo
     {
-        ExtAction SaveTTPayer 'Demo.Rhetos.TTPayer, Demo.Rhetos', 'SaveTTPayer'
+        ExtAction CreatePrincipal 'Demo.Rhetos.Principals, Demo.Rhetos', 'CreatePrincipal'
         {
             Guid ID;
-            ShortString Pin;
             ShortString Name;
         }
         
@@ -61,25 +60,17 @@ Example for the `ExtAction` concept:
 * C#:
 
     ```
-    // This method is implemented in the assembly Demo.Rhetos, in class TTPayer.
-    public static void SaveTTPayer(SaveTTPayer parameters, DomRepository repository, IUserInfo userInfo)
+    // This method is implemented in the assembly Demo.Rhetos, in class Principals.
+    public static void CreatePrincipal(CreatePrincipal parameters, DomRepository repository, IUserInfo userInfo)
     {
-            var ttPayer = new Demo.TTPayer
-            {
-                ID = parameters.ID,
-                Pin = parameters.Pin,
-                Name = parameters.Name
-            };
-            
-            repository.Demo.TTPayer.Insert(ttPayer);
-            
             var principal = new Common.Principal
             {
                 ID = parameters.ID,
-                Name = parameters.Pin
+                Name = parameters.Name
             }
 
-            InsertPrincipal(principal, repository, Role.TTPayer); // A helper method that creates a new used and assigns default permissions.
+            repository.Common.Principal.Insert(principal);
+
             var notification = "...";
             Notify(notification, repository, userInfo, Notify.Admin|Notify.PowerUsers); // A helper method for notifications.
     }
