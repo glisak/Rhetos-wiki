@@ -1,4 +1,4 @@
-Persisting the computed data is done by developing the data source that computed the data (usually an `SqlQueryable`),
+Persisting the computed data is done by developing the data source that computes the data (usually an `SqlQueryable`),
 and saving the result into the database table.
 
 Rhetos contains concepts that help automate the implementation:
