@@ -30,7 +30,7 @@ Module Demo
         {
             ID = parameters.ID,
             Name = parameters.Name
-        }
+        };
         
         repository.Common.Principal.Insert(principal);
     }'
