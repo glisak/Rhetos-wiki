@@ -29,7 +29,7 @@ void Main()
 
 * Downloaded LinqPad from <https://www.linqpad.net/>.
 * The examples use the LinqPad's method `Dump()` to print the results in a grid.
-* LinqPad keeps the Rhetos server's process active between executions.
+* LinqPad keeps the Rhetos server's process active between executions. This improves performance, but you will need to stop the LinqPad process ("Cancel All Thread and Reset" menu option) before calling DeployPackages.exe, to unlock the dll files.
 * The following code examples can be executed with Visual Studio project referencing ServerDom.*.dll (and the dlls it uses) if the `Dump()` method is removed.
 
 ### Rhetos notes
