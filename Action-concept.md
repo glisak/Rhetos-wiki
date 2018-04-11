@@ -24,28 +24,18 @@ Example:
 ```
 Module Demo
 {
-    Action SaveTTPayer '(parameters, repository, userInfo) =>
+    Action CreatePrincipal '(parameters, repository, userInfo) =>
     {
-        var ttPayer = new Demo.TTPayer
-        {
-            ID = parameters.ID,
-            Pin = parameters.Pin,
-            Name = parameters.Name
-        };
-        
-        repository.Demo.TTPayer.Insert(ttPayer);
-        
         var principal = new Common.Principal
         {
             ID = parameters.ID,
-            Name = parameters.Pin
+            Name = parameters.Name
         }
         
         repository.Common.Principal.Insert(principal);
     }'
     {
         Guid ID;
-        ShortString Pin;
         ShortString Name;
     }
 }
