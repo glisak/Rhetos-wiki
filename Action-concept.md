@@ -48,7 +48,7 @@ Example for the `ExtAction` concept:
     ```
     Module Demo
     {
-        ExtAction CreatePrincipal 'Demo.Rhetos.Principals, Demo.Rhetos', 'CreatePrincipal'
+        ExtAction CreatePrincipal 'Demo.Rhetos.Principals, Demo.Rhetos' 'CreatePrincipal'
         {
             Guid ID;
             ShortString Name;
