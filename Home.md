@@ -8,7 +8,7 @@ use it to generate the application server, including the application's database,
 business layer object model (C#) and web API (REST and SOAP).
 
 For an overview of the Rhetos architecture and principles, see:
-* [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos).
+* [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos)
 
 ## Application development
 
