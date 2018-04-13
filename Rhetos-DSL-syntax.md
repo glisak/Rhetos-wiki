@@ -84,3 +84,7 @@ Module Demo { Entity School; ShortString School.Name; }
 
 Module Demo { Entity School; } ShortString Demo.School.Name;
 ```
+
+## See also
+
+* [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
