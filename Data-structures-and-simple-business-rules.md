@@ -127,3 +127,7 @@ Entity Employee
     InvalidData FinishBeforeStart 'It is not allowed to enter a WorkFinished time before the WorkStarted time.';
 }
 ```
+
+## See also
+
+* [Rhetos DSL syntax](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-syntax)
