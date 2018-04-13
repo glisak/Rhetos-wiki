@@ -72,7 +72,7 @@ Other:
       All columns are read from the movie table, event those that are not needed.
       An additional query is executed for each lazy evaluation of a reference to the movie's director.
 
-        ```
+        ```C#
         var movies = repository.Demo.Movies.Query().ToList();
 
         foreach (var movie in movies)
@@ -84,7 +84,7 @@ Other:
       Only movie names and director names are read from the database.
       Only one SQL query is executed.
 
-        ```
+        ```C#
         var movies = repository.Demo.Movies.Query()
             .Select(movie => new { movie.Name, DirectorName = movie.Director.Name }).ToList();
 
