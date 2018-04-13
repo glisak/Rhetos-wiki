@@ -51,7 +51,7 @@ The basic principles:
 
 [[images/dsl-example.png|DSL example]]
 
-Rhetos DSL (a programming language) is a set of **concepts** - the **keywords** of the DSL language.
+Rhetos DSL (a programming language) is a set of **concepts** - the **keywords** in the DSL scripts.
 
 * Each concept represent a business pattern or a software design pattern, for example Entity, InvalidData, Logging, RowPermissions, etc.
 * Each concept has code generators that generate the application code, database structure, other concepts, web API and other stuff.
