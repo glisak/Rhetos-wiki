@@ -13,7 +13,7 @@ This means that the following changes are **irrelevant** to the generated applic
 Each statement in a DSL script has the following format:
 
 1. starts with the concept's **keyword**,
-2. followed by the **parameter values**,
+2. followed by the parameter values,
 3. ends with a semicolon (`;`) or an inner block of statements (`{` ... `}`).
 
 Each parameter is **a string** or **a reference** to another statement (feature).
