@@ -19,13 +19,13 @@ Setup the application development environment:
 
 Rhetos DSL examples:
 1. How to create a data model: [Data structures and simple business rules](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-simple-business-rules)
-2. Row permissions business rules: [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
+2. [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
 3. Implementing entity inheritance and common interfaces: [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
 4. Low-level database development: [Database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects)
 5. How to implement complex server commands: [Action concept](https://github.com/Rhetos/Rhetos/wiki/Action-concept)
-6. Reports: [TemplaterReport](https://github.com/Rhetos/Rhetos/wiki/TemplaterReport)
-7. [Temporal data and change history](https://github.com/Rhetos/Rhetos/wiki/Temporal-data-and-change-history)
-8. [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
+6. [Temporal data and change history](https://github.com/Rhetos/Rhetos/wiki/Temporal-data-and-change-history)
+7. Row permissions business rules: [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
+8. Reports: [TemplaterReport](https://github.com/Rhetos/Rhetos/wiki/TemplaterReport)
 
 Recommended documentation:
 
