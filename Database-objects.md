@@ -57,10 +57,10 @@ The SQL script that creates a database object can be written in-line (inside the
 * **SqlView** *&lt;Module&gt;.&lt;Name&gt; &lt;ViewSource&gt;*
 
     ``` sql
-    SqlView ActiveEmployees <SQL\1_View\ActiveEmployees.sql>;
+    SqlView ActiveEmployees <SQL\ActiveEmployees.sql>;
     ```
 
-    - File "ActiveEmployees.sql"
+    - File "ActiveEmployees.sql" in the "SQL" subfolder
 
         ``` sql
         SELECT
