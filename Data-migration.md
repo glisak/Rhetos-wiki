@@ -147,6 +147,37 @@ The `DeployPackages.exe` utility will automatically execute the data-migration s
   be copied only on a fist call.
   This ensures that later script will not overwrite data modification of a previous script.
 
+### Database structure independence
+
+The data migration scripts are independent of the current database structure,
+so the developers don't need to couple the database structure versioning with the data migration scripts.
+
+In the following examples, the same data-migration script is executed in different database versions (before or after upgrading the database), resulting with the identical data at the end. The steps that follow the main data flow are marked bold.
+
+The examples show the effect of a data-migration script that copies the data from entity A to B, when the entity in module "M" is renamed from "A" to "B".
+
+Option A) Deployment before the data migration:
+
+1. DeployPackages.exe - Update database
+    1. **Drop M.A: backup to _M.A**
+    2. Create M.B
+2. Manual execution of the data-migration script
+    1. DataMigrationUse M.A: M.A => _M.A (nothing to do, A does not exits, _A already contains old data)
+    2. DataMigrationUse M.B: M.B => _M.B (B is empty)
+    3. **SQL update query: _M.A => _M.B**
+    4. **DataMigrationApply M.B: _M.B => M.B**
+
+Option B) Data migration before the deployment:
+
+1. DeployPackages.exe - Data migration
+    1. **DataMigrationUse M.A: M.A => _M.A**
+    2. DataMigrationUse M.B: M.B => _M.B (nothing to do, B does not exist)
+    3. **Update: _M.A => _M.B**
+    4. DataMigrationApply M.B: _M.B => M.B (nothing to do, B does not exist)
+2. DeployPackages.exe - Update database
+    1. Drop M.A
+    2. **Create M.B: restore from _B**
+
 ### Cleanup
 
 * After upgrading the database, `DeployPackages.exe` will delete the migration columns and tables
