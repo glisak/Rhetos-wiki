@@ -60,7 +60,7 @@ Comments:
 ## Flat vs. embedded statements
 
 Rhetos reads the DSL scripts as a set of somewhat independent statements (with references between them).
-Embedding a block of statements within another statement is just an optional [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar).
+Embedding a block of statements within another statement is just an optional syntactic sugar.
 
 The following script is semantically identical to the example above:
 
