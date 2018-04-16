@@ -172,3 +172,5 @@ Automatic dependency detection is not perfect but works well in practice:
     - `SqlDependsOnView`
     - `SqlDependsOnFunction`
     - `SqlDependsOnSqlObject`
+    - `SqlDependsOnIndex`
+    - `SqlDependsOnID` - Dependency on ID property. Use this instead of `SqlDependsOn entity` to avoid having dependencies to all properties of the entity.
