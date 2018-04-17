@@ -26,7 +26,7 @@ Table of contents:
 * Use one empty line to separate logical groups of code.
   Avoid more than one empty line.
 * Avoid spurious free spaces.
-* Use single quotes for C# code snippets and double quotes for SQL.
+* Use single quotes for C# code snippets (`'`) and double quotes for SQL (`"`).
 * Larger SQL code snippets should be extracted to a separate .sql file in the "SQL" subfolder.
   The file can be referenced from the .rhe script, for example: `SqlQueryable DocumentInfo <SQL\DocumentInfo.sql> { ... `.
 
