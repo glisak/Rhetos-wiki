@@ -2,6 +2,9 @@
 
 By using a hierarchy of **roles**, the administrator can create groups of users and permissions, or connect them directly.
 
+For automatic synchronization of Rhetos user roles with the user groups in Active Directory,
+add the [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin package to the Rhetos applications. This will allow the domain administrator to set the user permissions in the Rhetos application.
+
 ## Claims
 
 Each record in a *Common.Claim* entity represents a basic element of access. is an operation on an entity (read/insert/update/delete) or an action.
