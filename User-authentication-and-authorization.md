@@ -1,3 +1,6 @@
+
+## Authorization
+
 There are two subsystems available for the authorization of user access in the Rhetos applications.
 
 1. [Basic permissions (Claims)](https://github.com/Rhetos/Rhetos/wiki/Basic-permissions)
