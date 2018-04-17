@@ -9,7 +9,7 @@ add the [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plu
 
 Each record in a *Common.Claim* entity represents a basic element of access. is an operation on an entity (read/insert/update/delete) or an action.
 
-The list of claims (the *Common.Claim* entity) is created on deployment, and does not change during run-time.
+The list of claims is created on deployment, and does not change during run-time.
 There are claims generated for each of the following objects:
 
 * For each entity: Read, New, Edit, Remove
