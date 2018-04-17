@@ -1,10 +1,22 @@
-## Roles
+## Users and roles
 
-By using a hierarchy of **roles**, the administrator can create groups of users and permissions, or connect them directly.
+By using a hierarchy of roles, the administrator can create groups of users and permissions, or connect them directly.
+
+The following diagram shows the Rhetos entities in the *Common* module that determine the user's roles and permissions. The diamond shapes represent the associative entities.
 
 [[images/claims.png|Roles and Claims]]
 
-For **automatic synchronization** of Rhetos user roles with the user groups in **Active Directory**,
+### Common administration activities
+
+All administration activities are performed by modifying the data in the entities from the diagram above. For example:
+
+* To create a new user, insert the record in the *Common.Principal* entity.
+* To configure the user's permissions, enter the data in *Common.PrincipalHasRole* or *Common.PrincipalPermission*.
+* The roles and the role permissions are usually preconfigured by the development team (entering the data in *Common.Role* and *Common.RolePermission*).
+
+### Additional features
+
+* For **automatic synchronization** of Rhetos user roles with the user groups in **Active Directory**,
 add the [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin package to the Rhetos application. This will allow the domain administrator to indirectly set the user permissions in the Rhetos application.
 
 ## Claims
