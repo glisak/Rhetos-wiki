@@ -4,8 +4,8 @@ By using a hierarchy of **roles**, the administrator can create groups of users 
 
 [[images/claims.png|Roles and Claims]]
 
-For automatic synchronization of Rhetos user roles with the user groups in Active Directory,
-add the [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin package to the Rhetos applications. This will allow the domain administrator to set the user permissions in the Rhetos application.
+For **automatic synchronization** of Rhetos user roles with the user groups in **Active Directory**,
+add the [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin package to the Rhetos application. This will allow the domain administrator to indirectly set the user permissions in the Rhetos application.
 
 ## Claims
 
