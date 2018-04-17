@@ -1,5 +1,5 @@
 Allows creating any SQL object as a part of generated application.
-**SqlObject** is intended to be used as a workaround when existing DSL concepts (**Unique**, **SqlIndex**, **SqlView**, **SqlTrigger**, etc) are not sufficient.
+**SqlObject** is intended to be used as a workaround when existing DSL concepts for [database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects) (**Unique**, **SqlIndex**, **SqlView**, **SqlTrigger**, etc) are not sufficient.
 
 Implemented in Rhetos package: *CommonConcepts*.
 
@@ -58,3 +58,7 @@ This example (from Rhetos unit tests) creates an SQL view, adding the transactio
                 SET @dropView = 'DROP VIEW TestSqlWorkarounds.' + @dropView;
                 EXEC (@dropView);";
     }
+
+## See also
+
+* [Database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects)
