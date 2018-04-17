@@ -1,3 +1,8 @@
+## Authentication
+
+Rhetos supports **Windows Authentication** by default.
+
+If the web application must be accessed from outside of Windows Domain (for example, a public application), use the **Forms Authentication** instead, by including the [AspNetFormsAuth](https://github.com/Rhetos/AspNetFormsAuth) plugin package.
 
 ## Authorization
 
