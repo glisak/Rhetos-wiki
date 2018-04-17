@@ -20,4 +20,4 @@ A custom claim can be created in a DSL script by using the CustomClaim concept. 
 
 ## See also
 
-* [Access control](https://github.com/Rhetos/Rhetos/wiki/Access-control) - See other options for user authorization.
+* [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization) - Other options for user authorization.
