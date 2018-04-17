@@ -12,7 +12,8 @@ Table of contents:
 Row permissions are intended for implementing business requirements that can be formed in rules of the following format:
 > Some employees are allowed to access (read or write) some subset of the entity's records.
 
-Note that row permissions are **not intended** for limiting access to specific **actions**, or **filtering** out some records in one part of the application while allowing the user to access those records in another part of the application.
+* Note that row permissions are **not intended** for limiting access to specific **actions**, or **filtering** out some records in one part of the application while allowing the user to access the same records in another part of the application.
+* For the simpler model of user permissions, see [Basic-permissions](https://github.com/Rhetos/Rhetos/wiki/Basic-permissions).
 
 Row permissions are based on filters that are applied when reading and writing entity's records:
 
@@ -354,3 +355,7 @@ Row permissions are automatically checked for client's read and write requests. 
 
 1. Use `IProcessingEngine` to execute server commands to read/write data. The processing engine will check the current user's permissions, including row permission.
 2. Directly use row permissions filters (`Common.RowPermissionsReadItems` and `Common.RowPermissionsWriteItems`) on an entity with row permissions, to verify the data before writing it to the database or sending it to the user.
+
+## See also
+
+* [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization)
