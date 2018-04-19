@@ -36,17 +36,17 @@ Rhetos packages define the content of the Rhetos server. This section describes 
     * Name: "RhetosAppPool"
     * NET framework version: "v4.x"
     * Manged pipeline mode: "Integrated"
-3. Select the "RhetosAppPool" => "Advanced settings" => "Process Model" => Change "Identity" => Select "Custom account"
-    * Enter a domain user account that will be used for Rhetos server (on a development computer enter the **developer's account**). If you are **not using** a Windows domain account, see the next paragraph for further instructions.
+3. Open "RhetosAppPool" => "Advanced settings" => Change "Identity" => Select "Custom account" => Enter a domain user account that will be used for Rhetos server (on a development computer enter the **developer's account**). If you are **not using** a Windows domain account, see the next paragraph for setting the custom account.
     * Note: This account must have *db_owner* rights for the Rhetos database (see Database setup).
-4. Select "Sites" => Right click "Default Web Site" => "Add application...", enter the following data:
+4. *Only for older versions*: If using Rhetos v1.1 or older, "RhetosAppPool" => "Advanced settings" => check "Enable 32-Bit Application".
+5. Select "Sites" => Right click "Default Web Site" => "Add application...", enter the following data:
     * Enter Alias: "RhetosServer"
     * Application pool: "RhetosAppPool"
     * Physical path: select the path of the **RhetosServer** folder inside your application's development folder.
-5. Select the created "RhetosServer" web application => Open "Authentication" icon:
+6. Select the created "RhetosServer" web application => Open "Authentication" icon:
     * Enable "Windows Authentication"
     * *Disable* all other authentication options.
-6. Start your browser, and then type <http://localhost/RhetosServer/> in the address. Verify that the web site is working and the Rhetos server status is displayed on the web page.
+7. Start your browser, and then type <http://localhost/RhetosServer/> in the address. Verify that the web site is working and the Rhetos server status is displayed on the web page.
 
 If is is not possible to use Windows domain account, the Rhetos service can be set up to use ApplicationPoolIdentity in a development environment:
 
