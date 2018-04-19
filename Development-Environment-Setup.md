@@ -1,5 +1,17 @@
 This article describes how to setup the development environment for developing applications with Rhetos framework.
 
+Table of contents:
+
+1. [Prerequisites](#prerequisites)
+2. [Get Rhetos server binaries](#get-rhetos-server-binaries)
+3. [Database setup](#database-setup)
+4. [Packages configuration](#packages-configuration)
+5. [IIS setup](#iis-setup)
+6. [IIS Express setup](#iis-express-setup)
+7. [Configure your text editor for DSL scripts (*.rhe)](#configure-your-text-editor-for-dsl-scripts-rhe)
+
+## Prerequisites
+
 Before following the instructions in this article, **make sure that all the [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites) are installed**.
 
 ## Get Rhetos server binaries
