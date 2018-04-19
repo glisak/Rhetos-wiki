@@ -69,6 +69,13 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
 3. Open SQL Server Management Studio:
     * On the SQL Server add a Security => Logins => New Login... => Enter "BUILTIN\IIS_IUSRS".
     * Open the created  login entry (BUILTIN\IIS_IUSRS) => Open "User Mapping" => Select the Rhetos database and mark the "db_owner" checkbox.
+4. Allow IIS system accounts read access to the Rhetos server folder and write access to the Rhetos logs folder (the "Logs" subfolder or directly in the Rhetos server folder, depending on the settings in *web.config*), by entering these commands to the command prompt *as administrator*, in the "RhetosServer" folder:
+
+        ICACLS . /grant "BUILTIN\IIS_IUSRS":(OI)(CI)(RX)
+        ICACLS . /grant "NT AUTHORITY\IUSR":(OI)(CI)(RX)
+        ICACLS .\Logs /grant "BUILTIN\IIS_IUSRS":(OI)(CI)(M)
+        ICACLS .\Logs /grant "NT AUTHORITY\IUSR":(OI)(CI)(M)
+
 4. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
     * Read permissions to the RhetosServer folder.
     * Write permissions to the RhetosServer logs folder ("RhetosServer\Logs", or directly "RhetosServer" folder).
