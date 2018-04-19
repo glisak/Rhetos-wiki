@@ -5,10 +5,16 @@ Rhetos is a DSL platform for Enterprise Application Development.
 
 Rhetos works as a compiler that **generates the business application** from the source written in the DSL scripts.
 
-* It is focused on the back-end development: It generates the business logic layer and the database.
+* The generated application is a standard business applications based on Microsoft .NET technology stack.
+* It is focused on the back-end development: It generates the business logic layer (C# object model), the database and the web API (REST, SOAP, etc.).
+* The database is not generated from scratch on each deployment, it is upgraded instead, protecting the existing data.
 * Rhetos application generator can be used for application scaffolding, but its real strength is utilized when using DSL scripts as the *source* and never manually modify the generated code.
 
 [[images/Rhetos-4tier.png|Rhetos 4tier]]
+
+Rhetos comes with the *CommonConcepts* DSL package, a programming language extension that contains many ready-to-use features for building applications.
+
+[Syntax highlighting](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup#configure-your-text-editor-for-dsl-scripts-rhe) is available for Visual Studio Code, SublimeText3 and Notepad++.
 
 ## Why was Rhetos created
 
