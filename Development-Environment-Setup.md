@@ -76,10 +76,10 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
         ICACLS .\Logs /grant "BUILTIN\IIS_IUSRS":(OI)(CI)(M)
         ICACLS .\Logs /grant "NT AUTHORITY\IUSR":(OI)(CI)(M)
 
-4. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
+5. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
     * Read permissions to the RhetosServer folder.
     * Write permissions to the RhetosServer logs folder ("RhetosServer\Logs", or directly "RhetosServer" folder).
-5. Open "RhetosServer\Web.config" file and set the "Security.AllClaimsForUsers" parameter value to your username and computer name, formatted "username@computername". Note that your username may include the domain name prefix.
+6. Open "RhetosServer\Web.config" file and set the "Security.AllClaimsForUsers" parameter value to your username and computer name, formatted "username@computername". Note that your username may include the domain name prefix.
 
 ## IIS Express setup
 
