@@ -31,6 +31,8 @@ Rhetos packages define the content of the Rhetos server. This section describes 
 
 ## IIS setup
 
+Follow the steps in this chapter if using IIS (recommended) instead of IIS Express.
+
 1. Start "Internet Information Services (IIS) Manager".
 2. Select "Application Pools" => "Add Application Pool...", enter the following data:
     * Name: "RhetosAppPool"
@@ -55,10 +57,53 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
 3. Open SQL Server Management Studio:
     * On the SQL Server add a Security => Logins => New Login... => Enter "BUILTIN\IIS_IUSRS".
     * Open the created  login entry (BUILTIN\IIS_IUSRS) => Open "User Mapping" => Select the Rhetos database and mark the "db_owner" checkbox.
-5. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
+4. If the web application fails with a file access error, set the required permissions for the IIS system accounts "BUILTIN\IIS_IUSRS" and "NT AUTHORITY\IUSR":
     * Read permissions to the RhetosServer folder.
     * Write permissions to the RhetosServer logs folder ("RhetosServer\Logs", or directly "RhetosServer" folder).
-6. Open "RhetosServer\Web.config" file and set the "Security.AllClaimsForUsers" parameter value to your username and computer name, formatted "username@computername". Note that your username may include the domain name prefix.
+5. Open "RhetosServer\Web.config" file and set the "Security.AllClaimsForUsers" parameter value to your username and computer name, formatted "username@computername". Note that your username may include the domain name prefix.
+
+## IIS Express setup
+
+Follow the steps in this chapter if using IIS Express instead of IIS.
+
+`SetupRhetosServer.bat` will set up web environment for IIS Express.
+It requires few parameters based on which it sets up database, configures
+Rhetos server and sets up IIS Express local config which is enough to start Rhetos
+server and developing.
+
+Open command prompt in "Source\Rhetos" subfolder and run:
+
+    SetupRhetosServer.bat <WebsiteName> <Port> <SqlServer> <DatabaseName>
+
+SetupRhetosServer.bat command-line arguments:
+
+* *WebsiteName* - name of website in IISExpress config
+  (choose any name, it is not directly related to URL of Rhetos web service)
+* *Port* - port that Rhetos web service will be listening to if using IIS Express
+  (1234, for example)
+* *SqlServer* - Microsoft SQL Server instance on which there is/will be database for Rhetos server
+* *DatabaseName* - name of database that will Rhetos use, script will create
+  database if it doesn't exist.
+
+After running this script and before running Rhetos server, you can manually
+configure `IISExpress.config`. It is template config for IIS Express site
+with modified `<sites>` section and added `<location>` part at the end of config.
+Those two defines which port on localhost Rhetos will be listening and that
+security used is based on windows authentication.
+
+If one wants to use different database it is defined in ConnectionStrings.config
+in "Source\Rhetos\bin" subfolder.
+
+Note that besides configuring IIS and Database, `SetupRhetosServer.bat` also
+deploys *CommonConcepts* and user defined packages to that database. If one chooses
+manual setup it is necessary to run ApplyPackages.bat in "Source\Rhetos".
+
+Once configured, Rhetos server can be started by running following command
+in cmd while positioned in "Source\Rhetos":
+
+    CALL "C:\Program Files (x86)\IIS Express\IISExpress.exe" /config:IISExpress.config
+
+If using Rhetos v1.1 or older, use the 32-bit "Program Files" folder.
 
 ## Configure your text editor for DSL scripts (*.rhe)
 
