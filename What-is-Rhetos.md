@@ -8,7 +8,7 @@ Rhetos works as a compiler that **generates the business application** from the 
 * The generated application is a standard business applications based on Microsoft .NET technology stack.
 * It is focused on the back-end development: It generates the business logic layer (C# object model), the database and the web API (REST, SOAP, etc.).
 * The database is not generated from scratch on each deployment, it is upgraded instead, protecting the existing data.
-* Rhetos application generator can be used for application scaffolding, but its real strength is utilized when using DSL scripts as the *source* and never manually modify the generated code.
+* Rhetos application generator can be used for application scaffolding, but its real strength is utilized when using DSL scripts as the *source* and never manually modifying the generated code.
 
 [[images/Rhetos-4tier.png|Rhetos 4tier]]
 
@@ -29,9 +29,9 @@ The basic principles:
   * Write high-quality implementations of standard patterns and reuse them.
 * **Declarative programming** helps reduce the difference between the requirements and the code, and separate business logic from technology details.
   * Try to develop most of the application's business logic by simply declaring the features.
-  * Reduce the amount if the imperative code in order to decrease code coupling and increase long-term maintainability.
-  * Developers are encouraged to recognize business and technology patterns, and create DSL concepts to simplify the use for those patterns in the business application development.
->   Rhetos DSL concept are able to encapsulate a much larger scope of patterns than just writing a reusable class or a function. The implemented pattern can affect any part of the system, from the database structure to the web API, extend other existing features or implement the crosscutting concerns.
+  * Reduce the amount of the imperative code in order to decrease code coupling and increase long-term maintainability.
+  * Developers are encouraged to recognize business and technology patterns, and create DSL concepts to simplify the use of those patterns in the business application development.
+>   Rhetos DSL concepts are able to encapsulate a much larger scope of patterns than just writing a reusable class or a function. The implemented pattern can affect any part of the system, from the database structure to the web API, extend other existing features or implement the crosscutting concerns.
 * **Code decoupling and Extensibility**
   * Each feature is implemented as a DSL concept with minimal number of dependencies.
   * Additional features are added as an extension from outside, not increasing complexity of the existing features' implementation.
@@ -59,14 +59,14 @@ The basic principles:
 
 Rhetos DSL (a programming language) is a set of **concepts** - the **keywords** in the DSL scripts.
 
-* Each concept represent a business pattern or a software design pattern, for example Entity, InvalidData, Logging, RowPermissions, etc.
-* Each concept has code generators that generate the application code, database structure, other concepts, web API and other stuff.
+* Each concept represents a business pattern or a software design pattern, for example Entity, InvalidData, Logging, RowPermissions, etc.
+* Each concept has code generators that generate the application code, database structure, other concepts, web API and other.
 * Existing libraries include many standard concepts, but the application developers can easily add new concepts to extend the programming language.
 
 Developers write the business application's code in the DSL scripts:
 
 * A DSL script can be understood as a set of **statements**: Each statement declares **a feature** of the application.
-* Statements are instances of the concepts, starting with concept keyword followed by parameter values.
+* Statements are instances of the concepts, starting with a concept keyword followed by parameter values.
 * DSL scripts often include SQL and C# code snippets.
 * DSL scripts can also contain calls to external dlls.
 
