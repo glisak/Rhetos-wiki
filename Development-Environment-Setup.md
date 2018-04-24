@@ -84,6 +84,7 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
 ## IIS Express setup
 
 Follow the steps in this chapter if using IIS Express instead of IIS.
+IIS is recommended (see the previous chapter), but IIS Express can be useful if a restricted environment is needed on the development machine.
 
 `SetupRhetosServer.bat` will set up web environment for IIS Express.
 It requires few parameters based on which it sets up database, configures
