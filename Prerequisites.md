@@ -41,7 +41,7 @@ Verify Visual Studio 2017 and ASP.NET:
 3. Project Properties => Web => Change the setting "IIS Express" to "Local IIS", and Create Virtual Directory.
 4. Build and Start the application (F5) to check if everything is installed correctly.
   The ASP.NET web page should automatically open in a browser (http://localhost/WebApplicationX/).
-5. Delete the test projekt.
+5. Delete the test project.
 
 Verify the SQL Server and your development database:
 
