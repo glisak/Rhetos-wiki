@@ -8,7 +8,7 @@ This means that the following changes are **irrelevant** to the generated applic
 * Multiple declaration of the same feature
 * The arrangement of the statements over multiple DSL scripts
 
-## Literals
+## Syntax of a statement
 
 Each statement in a DSL script has the following format:
 
@@ -38,7 +38,7 @@ Example:
 }
 </pre>
 
-### 1. String literals
+### String literals
 
 * Simple strings such as object names (**identifiers**) do not need parenthesis.
 * Strings with spaces and special characters (code snippets, messages) must be enclosed in either **single or double** quotation marks.
@@ -49,11 +49,11 @@ Example:
   * In the example above: `RegExMatch '\d{5}' <RegexMessage.txt>;`
   * Coding standard: This is recommended for larger SQL queries.
 
-### 2. References
+### References
 
 * A reference to another statement is a list of the statement's identifiers (the feature's name), separated by a dot. In the example above, `Demo.Region` after `BelongTo` is a reference to the second entity.
 
-### 3. Comments
+## Comments
 
 * Single-line comments begin with a double slash (`//`).
 
