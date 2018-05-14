@@ -24,12 +24,12 @@ Example:
 ```
 Module Demo
 {
-    Action CreatePrincipal '(parameters, repository, userInfo) =>
+    Action CreatePrincipal '(parameter, repository, userInfo) =>
     {
         var principal = new Common.Principal
         {
-            ID = parameters.ID,
-            Name = parameters.Name
+            ID = parameter.ID,
+            Name = parameter.Name
         };
         
         repository.Common.Principal.Insert(principal);
@@ -61,12 +61,12 @@ Example for the `ExtAction` concept:
 
     ```
     // This method is implemented in the assembly Demo.Rhetos, in class Principals.
-    public static void CreatePrincipal(CreatePrincipal parameters, DomRepository repository, IUserInfo userInfo)
+    public static void CreatePrincipal(CreatePrincipal parameter, DomRepository repository, IUserInfo userInfo)
     {
             var principal = new Common.Principal
             {
-                ID = parameters.ID,
-                Name = parameters.Name
+                ID = parameter.ID,
+                Name = parameter.Name
             }
 
             repository.Common.Principal.Insert(principal);
