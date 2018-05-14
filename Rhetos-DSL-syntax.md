@@ -55,7 +55,7 @@ Example:
 
 ## Comments
 
-* Single-line comments begin with a double slash (`//`).
+Single-line comments begin with a double slash (`//`).
 
 ## Flat vs. embedded statements
 
