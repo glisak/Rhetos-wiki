@@ -38,7 +38,7 @@ Example:
 }
 </pre>
 
-String literals:
+### 1. String literals
 
 * Simple strings such as object names (**identifiers**) do not need parenthesis.
 * Strings with spaces and special characters (code snippets, messages) must be enclosed in either **single or double** quotation marks.
@@ -49,11 +49,11 @@ String literals:
   * In the example above: `RegExMatch '\d{5}' <RegexMessage.txt>;`
   * Coding standard: This is recommended for larger SQL queries.
 
-References:
+### 2. References
 
 * A reference to another statement is a list of the statement's identifiers (the feature's name), separated by a dot. In the example above, `Demo.Region` after `BelongTo` is a reference to the second entity.
 
-Comments:
+### 3. Comments
 
 * Single-line comments begin with a double slash (`//`).
 
