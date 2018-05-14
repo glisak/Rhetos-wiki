@@ -42,12 +42,12 @@ String literals:
 
 * Simple strings such as object names (**identifiers**) do not need parenthesis.
 * Strings with spaces and special characters (code snippets, messages) must be enclosed in either **single or double** quotation marks.
-  * Convention: The single quotes are typically used for C# code snippet and the double quotes are used for SQL code snippets,
+  * Coding standard: The single quotes are usually used for C# code snippet and the double quotes are used for SQL code snippets,
   to avoid escaping quoted strings in the respective languages.
 * Quotation marks within a string are escaped by typing the quotation mark twice.
 * Any string parameter can be placed in an **external file** and referenced from the DSL scripts by the relative path in angle quotes.
   * In the example above: `RegExMatch '\d{5}' <RegexMessage.txt>;`
-  * Convention: This is recommended for larger SQL queries.
+  * Coding standard: This is recommended for larger SQL queries.
 
 References:
 
