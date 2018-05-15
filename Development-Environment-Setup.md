@@ -73,6 +73,7 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
 
         ICACLS . /grant "BUILTIN\IIS_IUSRS":(OI)(CI)(RX)
         ICACLS . /grant "NT AUTHORITY\IUSR":(OI)(CI)(RX)
+        IF NOT EXIST Logs\ MD Logs
         ICACLS .\Logs /grant "BUILTIN\IIS_IUSRS":(OI)(CI)(M)
         ICACLS .\Logs /grant "NT AUTHORITY\IUSR":(OI)(CI)(M)
 
