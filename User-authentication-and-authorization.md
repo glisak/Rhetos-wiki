@@ -2,11 +2,13 @@
 
 ### Windows Authentication
 
-Rhetos supports **Windows Authentication** by default, so the users can automatically log in to the web application inside the Windows domain.
+Rhetos supports Windows Authentication by default, so the users can automatically log in to the web application inside the Windows domain.
+
+For additional administration features, such as automatic synchronization with the **Active Directory user groups**, see [Basic permissions](https://github.com/Rhetos/Rhetos/wiki/Basic-permissions).
 
 ### Forms Authentication
 
-If the web application must be accessed from outside of Windows Domain (for example, a public application), use the **forms authentication** instead. Users with login to the application with a username and a password.
+If the web application must be accessed from outside of Windows Domain (for example, a public application), use the **forms authentication** instead. The users will log in by typing a username and a password.
 
 * Install forms authentication by including the [AspNetFormsAuth](https://github.com/Rhetos/AspNetFormsAuth) plugin package and follow the additional instruction in the package's readme file.
 * Optional plugin [AspNetFormsAuthImpersonation](https://github.com/Rhetos/AspNetFormsAuthImpersonation) allows the administrator to log in as another user for debugging and support.
