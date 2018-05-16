@@ -1,12 +1,20 @@
 ## Authentication
 
+### Windows Authentication
+
 Rhetos supports **Windows Authentication** by default, so the users can automatically log in to the web application inside the Windows domain.
+
+### Forms Authentication
 
 If the web application must be accessed from outside of Windows Domain (for example, a public application), use the **forms authentication** instead. Users with login to the application with a username and a password.
 
 * Install forms authentication by including the [AspNetFormsAuth](https://github.com/Rhetos/AspNetFormsAuth) plugin package and follow the additional instruction in the package's readme file.
 * Optional plugin [AspNetFormsAuthImpersonation](https://github.com/Rhetos/AspNetFormsAuthImpersonation) allows the administrator to log in as another user for debugging and support.
 * [SimpleSPRTEmail](https://github.com/Rhetos/SimpleSPRTEmail) plugin adds an authentication service method "Send password reset token" for sending emails if a user forgot the password.
+
+### Additional authentication options
+
+A custom authentication plugin may be added by implementing a IUserInfo interface and registering the new implementation as the Rhetos server plugin (for example see AspNetUserInfo class in the AspNetFormsAuth plugin).
 
 ## Authorization
 
