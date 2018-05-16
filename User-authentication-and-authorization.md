@@ -16,7 +16,7 @@ If the web application must be accessed from outside of Windows Domain (for exam
 
 ### Additional authentication options
 
-A custom authentication plugin may be added by implementing a IUserInfo interface and registering the new implementation as the Rhetos server plugin (for example see AspNetUserInfo class in the AspNetFormsAuth plugin).
+A custom authentication plugin may be added by implementing the [IUserInfo](https://github.com/Rhetos/Rhetos/blob/master/Source/Rhetos.Utilities/IUserInfo.cs) interface and registering the new implementation as the Rhetos server plugin.
 
 ## Authorization
 
