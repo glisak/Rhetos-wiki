@@ -6,7 +6,7 @@ Rhetos is a DSL platform for Enterprise Application Development.
 Rhetos works as a compiler that **generates the business application** from the source written in the DSL scripts.
 
 * The generated application is a standard business applications based on Microsoft .NET technology stack.
-* It is focused on the back-end development: It generates the business logic layer (C# object model), the database and the web API (REST, SOAP, etc.).
+* It is focused on the back-end development: It generates the business logic layer (C# object model), the database and the web API (such as REST, SOAP and OData).
 * The database is not generated from scratch on each deployment, it is upgraded instead, protecting the existing data.
 * Rhetos application generator can be used for application scaffolding, but its real strength is utilized when using DSL scripts as the *source* and never manually modifying the generated code.
 
@@ -42,7 +42,7 @@ The basic principles:
     * A framework for developing DSL concepts (as plugins) and code generators.
 2. Ready-to-use DSL libraries:
     * Implementations of standard business and design patterns
-    * Web API generators (SOAP, REST, OData)
+    * Web API generators (such as REST, SOAP and OData)
     * Authentication plugins
     * Reporting
     * Internationalization
