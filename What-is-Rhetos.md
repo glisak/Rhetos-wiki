@@ -7,8 +7,8 @@ Rhetos works as a compiler that **generates the business application** from the 
 
 * The generated application is a standard business applications based on Microsoft .NET technology stack.
 * It is focused on the back-end development: It generates the business logic layer (C# object model), the database and the web API (such as REST, SOAP and OData).
-* The database is not generated from scratch on each deployment, it is upgraded instead, protecting the existing data.
-* Rhetos application generator can be used for application scaffolding, but its real strength is utilized when using DSL scripts as the *source* and never manually modifying the generated code.
+* The database is not generated from scratch on each deployment, it is upgraded instead, carefully protecting the existing data.
+* Rhetos application generator could be used for application scaffolding, but its real strength is utilized when using DSL scripts as the *source* and never manually modifying the generated code.
 
 [[images/Rhetos-4tier.png|Rhetos 4tier]]
 
