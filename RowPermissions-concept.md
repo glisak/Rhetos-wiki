@@ -301,10 +301,12 @@ and inherits the row permissions from the `Document`.
     {
         Extends DemoRowPermissions2.Document;
         ShortString Title2;
-        Reference Division2 DemoRowPermissions2.Division;
+        Reference Division2 DemoRowPermissions2.Division
+        {
+            SamePropertyValue 'Base' DemoRowPermissions2.Document.Division;
+        }
 
         RowPermissions { InheritFromBase; }
-        SamePropertyValue Division2.'Base' DemoRowPermissions2.Document.Division;
     }
 
 When querying the `DocumentInfo` with row permissions, the generated SQL query should `JOIN` the `DocumentInfo` view to the `Document` table, and use the `Document.DivisionID` column to check the row permissions as seen before.
