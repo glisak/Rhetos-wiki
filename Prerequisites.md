@@ -13,7 +13,7 @@ Prerequisites for the Rhetos server:
 Application development environment:
 
 * Visual Studio 2015 or newer
-* [NuGet.exe](https://www.nuget.org/downloads) command-line utility, downloaded and added to the PATH environment variable
+* [NuGet.exe](https://www.nuget.org/downloads) command-line utility, download and [add to the PATH](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/) environment variable
 * [Git client](https://gitforwindows.org), installed and added to the PATH environment variable
 * Text editor (recommended Visual Studio Code, SublimeText3 or Notepad++)
 * [LinqPad](https://www.linqpad.net/Download.aspx), the latest version
