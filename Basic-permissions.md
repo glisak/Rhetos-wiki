@@ -20,8 +20,8 @@ All administration activities are performed by modifying the data in the entitie
 * For **automatic synchronization** of Rhetos user roles with the user groups in **Active Directory**,
 add the [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin package to the Rhetos application. This will allow the domain administrator to indirectly set the user permissions in the Rhetos application.
 * The permission check can be turned off in a development environment by setting the following values in the Rhetos server's *web.config* file:
-    * "BuiltinAdminOverride" - If set to "True", the user that is a local administrator will have full permissions. This option will not work if the web server is not run in elevated mode (on IIS Express, e.g.); use the following option in that situation.
-    * "Security.AllClaimsForUsers" - The value contains a comma-separated list of users (formatted `username@servername`) that automatically have full permissions. Examples:
+    * "BuiltinAdminOverride" - If set to "True", the user that is a local administrator will have full permissions. This option works only for Windows authentication, and if the web server is able to check the user's Windows groups (usually in development environment). Use the following option otherwise.
+    * "Security.AllClaimsForUsers" - The value should contain a comma-separated list of users with server computer name (formatted `username@servername, ...`) that automatically have full permissions. Examples:
         * Domain user on a shared server: `<add key="Security.AllClaimsForUsers" value="mydomain\myusername@myserver" />`.
         * Local windows user without Windows domain: `<add key="Security.AllClaimsForUsers" value="mypc\myusername@mypc" />`.
         * Forms Authentication user "admin": `<add key="Security.AllClaimsForUsers" value="admin@myserver" />`.
