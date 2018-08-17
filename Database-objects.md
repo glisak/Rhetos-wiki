@@ -167,13 +167,14 @@ Automatic dependency detection is not perfect but works well in practice:
         }
     ```
 
-* Other concepts for defining dependencies are rarely used (when **AutoDetectSqlDependencies** is not applicable because of performance fine tuning)
+* Other concepts for defining dependencies are rarely used, when **AutoDetectSqlDependencies** is not applicable (see below)
     - `SqlDependsOn` - Declare that the concept's database implementation depends on another module, entity or a property.
     - `SqlDependsOnView`
     - `SqlDependsOnFunction`
-    - `SqlDependsOnSqlObject`
+    - `SqlDependsOnSqlObject` - `AutoDetectSqlDependencies` does not detect a dependency on an `SqlObject`. Use this concept to manually declare the dependency.
     - `SqlDependsOnIndex`
     - `SqlDependsOnID` - Dependency on ID property. Use this instead of `SqlDependsOn entity` to avoid having dependencies to all properties of the entity.
+    - Note: `AutoDetectSqlDependencies` can impact the deployment time in some rare scenarios: This concept detects coarse dependencies, on the level of tables and views, not on the level of columns. The `SqlDependsOn*` concepts can be used to set dependency to the specific columns. For example, if a view depends on a whole table, instead of only certain columns, adding a new column to the table would result with Rhetos re-creating the view. This is usually not a problem, unless some other database objects directly depend on that view, that are time-expensive to drop and re-create.
 
 ## See also
 
