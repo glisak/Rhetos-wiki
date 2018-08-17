@@ -40,40 +40,6 @@ Module Demo
 }
 ```
 
-Example for the `ExtAction` concept:
-
-* DSL:
-
-    ```
-    Module Demo
-    {
-        ExtAction CreatePrincipal 'Demo.Rhetos.Principals, Demo.Rhetos' 'CreatePrincipal'
-        {
-            Guid ID;
-            ShortString Name;
-        }
-    }
-    ```
-
-* C#:
-
-    ```CS
-    // This method is implemented in the assembly Demo.Rhetos, in class Principals.
-    public static void CreatePrincipal(CreatePrincipal parameter, DomRepository repository, IUserInfo userInfo)
-    {
-            var principal = new Common.Principal
-            {
-                ID = parameter.ID,
-                Name = parameter.Name
-            }
-
-            repository.Common.Principal.Insert(principal);
-
-            var notification = "...";
-            Notify(notification, repository, userInfo, Notify.Admin|Notify.PowerUsers); // A helper method for notifications.
-    }
-    ```
-
 ## How to use an external class in an Action code snippet
 
 For example, an Action should call an external method `string CreateUniqueName()`, implemented in class `MyNamespace.MyClass`, in a separate dll `MyAssembly.dll`.
@@ -110,3 +76,47 @@ Module Demo
 3. This class can then be used in the Action concept by adding it to the Action’s repository with `RepositoryUses` concept.
     * See example in the unit test DSL script: <https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/CommonConceptsTest/DslScripts/DataStructure.rhe>
     * In this example the RepositoryUses concept adds the `_logProvider` member property to be used in the Action’s code snippet. In that line you can see the property type `ILogProvider` (here you can use that singleton class name instead of the interface) and the assembly where the type is implemented “Rhetos.Logging.Interfaces.dll” (without the .dll extension).
+
+## How to avoid circular dependencies between the external class and the generated object model (ServerDom)
+
+The examples above work only for external classes that do not reference the generated object model (ServerDom).
+If the external class referenced the ServerDom, and the Action references the class, this would result with a circular dependency between the dlls.
+
+In such situations, one of the dependencies needs to be removed. There are two options:
+
+* Reflection can be used in the `Action` code snippet to invoke the external method. The `ExtAction` concept is just a helper that does the same.
+* The external class can use generic repository interfaces instead of directly referencing the ServerDom.
+  * This can be done by using some of the helper classes and interfaces from the Rhetos.CommonConcepts nuget: GenericRepositories, GenericRepository, IRepository, IQueryableRepository, IReadableRepository or IWritableRepository.
+  * The data (the properties of the loaded entities) can be accessed by using `dynamic` C# objects, or by creating interfaces that the Entity will implement in the DSL script. For examples see `Implements` keyword in [Security.rhe](https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/DslScripts/Security.rhe).
+  * In this case, the dependency injection pattern should be used, so that the external class can get all other components from the system in it's constructor (for example, the GenericRepositories instance). See "How to" above.
+
+## Example for the ExtAction concept
+
+DSL:
+
+```
+Module Demo
+{
+    ExtAction CreatePrincipal 'Demo.Rhetos.Principals, Demo.Rhetos' 'CreatePrincipal'
+    {
+        Guid ID;
+        ShortString Name;
+    }
+}
+```
+
+C#:
+
+```CS
+// This method is implemented in the assembly Demo.Rhetos, in class Principals.
+public static void CreatePrincipal(CreatePrincipal parameter, DomRepository repository, IUserInfo userInfo)
+{
+    var principal = new Common.Principal
+    {
+        ID = parameter.ID,
+        Name = parameter.Name
+    }
+
+    repository.Common.Principal.Insert(principal);
+}
+```
