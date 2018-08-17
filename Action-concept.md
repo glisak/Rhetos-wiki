@@ -11,9 +11,9 @@ Tips:
 
 * Action is executed in a single transaction. This means that it is not possible to log an exception error in the database.
 * Row permission and other security claims are not checked inside the action.
-    - The user need to have permission to execute the action (has the *Execute* claim on the action),
+  * The user need to have permission to execute the action (has the *Execute* claim on the action),
       but not for the resources that are used inside the action. The code inside the action has access to all data.
-    - The user's permission can be explicitly checked in the action by using `Common.RowPermissionsReadItems`
+  * The user's permission can be explicitly checked in the action by using `Common.RowPermissionsReadItems`
       and `Common.RowPermissionsWriteItems` filters, or `IAuthorizationManager` for checking security claims.
 * Reference property in the action parameters will not be bound the the database by the ORM (the lazy-load is not suppered).
   Also the whole entity cannot be sent as a reference property parameter.
@@ -31,7 +31,6 @@ Module Demo
             ID = parameter.ID,
             Name = parameter.Name
         };
-        
         repository.Common.Principal.Insert(principal);
     }'
     {
@@ -53,13 +52,12 @@ Example for the `ExtAction` concept:
             Guid ID;
             ShortString Name;
         }
-        
     }
     ```
 
 * C#:
 
-    ```
+    ```CS
     // This method is implemented in the assembly Demo.Rhetos, in class Principals.
     public static void CreatePrincipal(CreatePrincipal parameter, DomRepository repository, IUserInfo userInfo)
     {
@@ -75,3 +73,40 @@ Example for the `ExtAction` concept:
             Notify(notification, repository, userInfo, Notify.Admin|Notify.PowerUsers); // A helper method for notifications.
     }
     ```
+
+## How to use an external class in an Action code snippet
+
+For example, an Action should call an external method `string CreateUniqueName()`, implemented in class `MyNamespace.MyClass`, in a separate dll `MyAssembly.dll`.
+
+In the DSL script add the `ExternalReference` statement, so that the generated object model references the dll in which your class is implemented.
+
+```
+Module Demo
+{
+    ExternalReference 'MyNamespace.MyClass, MyAssembly';
+
+    Action CreatePrincipal '(parameter, repository, userInfo) =>
+    {
+        var nameGenerator = new MyNamespace.MyClass();
+        var principal = new Common.Principal
+        {
+            ID = parameter.ID,
+            Name = nameGenerator.CreateUniqueName()
+        };
+        repository.Common.Principal.Insert(principal);
+    }'
+    {
+        Guid ID;
+    }
+}
+```
+
+## How to use an external class in an Action with dependency injection
+
+1. Implement you class in a separate C# library project (dll).
+2. Register your class to the [Autofac](https://autofac.org/) dependency injection container
+    * See example of how to register your plugin’s classes: <https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/Plugins/Rhetos.Dom.DefaultConcepts/AutofacModuleConfiguration.cs>
+    * The singleton class should be registered to [Autofac](https://autofac.org/) container as a “SingleInstance” component. For other component registration options please refer to Autofac documentation: <https://autofaccn.readthedocs.io/en/latest/register/registration.html>
+3. This class can then be used in the Action concept by adding it to the Action’s repository with `RepositoryUses` concept.
+    * See example in the unit test DSL script: <https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/CommonConceptsTest/DslScripts/DataStructure.rhe>
+    * In this example the RepositoryUses concept adds the `_logProvider` member property to be used in the Action’s code snippet. In that line you can see the property type `ILogProvider` (here you can use that singleton class name instead of the interface) and the assembly where the type is implemented “Rhetos.Logging.Interfaces.dll” (without the .dll extension).
