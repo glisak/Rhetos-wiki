@@ -61,7 +61,7 @@ This example (from Rhetos unit tests) creates an SQL view, adding the transactio
             ";
     }
 
-## Splitting SQL script to multiple batches
+## Splitting an SQL script to multiple batches
 
 If an SQL script contains the `GO` statement (T-SQL), the deployment will fail with an error message **Incorrect syntax near 'GO'.**
 
