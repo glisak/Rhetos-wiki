@@ -20,14 +20,14 @@ If another object (**SqlQueryable**, for example) depends on the **SqlObject**, 
         Entity SomeEntity { Integer I; }
 
         SqlObject SomeView
-            'CREATE VIEW Demo.V1 AS SELECT ID, I+1 AS I1 FROM Demo.SomeEntity'
-            'DROP VIEW Demo.V1'
+            "CREATE VIEW Demo.V1 AS SELECT ID, I+1 AS I1 FROM Demo.SomeEntity"
+            "DROP VIEW Demo.V1"
         {
             SqlDependsOn Demo.SomeEntity;
         }
 
         SqlQueryable SomeEntityAdditionalInfo
-            'SELECT ID, I1+1 AS I2 FROM Demo.V1'
+            "SELECT ID, I1+1 AS I2 FROM Demo.V1"
         {
             Extends Demo.SomeEntity;
             Integer I2;
@@ -41,22 +41,49 @@ Some SQL object cannot be created in a trasaction (**full-text search index** on
 
 By default, Rhetos will execute all SQL scripts in a transaction, unless the script starts with comment `/*DatabaseGenerator:NoTransaction*/`.
 
-This example (from Rhetos unit tests) creates an SQL view, adding the transaction level (`@@TRANCOUNT`) as the suffix to the view name, to prove that the create script is executed without a transaction. 
+This example (from Rhetos unit tests) creates an SQL view, adding the transaction level (`@@TRANCOUNT`) as the suffix to the view name, to prove that the create script is executed without a transaction.
 
-    Module TestSqlWorkarounds
+    Module Demo
     {
         SqlObject WithoutTransaction
-        
-            "/*DatabaseGenerator:NoTransaction*/
+            "
+                /*DatabaseGenerator:NoTransaction*/
                 DECLARE @createView nvarchar(max);
-                SET @createView = 'CREATE VIEW TestSqlWorkarounds.WithoutTransaction_' + CONVERT(NVARCHAR(max), @@TRANCOUNT) + ' AS SELECT a=1';
-                EXEC (@createView);"
-                
-            "/*DatabaseGenerator:NoTransaction*/
+                SET @createView = 'CREATE VIEW Demo.WithoutTransaction_' + CONVERT(NVARCHAR(max), @@TRANCOUNT) + ' AS SELECT a=1';
+                EXEC (@createView);
+            "
+            "
+                /*DatabaseGenerator:NoTransaction*/
                 DECLARE @dropView nvarchar(max);
-                SELECT @dropView = name FROM sys.objects o WHERE type = 'V' AND SCHEMA_NAME(schema_id) = 'TestSqlWorkarounds' AND name LIKE 'WithoutTransaction[_]%';
-                SET @dropView = 'DROP VIEW TestSqlWorkarounds.' + @dropView;
-                EXEC (@dropView);";
+                SELECT @dropView = name FROM sys.objects o WHERE type = 'V' AND SCHEMA_NAME(schema_id) = 'Demo' AND name LIKE 'WithoutTransaction[_]%';
+                SET @dropView = 'DROP VIEW Demo.' + @dropView;
+                EXEC (@dropView);
+            ";
+    }
+
+## Splitting SQL script to multiple batches
+
+If an SQL script contains the `GO` statement (T-SQL), the deployment will fail with an error message **Incorrect syntax near 'GO'.**
+
+Note that Rhetos internally just uses SqlCommand to directly execute the script.
+
+Rhetos introduces a custom batch splitter "`{SPLIT SCRIPT}`" to be used in a situation
+when a single SQL script must be split to multiple batches that are executed separately.
+
+Example:
+
+    Module Demo
+    {
+        SqlObject TwoViews
+            "
+                CREATE VIEW Demo.V1 AS SELECT C = 1;
+                {SPLIT SCRIPT}
+                CREATE VIEW Demo.V2 AS SELECT C FROM V1;
+            "
+            "
+                DROP VIEW Demo.V2;
+                DROP VIEW Demo.V1;
+            ";
     }
 
 ## See also
