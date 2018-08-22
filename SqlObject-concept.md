@@ -1,4 +1,4 @@
-Allows developers to create a custom database object as a part of generated application.
+Allows developers to create a custom database object as a part of the generated application.
 **SqlObject** is intended to be used as a workaround when existing DSL concepts for [database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects) (**Unique**, **SqlIndex**, **SqlView**, **SqlTrigger**, etc) are not sufficient.
 
 Implemented in Rhetos package: *CommonConcepts*.
