@@ -68,7 +68,7 @@ These tutorial articles follow the given structure, and are a good example for w
     * Upgrading to a new Rhetos version
 * Reference manual
 * A sample project with best practices.
-* A application startup project
+* An application startup project
   * Build.bat (download Rhetos server binaries, add config files, MSBuild, deploy, unit tests)
   * [ProjectName]RhetosExtension (algorithms, DSL extensions, feature implementations don't reference DOM)
   * [ProjectName]RhetosRuntime (feature implementations that reference DOM)
