@@ -1,3 +1,8 @@
+## Development
+
+* To make any changes to the source code, please use the standard GitHub process of creating your own fork, and sending a pull request when finished. A detailed documentation is available on GitHub: [Collaborating with issues and pull requests](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/).
+* Run the unit tests before sending the pull request. Rhetos contains two types of unit tests simple unit tests (in Rhetos.sln), and integration tests (in CommonConceptsTest.sln) that can be run only after a successful deployment.
+
 ## Writing tutorial articles
 
 ### Format
