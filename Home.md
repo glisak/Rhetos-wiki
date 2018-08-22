@@ -17,7 +17,7 @@ Setup the application development environment:
 1. [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
 2. [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
 
-Rhetos DSL examples:
+Rhetos DSL tutorials:
 1. How to create a data model: [Data structures and simple business rules](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-simple-business-rules)
 2. [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
 3. Implementing entity inheritance and common interfaces: [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
