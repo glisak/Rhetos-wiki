@@ -1,4 +1,4 @@
-Allows creating any SQL object as a part of generated application.
+Allows developers to create a custom database object as a part of generated application.
 **SqlObject** is intended to be used as a workaround when existing DSL concepts for [database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects) (**Unique**, **SqlIndex**, **SqlView**, **SqlTrigger**, etc) are not sufficient.
 
 Implemented in Rhetos package: *CommonConcepts*.
@@ -6,12 +6,12 @@ Implemented in Rhetos package: *CommonConcepts*.
 ## Features
 
 * Set custom SQL script to create and remove the object in the database.
-* Define creation order of dependent SQL objects.
-* Create SQL objects without transaction (full-text search index, e.g.).
+* Define creation order of dependent database objects.
+* Create database objects without transaction (full-text search index, e.g.).
 
-## Dependencies and creation order of SQL objects
+## Dependencies and creation order of database objects
 
-Use any of the **SqlDependsOn...** concepts in an **SqlObject** to define other objects (entites, views, etc) that need to be created before the **SqlObject**.
+Use any of the **SqlDependsOn...** concepts in an **SqlObject** to define other objects (entities, views, etc.) that need to be created before the **SqlObject**.
 
 If another object (**SqlQueryable**, for example) depends on the **SqlObject**, use **SqlDependsOnSqlObject** to make sure that the **SqlObject** is created in database before the view from the **SqlQueryable**.
 
@@ -35,9 +35,9 @@ If another object (**SqlQueryable**, for example) depends on the **SqlObject**, 
         }
     }
 
-## Creating SQL objects without transaction
+## Creating database objects without transaction
 
-Some SQL object cannot be created in a trasaction (**full-text search index** on SQL Server, e.g.).
+Some database objects cannot be created in a transaction (**full-text search index** on SQL Server, e.g.).
 
 By default, Rhetos will execute all SQL scripts in a transaction, unless the script starts with comment `/*DatabaseGenerator:NoTransaction*/`.
 
