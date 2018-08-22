@@ -44,3 +44,32 @@ These tutorial articles follow the given structure, and are a good example for w
 
 * [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
 * [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
+
+### Planned documentation
+
+* Tutorials
+  * Rhetos DSL (CommonConcepts)
+    * Create your first Rhetos application (CommonConcepts, DSL scripts, RestGenerator)
+    * Data structures and relations (Bookstore example)
+    * Simple business rules
+    * Persisting the computed data (improve, use Bookstore example)
+    * Filters and validations
+    * Low-level concepts (SaveMethod, RepositoryUses)
+    * Event sourcing, Business process
+    * Full-text search
+  * Infrastructure
+    * Create new DSL concepts and code generators
+    * Unit testing Rhetos applications
+    * Debugging Rhetos applications
+    * Deployment process
+    * Internationalization
+    * Using the external C# methods
+    * Reporting
+    * Upgrading to a new Rhetos version
+* Reference manual
+* A sample project with best practices.
+* A application startup project
+  * Build.bat (download Rhetos server binaries, add config files, MSBuild, deploy, unit tests)
+  * [ProjectName]RhetosExtension (algorithms, DSL extensions, feature implementations don't reference DOM)
+  * [ProjectName]RhetosRuntime (feature implementations that reference DOM)
+  * Create a Yeoman generator
