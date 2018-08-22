@@ -1,15 +1,5 @@
-Table of contents:
-
-1. [Essential info](#1-essential-info)
-2. [Simple row permission rules](#2-simple-row-permission-rules)
-3. [Combining multiple rules](#3-combining-multiple-rules)
-4. [Inheriting row permissions](#4-inheriting-row-permissions)
-5. [Client code - Reading data with row permissions](#5-client-code---reading-data-with-row-permissions)
-6. [Server code - Manually verifying row permissions](#6-server-code---manually-verifying-row-permissions)
-
-## 1. Essential info
-
 Row permissions are intended for implementing business requirements that can be formed in rules of the following format:
+
 > Some employees are allowed to access (read or write) some subset of the entity's records.
 
 * Note that row permissions are **not intended** for limiting access to specific **actions**, or **filtering** out some records in one part of the application while allowing the user to access the same records in another part of the application.
@@ -21,14 +11,28 @@ Row permissions are based on filters that are applied when reading and writing e
 * A client may **explicitly apply** the row permissions filter (`Common.RowPermissionsReadItems`) when reading data from the Rhetos server, in order to avoid any access-denied errors.
 * Row permissions are **ignored** inside a server-side functions (inside an **Action** or a **FilterBy**, e.g.). To explicitly verify user's permissions in a sever action, see "Manually verifying row permissions" below.
 
-## 2. Simple row permission rules
+Contents:
 
-### Example requirements
+* [Simple row permission rules](#simple-row-permission-rules)
+* [Combining multiple rules](#combining-multiple-rules)
+* [Inheriting row permissions](#inheriting-row-permissions)
+    * [Solution 1](#solution-1)
+    * [Solution 2](#solution-2)
+    * [Optimizing inherited row permissions](#optimizing-inherited-row-permissions)
+* [Client code - Reading data with row permissions](#client-code---reading-data-with-row-permissions)
+    * [Reading all documents (access denied)](#reading-all-documents-access-denied)
+    * [Reading the user's documents](#reading-the-users-documents)
+* [Server code - Manually verifying row permissions](#server-code---manually-verifying-row-permissions)
+* [See also](#see-also)
+
+## Simple row permission rules
+
+Example requirements:
 
 * Each *employee* belongs to a *division*.
 * An employee may read and write (insert/update/delete) the *documents* from his division.
 
-### Solution
+Solution:
 
     Module DemoRowPermissions1
     {
@@ -36,19 +40,19 @@ Row permissions are based on filters that are applied when reading and writing e
         {
             ShortString Name;
         }
-        
+
         Entity Employee
         {
             ShortString UserName;
             Reference Division;
         }
-        
+
         Entity Document
         {
             ShortString Title;
             DateTime Created { CreationTime; }
             Reference Division;
-            
+
             RowPermissions
             {
                 Allow WithinDivision 'context =>
@@ -64,8 +68,6 @@ Row permissions are based on filters that are applied when reading and writing e
     }
 
 *This solution is implemented in Rhetos unit tests, see `RowPermissionsDemo.rhe` and `RowPermissionsDemo.cs` in the Rhetos source repository.*
- 
-### Explanation
 
 `RowPermissions` is the root concept for row permission rules on a data structure.
 It allows combining multiple rules and inheriting rules from one data structure to another.
@@ -76,16 +78,15 @@ Each rule has the following parameters:
 
 1. **Rule name**
 2. **Filter expression function**
-    * This is a function that returns the filter expression: the resulting expression for each record (`item`) returns whether the rule applies to the record or not.  
+    * This is a function that returns the filter expression: the resulting expression for each record (`item`) returns whether the rule applies to the record or not.
     * The function typically first collects the data that will be used to filter the records, such as a list of business permission that are applied to the current user.
     * The parameter `context` can be used to retrieve the current user's name (`context.UserInfo.UserName`) or access data repositories (`context.Repository.SomeModule.SomeEntity.Query()`, replacing SomeModule and SomeEntity with the actual names).
     * The resulting expression will be translated to an SQL query (WHERE part), therefore it should be made as simple as possible, in order to allow efficient ORM translation.
     * This function is formatted as a lambda expression of type: `Func<Common.ExecutionContext, Expression<Func<TEntity, bool>>>`.
 
+## Combining multiple rules
 
-## 3. Combining multiple rules
-
-### Example requirements
+Example requirements:
 
 * Each *employee* belongs to a *division*.
 * An employee may read and write (insert/update/delete) the *documents* from his division.
@@ -93,7 +94,7 @@ Each rule has the following parameters:
 * An employee may be a *region supervisor*. A region supervisor may read (but not write) all the documents from all the divisions inside that region.
 * The documents from *previous years* are read-only.
 
-### Solution
+Solution:
 
     Module DemoRowPermissions2
     {
@@ -101,31 +102,31 @@ Each rule has the following parameters:
         {
             ShortString Name;
         }
-        
+
         Entity Division
         {
             ShortString Name;
             Reference Region;
         }
-        
+
         Entity Employee
         {
             ShortString UserName;
             Reference Division;
         }
-        
+
         Entity RegionSupervisor
         {
             Reference Employee;
             Reference Region;
         }
-        
+
         Entity Document
         {
             ShortString Title;
             DateTime Created { CreationTime; }
             Reference Division;
-            
+
             RowPermissions
             {
                 Allow WithinDivision 'context =>
@@ -136,7 +137,7 @@ Each rule has the following parameters:
                             .SingleOrDefault();
                         return item => item.Division.ID == myDivisionId;
                     }';
-                
+
                 AllowRead SupervisedRegions 'context =>
                     {
                         List<Guid> myRegionIds = context.Repository
@@ -144,13 +145,13 @@ Each rule has the following parameters:
                             .Where(rs => rs.Employee.UserName == context.UserInfo.UserName)
                             .Select(rs => rs.Region.ID)
                             .ToList();
-                        
+
                         if (myRegionIds.Count == 0)
                             return item => false; // Minor optimization.
-                        
+
                         return item => myRegionIds.Contains(item.Division.Region.ID);
                     }';
-                
+
                 DenyWrite PreviousYears 'context =>
                     {
                         return item => item.Created < new DateTime(DateTime.Today.Year, 1, 1);
@@ -160,8 +161,6 @@ Each rule has the following parameters:
     }
 
 *This solution is implemented in Rhetos unit tests, see `RowPermissionsDemo.rhe` and `RowPermissionsDemo.cs` in the Rhetos source repository.*
-
-### Explanation
 
 The rules are combined into a single filter (check the generated SQL query in the SQL Profiler), based on the following principles:
 
@@ -174,10 +173,9 @@ Note that the `SupervisedRegions` rule implements an additional **optimization**
 * If the resulting filter expression is `item => false` (no items selected), the rule will be ignore when generating the final SQL query.
 * Similarly, if an `Allow*` rule returns filter expression `item => true` (all items are selected), the other `Allow*` rules will be ignored, and the final SQL query will not contain any rule-specific filtering.
 
+## Inheriting row permissions
 
-## 4. Inheriting row permissions
-
-### Example requirements
+Example requirements:
 
 * Row permissions for a `Document` should also be applied (*inherited*) to all of the document's **extensions**, including the **Browse** data structures, and to all of the document's **detail** entities.
 * In addition to the inherited row permissions, a `DocumentApproval` record should be read-only for everyone except the employee that approved it.
@@ -189,25 +187,25 @@ Add this script to the previous example's solution.
     Module DemoRowPermissions2
     {
         AutoInheritRowPermissions;
-        
+
         Browse DocumentBrowse DemoRowPermissions2.Document
         {
             Take 'Title';
             Take 'Division.Name';
         }
-        
+
         Entity DocumentComment
         {
             Reference Document { Detail; }
             ShortString Comment;
         }
-        
-        Entity DocumentApproval  
+
+        Entity DocumentApproval
         {
             Extends DemoRowPermissions2.Document;
             Reference ApprovedBy DemoRowPermissions2.Employee;
             ShortString Note;
-            
+
             RowPermissions
             {
                 // This rule is joined with the inherited rules from DemoRowPermissions2.Document.
@@ -225,48 +223,46 @@ Add this script to the previous example's solution.
 
 *This solution is implemented in Rhetos unit tests, see `RowPermissionsDemo.rhe` and `RowPermissionsDemo.cs` in the Rhetos source repository.*
 
-### Explanation 1
-
 By using `AutoInheritRowPermissions`, the row permissions from `Document` entity are copied to the following related entities:
 
 * extensions of the entity (`DocumentApproval`, see **Extends**).
 * browse data structures (`DocumentBrowse`, **Browse** is also an extension).
-* details of the entity (`DocumentComment`, see **Detail** reference). 
+* details of the entity (`DocumentComment`, see **Detail** reference).
 
-### Solution 2 
+### Solution 2
 
-Instead of using `AutoInheritRowPermissions` (see the previous solution), row permissions inheritance may be explicitly set for selected entities.  
+Instead of using `AutoInheritRowPermissions` (see the previous solution), row permissions inheritance may be explicitly set for selected entities.
 
     Module DemoRowPermissions2
     {
         // NOT USING AutoInheritRowPermissions;
-        
+
         Browse DocumentBrowse DemoRowPermissions2.Document
         {
             Take 'Title';
             Take 'Division.Name';
-            
+
             RowPermissions { InheritFromBase; }
         }
-        
+
         Entity DocumentComment
         {
             Reference Document { Detail; }
             ShortString Comment;
-            
+
             RowPermissions { InheritFrom DemoRowPermissions2.DocumentComment.Document; }
         }
-        
-        Entity DocumentApproval  
+
+        Entity DocumentApproval
         {
             Extends DemoRowPermissions2.Document;
             Reference ApprovedBy DemoRowPermissions2.Employee;
             ShortString Note;
-            
+
             RowPermissions
             {
                 InheritFromBase;
-                
+
                 // This rule is joined with the inherited rules from DemoRowPermissions2.Document.
                 DenyWrite ApprovedByCurrentUser 'context =>
                     {
@@ -279,8 +275,6 @@ Instead of using `AutoInheritRowPermissions` (see the previous solution), row pe
             }
         }
     }
-
-### Explanation 2
 
 * **InheritFromBase** can be used on a **Browse** data structures and on entities with **Extends** concept.
 * **InheritFrom** concept's parameter is the full name of `DocumentComment` entity's reference property (`Reference Document`) that references the "parent" entity with row permissions that will be inherited.
@@ -316,13 +310,13 @@ Since `DocumentInfo` view contains the `Division2ID` column, this column could b
 While this concept is useful on **SqlQueryable**, there is no use of putting **SamePropertyValue** inside **Browse** since **Browse** does not generate SQL view that might be used instead of the base table.
 Also note that this is a minor optimization in most cases, and there is no need to use the **SamePropertyValue** concept unless there are performance issues.
 
-## 5. Client code - Reading data with row permissions
+## Client code - Reading data with row permissions
 
 *The following examples use the test data from Rhetos unit tests. To prepare the data, open the `CommonConceptsTest.sln` solution in the Rhetos source and run the tests in the `RowPermissionsDemo` class.*
 
 ### Reading all documents (access denied)
 
-Use REST API to read all documents, including those that a current user should no access: 
+Use REST API to read all documents, including those that a current user should no access:
 
     http://localhost/Rhetos/rest/DemoRowPermissions1/Document/
 
@@ -351,7 +345,7 @@ Response example:
 
 Note that if multiple filters are given, the RowPermissionsReadItems filter should be listed last for performance reasons. If the filter is applied last, it will guarantee that the returned records all pass the filter, and the server will skip the permissions verification of the returned records.
 
-## 6. Server code - Manually verifying row permissions
+## Server code - Manually verifying row permissions
 
 Row permissions are automatically checked for client's read and write requests. Row permissions are ignored inside a server-side functions that use ServerDom repositories the read and write data (inside an **Action** or a report, for example). To explicitly verify the current user's permissions inside the server code, use one of the following methods:
 
