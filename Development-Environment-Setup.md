@@ -16,12 +16,18 @@ Before following the instructions in this article, **make sure that all the [Pre
 
 ## Get Rhetos server binaries
 
-The Rhetos server binaries can be built from source:
+Inside your application's development folder, create a subfolder named "<MyApplicationName>RhetosServer" or "RhetosServer", where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "RhetosServer folder".
+
+Option A: Download the zip file for selected release version from <https://github.com/Rhetos/Rhetos/releases>.
+
+1. Unpack the zip to the RhetosServer folder.
+
+Option B: Build the binaries from source:
 
 1. Use git to clone the repository <https://github.com/Rhetos/Rhetos.git> to a new source folder on your disk:
     * In the command prompt run `git clone https://github.com/Rhetos/Rhetos.git RhetosSource`
 2. Open the command prompt in the created Rhetos source folder and run `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
-3. The Rhetos server binaries are created in the subfolder **Install\Rhetos**. Copy folder **Install\Rhetos** to your application's development folder and rename it to "RhetosServer" or "&lt;MyApplicationName&gt;RhetosServer". The following documentation will refer to this copied folder as "RhetosServer".
+3. The Rhetos server binaries are created in the subfolder **Install\Rhetos**. Copy the concept of **Install\Rhetos** to your application's RhetosServer folder.
 
 ## Database setup
 
