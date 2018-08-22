@@ -1,16 +1,3 @@
-Table of contents:
-
-1. [Essential info](#essential-info)
-2. [Usage](#usage)
-3. [Referencing or extending a polymorphic entity](#referencing-or-extending-a-polymorphic-entity)
-4. [Multiple interface implementations](#multiple-interface-implementations)
-5. [Property implementation with subquery](#property-implementation-with-subquery)
-6. [Limit the implementation with filter (where)](#limit-the-implementation-with-filter-where)
-7. [Subtype implementation using SQL query](#subtype-implementation-using-sql-query)
-8. [Writing efficient queries from client application](#writing-efficient-queries-from-client-application)
-
-## Essential info
-
 Polymorphic concept is intended for implementing the application design pattern where multiple entities share common interface for reading data (defined as a list of common properties).
 
 Similar features:
@@ -18,7 +5,17 @@ Similar features:
 * Polymorphic concept is similar to object-oriented concept of class inheritance, but class inheritance is not used here.
 * Polymorphic concept can sometimes be used as an alternative to the Extends concept.
 
-## Usage
+Contents:
+
+* [Basic usage](#basic-usage)
+* [Referencing or extending a polymorphic entity](#referencing-or-extending-a-polymorphic-entity)
+* [Multiple interface implementations](#multiple-interface-implementations)
+* [Property implementation with subquery](#property-implementation-with-subquery)
+* [Limit the implementation with filter (where)](#limit-the-implementation-with-filter-where)
+* [Subtype implementation using SQL query](#subtype-implementation-using-sql-query)
+* [Writing efficient queries from client application](#writing-efficient-queries-from-client-application)
+
+## Basic usage
 
 For example, `MoneyTransaction` data structure can have multiple forms: `BorrowMoney` and `LendMoney` (see the example below).
 
@@ -64,7 +61,7 @@ Note that:
 
 ## Referencing or extending a polymorphic entity
 
-A polymorphic data structure may be referenced or extended by other entites (Browse is also an extension).
+A polymorphic data structure may be referenced or extended by other entities (Browse is also an extension).
 Rhetos will check the **reference constraint** on data modifications.
 
     Entity TransactionComment
@@ -127,7 +124,7 @@ See the generated SQL view `Demo.LendMoney_As_MoneyTransaction_TotalAddendum` to
 
 ## Limit the implementation with filter (where)
 
-The `Where` concept can be used to limit the items when will be incluced in the polymorphic implementation. The filter is defined by an SQL expression for the SQL query *WHERE part*.
+The `Where` concept can be used to limit the items when will be included in the polymorphic implementation. The filter is defined by an SQL expression for the SQL query *WHERE part*.
 
 * If multiple `Where` concepts are provided in the same `Is` block, the `AND` operation will be applied between them.
 
