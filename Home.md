@@ -36,6 +36,7 @@ Recommended documentation:
 * [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
 * [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
 * [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
+* [Rhetos release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md)
 
 ## Recommended plugins
 
