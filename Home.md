@@ -15,7 +15,7 @@ For an overview of the Rhetos architecture and principles, see:
 Setup the application development environment:
 
 1. [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
-2. [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
+2. [Development environment setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
 
 Rhetos DSL tutorials:
 1. How to create a data model: [Data structures and simple business rules](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-simple-business-rules)
