@@ -58,4 +58,4 @@ Verify building Rhetos from source:
 
 ## Read next
 
-* [Development Environment Setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
+* [Development environment setup](https://github.com/Rhetos/Rhetos/wiki/Development-environment-setup)
