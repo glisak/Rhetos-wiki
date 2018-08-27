@@ -26,7 +26,7 @@ Example:
     <b>Entity</b> School
     {
         <b>ShortString</b> Name;
-        <b>Reference</b> BelongTo Demo.Region;
+        <b>Reference</b> BelongsTo Demo.Region;
         <b>ShortString</b> Code
         {
             <b>Unique</b>;
@@ -51,7 +51,7 @@ Example:
 
 ### References
 
-* A reference to another statement is a list of the statement's identifiers (the feature's name), separated by a dot. In the example above, `Demo.Region` after `BelongTo` is a reference to the second entity.
+* A reference to another statement is a list of the statement's identifiers (the feature's name), separated by a dot. In the example above, `Demo.Region` after `BelongsTo` is a reference to the second entity.
 
 ## Comments
 
@@ -68,7 +68,7 @@ The following script is semantically identical to the example above:
 Module Demo;
 Entity Demo.School;
 ShortString Demo.School.Name;
-Reference Demo.School.BelongTo Demo.Region;
+Reference Demo.School.BelongsTo Demo.Region;
 ShortString Demo.School.Code;
 Unique Demo.School.Code;
 RegExMatch Demo.School.Code '\d{5}' 'Must have 5 digits.';
