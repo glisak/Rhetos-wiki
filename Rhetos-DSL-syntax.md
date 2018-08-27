@@ -64,26 +64,26 @@ Embedding a block of statements within another statement is just an optional syn
 
 The following script is semantically identical to the example above:
 
-```
-Module Demo;
-Entity Demo.School;
-ShortString Demo.School.Name;
-Reference Demo.School.BelongsTo Demo.Region;
-ShortString Demo.School.Code;
-Unique Demo.School.Code;
-RegExMatch Demo.School.Code '\d{5}' 'Must have 5 digits.';
-Entity Demo.Region;
-```
+<pre>
+<b>Module</b> Demo;
+<b>Entity</b> Demo.School;
+<b>ShortString</b> Demo.School.Name;
+<b>Reference</b> Demo.School.BelongsTo Demo.Region;
+<b>ShortString</b> Demo.School.Code;
+<b>Unique</b> Demo.School.Code;
+<b>RegExMatch</b> Demo.School.Code '\d{5}' 'Must have 5 digits.';
+<b>Entity</b> Demo.Region;
+</pre>
 
 Embedding one statement into another is a helper for setting **the first argument** of the statement to reference the parent statement. Notice changes in the `ShortString` placement and syntax in the following three equivalent examples:
 
-```
-Module Demo { Entity School { ShortString Name; } }
+<pre>
+<b>Module</b> Demo { <b>Entity</b> School { <b>ShortString</b> Name; } }
 
-Module Demo { Entity School; ShortString School.Name; }
+<b>Module</b> Demo { <b>Entity</b> School; <b>ShortString</b> School.Name; }
 
-Module Demo { Entity School; } ShortString Demo.School.Name;
-```
+<b>Module</b> Demo { <b>Entity</b> School; } <b>ShortString</b> Demo.School.Name;
+</pre>
 
 ## See also
 
