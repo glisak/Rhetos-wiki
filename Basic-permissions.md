@@ -39,7 +39,7 @@ There are claims generated for each of the following objects:
 * For each action: Execute
 * For each report: Download
 
-Please note that the records in *Common.Claim* table are automatically updated on each deployment. If a new custom claim is inserted manually into the table or in a DataMigration script, it will be automatically removed (deactivated) on the next deployment.
+Please note that the records in *Common.Claim* table are automatically updated on each deployment. If a new custom claim is inserted into the table manually or by a DataMigration script, it will be automatically removed (deactivated) on the next deployment.
 
 A custom claim can be created in a DSL script by using the CustomClaim concept. Example:
 
