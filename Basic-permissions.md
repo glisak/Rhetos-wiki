@@ -54,8 +54,8 @@ The recommended solution is to include [Rhetos.AfterDeploy](https://github.com/R
 
 Note: The DataMigration scripts are often the first solution that comes to mind, but there are issues with this approach:
 
-* The claims in *Common.Claim* table are generated automatically at the end of each deployment (see the *DeployPackages.log*). The data-migration scripts are executed at the beginning of the deployment, so the inserted permissions will not include the new claims that will be generated at the end. Possible workaround is to insert the claims along with the permissions, but the AfterDeploy script is much better solutions.
 * DataMigration scripts are intended for incremental modifications. This means that when changing permissions, new DataMigration scripts should be added to correct the existing permissions. It is simpler to maintain an AfterDeploy script that is executed on each deployment, that contains a list of wanted permissions and updates the records in database to match the list.
+* The claims in *Common.Claim* table are generated automatically at the end of each deployment (see the *DeployPackages.log*). The data-migration scripts are executed at the beginning of the deployment, so the inserted permissions will not include the new claims that will be generated at the end. Possible workaround is to insert the claims along with the permissions, but the AfterDeploy script is much better solutions.
 
 ## See also
 
