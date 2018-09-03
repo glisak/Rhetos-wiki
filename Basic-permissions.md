@@ -56,6 +56,7 @@ Note: The DataMigration scripts are often the first solution that comes to mind,
 
 * DataMigration scripts are intended for incremental modifications. This means that when changing permissions, new DataMigration scripts should be added to correct the existing permissions. It is easier to maintain an AfterDeploy script that is executed on each deployment, that contains a complete list of wanted permissions and updates the records in database to match the list.
 * The claims in *Common.Claim* table are generated automatically at the end of each deployment (see the *DeployPackages.log*). The data-migration scripts are executed at the beginning of the deployment, so the inserted permissions will not include the new claims that will be generated at the end. Possible workaround is to insert the claims along with the permissions, but the AfterDeploy script is much better solutions.
+* This recommendation to use AfterDeploy scripts is specific to managing permissions. For most other data that needs to be initialized or hard-coded in the database, the DataMigration scripts are recommended way to go, because they will work well with future changes of the database structure.
 
 ## See also
 
