@@ -2,10 +2,10 @@
     * [ ] Make sure you are working on the latest version of the master branch (git pull).
     * [ ] Check out the [project network](https://github.com/Rhetos/Rhetos/network)
        and [pull requests](https://github.com/Rhetos/Rhetos/pulls) for any forgotten branches.
-    * [ ] List any other core packages that also need to be released along with this release.
     * [ ] Check the last [release number](https://github.com/Rhetos/Rhetos/releases) and decide on the new version number.
         A new release usually just increases the minor version by 1 (the second number).
       * Note: The version number format must be compliant with [semantic versioning](https://semver.org/).
+    * [ ] List any other core packages that also need to be released along with this release.
 2. Build:
     * [ ] Update *ChangeLog.md* file based on the commit history since the previous release.
     * [ ] Set the release version number in *Build.bat* file (probably it is already set), and the *Prerelease* to an empty value:<br/>
