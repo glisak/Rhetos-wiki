@@ -35,7 +35,6 @@ Recommended documentation:
 * [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization)
 * [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
 * [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
-* [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
 * [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md) for each version
 
 ## Recommended plugins
@@ -49,3 +48,8 @@ Recommended documentation:
 * [I18NFormatter](https://github.com/Rhetos/I18NFormatter), enables localization of Rhetos applications using [GetText / PO](http://en.wikipedia.org/wiki/Gettext) standard.
 * [LegacyRestGenerator](https://github.com/Rhetos/LegacyRestGenerator), an old version of REST API, available for backward compatibility.
 * [AfterDeploy](https://github.com/Rhetos/AfterDeploy), simplifies the handling of SQL scripts that need to be executed on each deployment.
+
+## Framework development
+
+* [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
+* [Releasing a new Rhetos version](https://github.com/Rhetos/Rhetos/wiki/Releasing-a-new-Rhetos-version)
