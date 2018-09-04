@@ -1,6 +1,6 @@
 1. Before you start:
     * [ ] Make sure you are working on the latest version of the master branch (git pull).
-    * [ ] Check out the [github network](https://github.com/Rhetos/Rhetos/network)
+    * [ ] Check out the [project network](https://github.com/Rhetos/Rhetos/network)
        and [pull requests](https://github.com/Rhetos/Rhetos/pulls) for any forgotten branches.
     * [ ] List any other core packages that need to be released with the new framework version.
     * [ ] Check the last [release number](https://github.com/Rhetos/Rhetos/releases) and decide on the new version number.
