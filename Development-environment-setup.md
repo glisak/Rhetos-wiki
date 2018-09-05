@@ -2,13 +2,13 @@ This article describes how to setup the development environment for developing a
 
 Table of contents:
 
-1. [Prerequisites](#prerequisites)
-2. [Get Rhetos server binaries](#get-rhetos-server-binaries)
-3. [Database setup](#database-setup)
-4. [Packages configuration](#packages-configuration)
-5. [IIS setup](#iis-setup)
-6. [IIS Express setup](#iis-express-setup)
-7. [Configure your text editor for DSL scripts (*.rhe)](#configure-your-text-editor-for-dsl-scripts-rhe)
+* [Prerequisites](#prerequisites)
+* [Working folder](#working-folder)
+* [Get Rhetos server binaries](#get-rhetos-server-binaries)
+* [Database setup](#database-setup)
+* [Packages configuration](#packages-configuration)
+* [IIS setup](#iis-setup)
+* [IIS Express setup](#iis-express-setup)
 
 ## Prerequisites
 
@@ -60,7 +60,7 @@ Follow the steps in this chapter if using IIS (recommended) instead of IIS Expre
 2. Select "Application Pools" => "Add Application Pool...", enter the following data:
     * Name: "RhetosAppPool"
     * NET framework version: "v4.x"
-    * Manged pipeline mode: "Integrated"
+    * Managed pipeline mode: "Integrated"
 3. Open "RhetosAppPool" => "Advanced settings" => Change "Identity" => Select "Custom account" => Enter a domain user account that will be used for Rhetos server (on a development computer enter the **developer's account**). If you are **not using** a Windows domain account, see the next paragraph for setting the custom account.
     * Note: This account must have *db_owner* rights for the Rhetos database (see Database setup).
 4. *Only for older versions*: If using Rhetos v1.1 or older, "RhetosAppPool" => "Advanced settings" => check "Enable 32-Bit Application".
@@ -136,24 +136,3 @@ in cmd while positioned in "Source\Rhetos":
     CALL "C:\Program Files (x86)\IIS Express\IISExpress.exe" /config:IISExpress.config
 
 If using Rhetos v1.1 or older, use the 32-bit "Program Files" folder.
-
-## Configure your text editor for DSL scripts (*.rhe)
-
-The **syntax highlighting** plugins are available for the following text editors.
-
-Visual Studio Code:
-
-1. Open Visual Studio Code => Press Ctrl-Shift-P => Select "Extensions: Open Extensions Folder".
-2. In the opened folder, use git to clone the <https://github.com/Rhetos/RhetosVSCode> repository to the subfolder "RhetosVSCode".
-3. Restart Visual Studio Code.
-
-Notepad++:
-
-1. Download the [RhetosNppSyntaxHighlight.xml](https://raw.githubusercontent.com/Rhetos/RhetosNPP/master/RhetosNppSyntaxHighlight.xml) file from <https://github.com/Rhetos/RhetosNPP>.
-2. Open "Notepad++" => Menu "Language" => "Define your language" => Click "Import..." => Select the downloaded XML file.
-
-SublimeText3:
-
-1. Install the *PackageControl* plugin by following the instructions at <https://packagecontrol.io/installation>.
-2. Install the *RhetosDSL* sublime text package: Ctrl-Shift-P, select "install package", select "RhetosDSL".
-    * Note: The source code is available at <https://github.com/Hugibeer/RhetosDSLSyntax>.
