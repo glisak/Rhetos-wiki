@@ -1,4 +1,4 @@
-This article describes the release process for both Rhetos framework (<https://github.com/Rhetos/Rhetos>) and Rhetos plugins (most of the other repositories in <https://github.com/Rhetos>).
+This article describes the release process for both Rhetos framework (<https://github.com/Rhetos/Rhetos>) and Rhetos plugins (most of the other repositories in <https://github.com/Rhetos>). Steps that are applied only to Rhetos framework release are marked with [Framework only].
 
 1. Before you start:
     * [ ] Make sure you are working on the latest version of the master branch (git pull).
