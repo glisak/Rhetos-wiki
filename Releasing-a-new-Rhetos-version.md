@@ -13,9 +13,10 @@
     * [ ] Run full build in the command prompt:<br/>
         `Clean.bat && Build.bat && Test.bat`
     * [ ] Verity that the build is successful: the console output should end with "Test.bat SUCCESSFULLY COMPLETED.".
-    * [ ] In the *Install* subfolder: zip the *Rhetos* folder to *Rhetos.&lt;NEW VERSION&gt;.zip* (for example Rhetos.1.2.0.zip).
+    * [ ] [Framework only] In the *Install* subfolder: zip the *Rhetos* folder to *Rhetos.&lt;NEW VERSION&gt;.zip* (for example Rhetos.1.2.0.zip).
 3. Publish:
-    * [ ] [Private builds only] Copy the 1 zip and 2 nupkg files from Install folder to your company's shared network storage (ask your system administrator for the location).
+    * [ ] [Private builds only] Copy the generated files from the Install folder to your company's shared network storage (ask your system administrator for the location).
+      * Rhetos framework build creates 1 zip and 2 nupkg files. A core package build creates 1 nupkg file.
     * [ ] Commit your repository changes, **except Build.bat file**, with comment "Release &lt;NEW VERSION&gt;.".
         For example "Release 1.2.0.".
       * Note: If there is nothing to commit, simply do the next step on the last commit.
@@ -24,7 +25,7 @@
     * [ ] Push your repository to GitHub (set the option *Include Tags*).
     * [ ] [Private builds only] Publish the new NuGet package to your company's NuGet gallery (ask your system administrator for the location).
     * [ ] Publish the Rhetos NuGet package to the public [NuGet gallery](https://www.nuget.org/packages/manage/upload).
-    * [ ] Add the Rhetos server zip file to GitHub release: Open [tags on GitHub](https://github.com/Rhetos/Rhetos/tags)
+    * [ ] [Framework only] Add the Rhetos server zip file to GitHub release: Open [tags on GitHub](https://github.com/Rhetos/Rhetos/tags)
         => At the tag for the newly released version click "Create release"
         => **Check** that the opened form displays the tag you have just selected
         => Drag & drop the zip file to the "**Attach binaries**" box
