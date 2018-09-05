@@ -16,9 +16,9 @@ Before following the instructions in this article, **make sure that all the [Pre
 
 ## Working folder
 
-Create a development folder for your demo application.
+1. Create a development folder for your demo application.
+2. Inside your application's development folder, create a subfolder named "&lt;MyApplicationName&gt;RhetosServer" or "RhetosServer", where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "RhetosServer folder".
 
-Inside your application's development folder, create a subfolder named "&lt;MyApplicationName&gt;RhetosServer" or "RhetosServer", where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "RhetosServer folder".
 ## Get Rhetos server binaries
 
 **Option A:**
