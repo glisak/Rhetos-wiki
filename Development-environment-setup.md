@@ -14,15 +14,20 @@ Table of contents:
 
 Before following the instructions in this article, **make sure that all the [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites) are installed**.
 
-## Get Rhetos server binaries
+## Working folder
+
+Create a development folder for your demo application.
 
 Inside your application's development folder, create a subfolder named "&lt;MyApplicationName&gt;RhetosServer" or "RhetosServer", where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "RhetosServer folder".
+## Get Rhetos server binaries
 
-Option A: Download the zip file for selected release version from <https://github.com/Rhetos/Rhetos/releases>.
+**Option A:**
+Download the zip file from the latest release at <https://github.com/Rhetos/Rhetos/releases>.
 
 1. Unpack the zip to the RhetosServer folder.
 
-Option B: Build the binaries from source:
+**Option B:**
+Build the binaries from source:
 
 1. Use git to clone the repository <https://github.com/Rhetos/Rhetos.git> to a new source folder on your disk:
     * In the command prompt run `git clone https://github.com/Rhetos/Rhetos.git RhetosSource`
