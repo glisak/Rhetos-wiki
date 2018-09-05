@@ -22,7 +22,7 @@ Before following the instructions in this article, **make sure that all the [Pre
 ## Get Rhetos server binaries
 
 **Option A:**
-Download the zip file from the latest release at <https://github.com/Rhetos/Rhetos/releases>.
+Download the zip file from the [latest release](https://github.com/Rhetos/Rhetos/releases) (not the source code).
 
 1. Unpack the zip to the RhetosServer folder.
 
