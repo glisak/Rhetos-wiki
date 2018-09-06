@@ -22,7 +22,6 @@ Tutorials:
 
 * How to create a data model:
   * [Data structures and relationships](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-relationships)
-  * [Properties](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties)
   * [Implementing simple business rules](https://github.com/Rhetos/Rhetos/wiki/Implementing-simple-business-rules)
 * [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
 * Implementing entity inheritance and common interfaces: [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
