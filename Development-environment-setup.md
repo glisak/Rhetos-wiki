@@ -14,10 +14,20 @@ Table of contents:
 
 Before following the instructions in this article, **make sure that all the [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites) are installed**.
 
-## Working folder
+## Create a working folder
 
-1. Create a development folder for your demo application.
+1. Create a development folder for your business application.
 2. Inside your application's development folder, create a subfolder named "&lt;MyApplicationName&gt;RhetosServer" or "RhetosServer", where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "RhetosServer folder".
+
+Example:
+
+> For an application Bookstore, a developer create the following folder structure.
+> 
+> * Bookstore
+>   * Output
+>     * BookstoreRhetosServer
+>   * Source
+>     * DslScripts
 
 ## Get Rhetos server binaries
 
