@@ -34,7 +34,7 @@ This article describes the release process for both Rhetos framework (<https://g
         => Click "Publish release".
 4. Prepare the code for further development:
     * [ ] In *Build.bat* increase the second version number by 1 and set the third to 0 (for example from 1.2.5 to 1.3.0). Set the `Prelease` version to `auto`, so that the source is ready for the development of the next release:<br/>
-          `SET Version=...current +0.+1.0`<br/>
+          `SET Version=<CURRENT +0.+1.0>`<br/>
           `SET Prerelease=auto`
     * [ ] Run *Build.bat*.
     * [ ] Commit with comment "Development &lt;NEXT VERSION&gt;". For example "Development 1.3.0.".
