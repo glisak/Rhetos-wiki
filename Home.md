@@ -8,16 +8,18 @@ use it to generate the application server, including the application's database,
 business layer object model (C#) and web API (REST, SOAP, OData, etc.).
 
 For an overview of the Rhetos architecture and principles, see:
+
 * [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos)
 
 ## Application development
 
-Setup the application development environment:
+Get started:
 
 1. [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
 2. [Development environment setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
 
-Rhetos DSL tutorials:
+Tutorials:
+
 1. How to create a data model: [Data structures and simple business rules](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-simple-business-rules)
 2. [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
 3. Implementing entity inheritance and common interfaces: [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
@@ -43,11 +45,12 @@ Recommended documentation:
 * [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync). Rhetos supports Windows Authentication by default. This package synchronizes Rhetos user roles with Active Directory, allowing user permissions to be defined by AD user groups.
 * [AspNetFormsAuth](https://github.com/Rhetos/AspNetFormsAuth), provides Forms Authentication to Rhetos applications.
 * [RestGenerator](https://github.com/Rhetos/RestGenerator) automatically generates RESTful JSON web API for all entities and other readable or writable data structures that are defined in a Rhetos application. Additionally allows executing actions and downloading reports.
-* [MvcModelGenerator](https://github.com/Rhetos/MvcModelGenerator) generates ASP.NET MVC model for all entities and other queryable data structures, for use in other web applications when accessing the Rhetos server.
+* [AfterDeploy](https://github.com/Rhetos/AfterDeploy), simplifies the handling of SQL scripts that need to be executed on each deployment.
+* [LightDMS](https://github.com/Rhetos/LightDMS),  light document versioning system plugin for Rhetos. Supports database table storage, SQL Server filestream and Azure Blob Storage.
 * [ODataGenerator](https://github.com/Rhetos/ODataGenerator) generates OData interface (Open Data Protocol) for all entities and other queryable data structures that are defined in a Rhetos application.
 * [I18NFormatter](https://github.com/Rhetos/I18NFormatter), enables localization of Rhetos applications using [GetText / PO](http://en.wikipedia.org/wiki/Gettext) standard.
 * [LegacyRestGenerator](https://github.com/Rhetos/LegacyRestGenerator), an old version of REST API, available for backward compatibility.
-* [AfterDeploy](https://github.com/Rhetos/AfterDeploy), simplifies the handling of SQL scripts that need to be executed on each deployment.
+* [MvcModelGenerator](https://github.com/Rhetos/MvcModelGenerator) generates ASP.NET MVC model for all entities and other queryable data structures, for use in other web applications when accessing the Rhetos server.
 
 ## Framework development
 
