@@ -60,9 +60,7 @@ for a list of simple property data types.
 Simple business rules:
 
 * You can mark any property to be **Required**, it will generate an on-save validation.
-  * Note: Required properties are still created with nullable types in C# and database,
-    in order to allow more flexible and uniform handling of changes in business rules,
-    application upgrades and error validation reporting.
+  * Note: Required properties are still created with nullable types in C# and database.
 * The **Unique** concept generates a unique SQL index on the column.
 
 ## One-to-many relationship (master-detail)
