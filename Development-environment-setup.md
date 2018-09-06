@@ -21,7 +21,7 @@ Before following the instructions in this article, **make sure that all the [Pre
 
 Example:
 
-> For an application Bookstore, a developer create the following folder structure.
+> For a tutorial application "Bookstore", create the following folder structure.
 > 
 > * Bookstore
 >   * Output
