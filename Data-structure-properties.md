@@ -1,7 +1,7 @@
 See the [Data structures and relationships](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-relationships) tutorial for examples and explanation of using properties
 on entities and other data structures.
 
-## Simple properties data types
+## Simple property data types
 
 The following concepts are available in CommonConcepts DSL:
 
