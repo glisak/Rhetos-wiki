@@ -2,6 +2,10 @@ This article shows how to implement business entities and other data structures,
 how to define entity relationships and what backend technologies are readily available
 (database table, business layer C# classes, JSON web API).
 
+Prerequisites:
+
+* To build and run the examples in this article, first **setup the development project**: [Development environment setup](https://github.com/Rhetos/Rhetos/wiki/Development-environment-setup).
+
 Contents:
 
 * [Entities and properties](#entities-and-properties)
