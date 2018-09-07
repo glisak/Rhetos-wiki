@@ -43,10 +43,15 @@ Solution:
         }
     }
 
-Place this code in the *DslScripts\Books.rhe*  file, and run *DeployPackages.exe*.
+Place this code in the *DslScripts\Books.rhe*  file, and run *RhetosServer\bin\DeployPackages.exe*.
 Review the generated database objects in SSMS.
 
 The **Module** concept creates a *namespace* in the generated C# code, and a *schema* in the database.
+
+* Note that modules are not directly related to deployment packages:
+  A single deployment package can contain DSL scripts with entities for many modules.
+  Also, multiple deployment packages can create or extend entities in a single module.
+* For example, a small application will probable have one deployment package and one business module with the same name.
 
 The **Entity** concept generates the following application code:
 
