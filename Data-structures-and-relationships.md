@@ -179,7 +179,7 @@ Data modelling considerations:
 
 Extends vs UniqueReference:
 
-* The Extends concept behaves as a "part-of" relationship to the base entity, similar to the Detail on Reference (see the description of Detail concept above). This means that from the business perspective, the extension is considered a part of the base entity, its data displayed and entered by user on the same form. Alternatively, if one-to-one relationship is needed on some entities, but the extended entity should not be considered as a part of the base entity (for example, if the row permissions should not be automatically inherited from base to dependent entity), than **UniqueReference** concept can be used instead of the Extends concept.
+* The Extends concept behaves as a "part-of" relationship to the base entity, similar to the Detail on Reference (see the description of Detail concept above). This means that from the business perspective, the extension is considered a part of the base entity, its data is probably displayed and entered by user on the same form. Alternatively, if one-to-one relationship is needed on some entities, but the extended entity should not be considered as a part of the base entity (for example, if the row permissions should not be automatically inherited from base to dependent entity), than **UniqueReference** concept can be used instead of the Extends concept.
 * The syntax is same, and both concepts create the same foreign key from the extended table's ID to the base table. The only difference in CommonConcepts DSL is automatic inheritance of row permissions and on-delete-cascade relationship on Extends concept.
 
 ## Many-to-many relationship (join table)
