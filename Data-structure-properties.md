@@ -35,6 +35,6 @@ See the [Data structures and relationships](https://github.com/Rhetos/Rhetos/wik
 
 ## LinkedItems property
 
-**LinkedItems** property adds a navigational property for use in Entity Framework LINQ queries that contains a list of detail items (records from another entity that references this entity).
+**LinkedItems** property adds a property that contains a list of detail items (records from another entity that references this entity).
 
-Note: This concepts does not directly affect the database or the generated web API.
+Note: This is a navigational property for use in Entity Framework LINQ queries. This concepts does not change the database structure or the generated web API.
