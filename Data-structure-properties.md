@@ -18,7 +18,7 @@ The following concepts are available in CommonConcepts DSL:
 | **Guid** | Guid? | uniqueidentifier |
 | **Binary** | byte[] | varbinary(max) |
 
-Note that any new property types can be created and implemented as a reusable Rhetos plugin, or simply as an internal part of a specific business application.
+Note that **any new property type** can be created and implemented as a reusable Rhetos plugin, or simply as an internal part of a specific business application.
 
 ## Reference property
 
