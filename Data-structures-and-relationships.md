@@ -63,7 +63,9 @@ The **Entity** concept generates the following application code:
   For example, the [RestGenerator](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
   plugin generates the REST methods for reading and writing the entity's records.
 
-See the [Data structure properties](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties) article
+Properties:
+
+* See the [Data structure properties](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties) article
 for a list of simple property data types.
 
 Simple business rules:
