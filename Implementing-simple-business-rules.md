@@ -30,3 +30,8 @@ Entity Employee
     InvalidData FinishBeforeStart 'It is not allowed to enter a WorkFinished time before the WorkStarted time.';
 }
 ```
+## See also
+
+Examples of many DSL concepts are available in the unit testing setup script in the Rhetos framework source folder [CommonConcepts\CommonConceptsTest\DslScripts](https://github.com/Rhetos/Rhetos/tree/master/CommonConcepts/CommonConceptsTest/DslScripts):
+
+* The script [SimpleBusinessLogic.rhe](https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/CommonConceptsTest/DslScripts/SimpleBusinessLogic.rhe) contains examples of many concepts from this article.
