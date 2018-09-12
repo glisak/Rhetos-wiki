@@ -41,6 +41,10 @@ Recommended documentation:
 * [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
 * [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md) for each version
 
+Support:
+
+* Feel free to ask questions on the [Issues](https://github.com/Rhetos/Rhetos/issues) page by searching the existing ones or adding a new issue.
+
 ## Recommended plugins
 
 * [CommonConcepts](https://github.com/Rhetos/Rhetos/tree/master/CommonConcepts) contains basic concepts for building applications, such as entities, validations and computations.
