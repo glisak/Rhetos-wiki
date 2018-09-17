@@ -28,3 +28,7 @@ There are two subsystems available for the authorization of user access in the R
 2. [Row permissions](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
     * Programmable permissions.
     * The access rights are implemented on an entity to allow some users access **a subset** of the entity's records.
+
+## See also
+
+* [Implementing Rhetos authentication plugins](https://github.com/Rhetos/Rhetos/wiki/Implementing-Rhetos-authentication-plugins) is an article focused on the framework development.
