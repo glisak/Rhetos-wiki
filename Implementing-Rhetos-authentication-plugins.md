@@ -42,3 +42,16 @@ For example, **Windows Authentication** user in Rhetos is implemented by [WcfWin
 **AspNetFormsAuth** plugin implements IUserInfo with a very simple [AspNetUserInfo](https://github.com/Rhetos/AspNetFormsAuth/blob/master/Plugins/Rhetos.AspNetFormsAuth/AspNetUserInfo.cs) class, where the username is returned from ASP.NET by calling `HttpContext.Current.User.Identity.Name`.
 
 To register a new class in Rhetos as a plugin that implements IUserInfo you need to register it to the dependency injection container, while making sure that there are no other security plugins registered. For example of how to do it see the [AutofacModuleConfiguration](https://github.com/Rhetos/AspNetFormsAuth/blob/master/Plugins/Rhetos.AspNetFormsAuth/AutofacModuleConfiguration.cs) class and all mentions of "AspNetUserInfo" in it. [Autofac](https://autofac.org/) is used in Rhetos for DI.
+
+The IUserInfo instance is most often used in the rest of the system as a property of ExecutionContext. For example, the following DSL script will generate a reader that returns the current user's username independently of the authentication mechanism.
+
+    Module Demo
+    {
+        Computed MyAccount 'repository => new[] {
+            new MyAccount { UserName = _executionContext.UserInfo.UserName } }'
+        {
+            ShortString UserName;
+        }
+    }
+
+It can be tested by opening <http://localhost/Rhetos/rest/Demo/MyAccount/>
