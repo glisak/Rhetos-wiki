@@ -31,14 +31,14 @@ Tutorials:
 * Row permissions business rules: [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
 * Reports: [TemplaterReport](https://github.com/Rhetos/Rhetos/wiki/TemplaterReport)
 
-Recommended documentation:
+Useful documentation:
 
 * [Rhetos DSL syntax](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-syntax)
-* [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
 * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
 * [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization)
 * [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
 * [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
+* [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
 * [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md) for each version
 
 Support:
@@ -61,4 +61,5 @@ Support:
 ## Framework development
 
 * [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
+* [Implementing Rhetos authentication plugins](https://github.com/Rhetos/Rhetos/wiki/Implementing-Rhetos-authentication-plugins)
 * [Releasing a new Rhetos version](https://github.com/Rhetos/Rhetos/wiki/Releasing-a-new-Rhetos-version)
