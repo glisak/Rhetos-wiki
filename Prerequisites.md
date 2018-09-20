@@ -1,5 +1,12 @@
 This article describes how to install and verify the prerequisites for developing applications with Rhetos framework. This is generally a standard C#/ASP.NET development environment.
 
+Contents:
+
+* [Install prerequisites](#install-prerequisites)
+* [Verify the prerequisites](#verify-the-prerequisites)
+* [Configure your text editor for DSL scripts (*.rhe)](#configure-your-text-editor-for-dsl-scripts-rhe)
+* [Read next](#read-next)
+
 ## Install prerequisites
 
 Prerequisites for the Rhetos server:
