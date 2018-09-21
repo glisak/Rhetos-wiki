@@ -32,7 +32,7 @@ Example:
 ## Get Rhetos server binaries
 
 **Option A:** (recommended)
-Download the zip file from the [latest release](https://github.com/Rhetos/Rhetos/releases) (not the source code).
+Download the RhetosServer zip file from the [latest release](https://github.com/Rhetos/Rhetos/releases) (not the source code).
 
 1. Unpack the zip to the RhetosServer folder.
 
