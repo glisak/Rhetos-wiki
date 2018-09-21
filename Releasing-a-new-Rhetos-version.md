@@ -15,7 +15,7 @@ This article describes the release process for both Rhetos framework (<https://g
     * [ ] Run full build in the command prompt:
       * For Rhetos framework run `Clean.bat && Build.bat && Test.bat`, for Rhetos packages run `Build.bat`.
     * [ ] Verity that the build is successful: the console output should end with "Test.bat SUCCESSFULLY COMPLETED.".
-    * [ ] [Framework only] In the *Install* subfolder: zip the *Rhetos* folder to *Rhetos.&lt;NEW VERSION&gt;.zip* (for example Rhetos.1.2.0.zip).
+    * [ ] [Framework only] In the *Install* subfolder: zip the *RhetosServer* folder to *RhetosServer.&lt;NEW VERSION&gt;.zip* (for example RhetosServer.1.2.0.zip).
 3. Publish:
     * [ ] [Private builds only] Copy the generated files from the Install folder to your company's shared network storage (ask your system administrator for the location).
       * Rhetos framework build creates 1 zip and 2 nupkg files. A Rhetos package build creates 1 nupkg file.
