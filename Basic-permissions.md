@@ -43,7 +43,7 @@ Denying permissions:
 * All claims are denied by default, and added with user's and role's permission.
 * Sometimes it is difficult to set up a purely additive system of roles and permissions. For example, if a user inherits some permissions (claims) from a certain role, but you need to remove some of those permissions without modifying this role, you can explicitly deny this permissions by setting `IsAuthorized = 0` in *PrincipalPermission* or *RolePermission* (with an additional role).
 * Deny will always override the allowed permissions from other roles, so if the user has a certain permission allowed by one of his roles and denied by some other role, at the and the permission will be denied.
-* Please note that denying permissions should be used as a rare exception because it complicates the administration of the permissions in the future.
+* Please note that denying permissions should be used as a **rare exception** because it complicates the administration of the permissions in the future.
 
 ## Inserting the permissions on deployment
 
