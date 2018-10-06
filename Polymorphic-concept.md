@@ -7,13 +7,13 @@ Similar features:
 
 Contents:
 
-* [Basic usage](#basic-usage)
-* [Referencing or extending a polymorphic entity](#referencing-or-extending-a-polymorphic-entity)
-* [Multiple interface implementations](#multiple-interface-implementations)
-* [Property implementation with subquery](#property-implementation-with-subquery)
-* [Limit the implementation with filter (where)](#limit-the-implementation-with-filter-where)
-* [Subtype implementation using SQL query](#subtype-implementation-using-sql-query)
-* [Writing efficient queries from client application](#writing-efficient-queries-from-client-application)
+- [Basic usage](#basic-usage)
+- [Referencing or extending a polymorphic entity](#referencing-or-extending-a-polymorphic-entity)
+- [Multiple interface implementations](#multiple-interface-implementations)
+- [Property implementation with subquery](#property-implementation-with-subquery)
+- [Limit the implementation with filter (where)](#limit-the-implementation-with-filter-where)
+- [Subtype implementation using SQL query](#subtype-implementation-using-sql-query)
+- [Writing efficient queries from client application](#writing-efficient-queries-from-client-application)
 
 ## Basic usage
 
@@ -24,35 +24,39 @@ For example, `MoneyTransaction` data structure can have multiple forms: `BorrowM
 
 Example:
 
-    Module Demo
+```
+Module Demo
+{
+    Polymorphic MoneyTransaction
     {
-        Polymorphic MoneyTransaction
+        DateTime EventDate;
+        Money Amount;
+    }
+
+    Entity BorrowMoney
+    {
+        ShortString FromWhom;
+        DateTime EventDate;
+        Money Amount;
+
+        Is Demo.MoneyTransaction;
+        // The EventDate and Amount are automatically mapped.
+    }
+
+    Entity LendMoney
+    {
+        ShortString ToWhom;
+        DateTime EventDate;
+        Money Amount;
+
+        Is Demo.MoneyTransaction
         {
-            DateTime EventDate;
-            Money Amount;
-        }
-
-        Entity BorrowMoney
-        {
-            ShortString FromWhom;
-            Money Amount;
-
-            Is Demo.MoneyTransaction;
-            // The EventDate will be automatically added. The Amount is automatically mapped.
-        }
-
-        Entity LendMoney
-        {
-            ShortString ToWhom;
-            Money Amount;
-
-            Is Demo.MoneyTransaction
-            {
-                Implements Demo.MoneyTransaction.Amount '-Amount';
-                // The Amount in the MoneyTransaction related to the LendMoney record will have negative value.
-            }
+            Implements Demo.MoneyTransaction.Amount '-Amount';
+            // The Amount in the MoneyTransaction related to the LendMoney record will have negative value.
         }
     }
+}
+```
 
 Note that:
 
@@ -83,6 +87,7 @@ For example, the `TransferMoney` entity record may represent two money transacti
 
     Entity TransferMoney
     {
+        DateTime EventDate;
         ShortString TransferFrom;
         ShortString TransferTo;
         Money Amount;
@@ -133,6 +138,7 @@ In the following example, only items from `BorrowMoney2` that are not `Forgotten
 
     Entity BorrowMoney2
     {
+        DateTime EventDate;
         ShortString FromWhom;
         Money Amount;
         Bool Forgotten;
