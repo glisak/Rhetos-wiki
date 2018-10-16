@@ -7,7 +7,7 @@ After an application developer describes the application in that language (DSL s
 use it to generate the application server, including the application's database,
 business layer object model (C#) and web API (REST, SOAP, OData, etc.).
 
-* [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos), overview of the Rhetos architecture and principles
+* [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos), an overview of the Rhetos architecture and principles
 * [Roadmap](https://github.com/Rhetos/Rhetos/wiki/Rhetos-platform-roadmap)
 
 ## Application development
