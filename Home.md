@@ -30,7 +30,7 @@ Tutorials:
 * Row permissions business rules: [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
 * Reports: [TemplaterReport](https://github.com/Rhetos/Rhetos/wiki/TemplaterReport)
 
-Useful documentation:
+Fundamentals:
 
 * [Rhetos DSL syntax](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-syntax)
 * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
