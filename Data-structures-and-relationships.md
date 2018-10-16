@@ -46,14 +46,14 @@ Solution:
 Place this code in the *DslScripts\Books.rhe*  file, and run *RhetosServer\bin\DeployPackages.exe*.
 Review the generated database objects in SSMS.
 
-The **Module** concept creates a *namespace* in the generated C# code, and a *schema* in the database.
+The `Module` concept creates a *namespace* in the generated C# code, and a *schema* in the database.
 
 * Note that modules are not directly related to deployment packages:
   A single deployment package can contain DSL scripts with entities for many modules.
   Also, multiple deployment packages can create or extend entities in a single module.
 * For example, a small application will probable have one deployment package and one business module with the same name.
 
-The **Entity** concept generates the following application code:
+The `Entity` concept generates the following application code:
 
 * a table in the database, with the uniqueidentifier primary key column "ID"
 * a POCO class in the C# object model (a simple property holder)
@@ -66,13 +66,13 @@ The **Entity** concept generates the following application code:
 Properties:
 
 * See the [Data structure properties](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties) article
-for a list of simple property data types.
+  for a list of simple property data types.
 
 Simple business rules:
 
-* You can mark any property to be **Required**, it will generate an on-save validation.
+* You can mark any property to be `Required`, it will generate an on-save validation.
   * Note: Required properties are still created with nullable types in C# and database.
-* The **Unique** concept generates a unique SQL index on the column.
+* The `Unique` concept generates a unique SQL index on the column.
 
 ## One-to-many relationship (master-detail)
 
@@ -110,7 +110,7 @@ Solution:
         }
     }
 
-**Reference** property represents the "N : 1" relationship in the data model, and usually a lookup field in the user interface.
+`Reference` property represents the "N : 1" relationship in the data model, and usually a lookup field in the user interface.
 
 * In the generated C# code it creates
   * a [navigation property](https://docs.microsoft.com/en-us/ef/ef6/fundamentals/relationships)
@@ -123,9 +123,9 @@ In the example above, `Reference Author` creates the foreign key column *AuthorI
 
 The **simplified syntax** can be used for Reference (without the referenced module and entity name, see `Reference Book` above) if the property name is same as the referenced entity, and the referenced entity is in the same module.
 
-**Detail** concept can be added on a Reference property when the dependent entity is considered **a part of** the parent entity from the business perspective. Usually this means that the user will enter the data together on the same form.
+`Detail` concept can be added on a Reference property when the dependent entity is considered **a part of** the parent entity from the business perspective. Usually this means that the user will enter the data together on the same form.
 
-* This will automatically add **Required** (detail cannot exist without parent), **CascadeDelete** and **SqlIndex** on the Reference property.
+* This will automatically add `Required` (detail cannot exist without parent), `CascadeDelete` and `SqlIndex` on the Reference property.
 * Some other features also act differently on the part-of relationship type: for example the row permissions are automatically inherited from base to dependent entity.
 
 Note: The Detail concept does not change the data model or the web API of the parent entity. The parent and detail can each be loaded and saved as separate entities. This is compliant with Rhetos principle to keep features decoupled where possible. The parent entity could be extended by the [LinkedItems](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties) concept to include details in the LINQ queries.
@@ -159,7 +159,7 @@ Solution:
         Reference Translator Bookstore.Person;
     }
 
-**Extends** concept is used when the dependent entity is an extension of the base entity. For example, the extension may contain a group of properties that are applied only to some records of the base entity, so it could be wasteful to include them in the base entity's table.
+`Extends` concept is used when the dependent entity is an extension of the base entity. For example, the extension may contain a group of properties that are applied only to some records of the base entity, so it could be wasteful to include them in the base entity's table.
 
 * In the database it creates a foreign key from the extension table's ID column to the base table's ID column.
 * In the generated C# code it creates the following navigation properties for use in Entity Framework LINQ queries:
@@ -181,7 +181,7 @@ Data modelling considerations:
 
 Extends vs UniqueReference:
 
-* The Extends concept behaves as a "part-of" relationship to the base entity, similar to the Detail on Reference (see the description of Detail concept above). This means that from the business perspective, the extension is considered a part of the base entity, its data is probably displayed and entered by user on the same form. Alternatively, if one-to-one relationship is needed on some entities, but the extended entity should not be considered as a part of the base entity (for example, if the row permissions should not be automatically inherited from base to dependent entity), than **UniqueReference** concept can be used instead of the Extends concept.
+* The Extends concept behaves as a "part-of" relationship to the base entity, similar to the Detail on Reference (see the description of Detail concept above). This means that from the business perspective, the extension is considered a part of the base entity, its data is probably displayed and entered by user on the same form. Alternatively, if one-to-one relationship is needed on some entities, but the extended entity should not be considered as a part of the base entity (for example, if the row permissions should not be automatically inherited from base to dependent entity), than `UniqueReference` concept can be used instead of the Extends concept.
 * The syntax is same, and both concepts create the same foreign key from the extended table's ID to the base table. The only difference in CommonConcepts DSL is automatic inheritance of row permissions and on-delete-cascade relationship on Extends concept.
 
 ## Many-to-many relationship (join table)
