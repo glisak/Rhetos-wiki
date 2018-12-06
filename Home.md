@@ -61,4 +61,5 @@ Support:
 
 * [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
 * [Implementing Rhetos authentication plugins](https://github.com/Rhetos/Rhetos/wiki/Implementing-Rhetos-authentication-plugins)
+* [Backward compatible feature implementation](https://github.com/Rhetos/Rhetos/wiki/Backward-compatible-feature-implementation-in-Rhetos-and-CommonConcepts)
 * [Releasing a new Rhetos version](https://github.com/Rhetos/Rhetos/wiki/Releasing-a-new-Rhetos-version)
