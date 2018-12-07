@@ -1,3 +1,5 @@
+## Existing applications should use the old behavior by default, new applications use the new behavior
+
 Add an option in *Web.config* that allows developers to choose between old and new behavior.
 This option should be configured so that the new behavior is enable, but the C# code that checked this option should default to old behavior if this options is missing (see the code examples below).
 
