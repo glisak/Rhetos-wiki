@@ -23,7 +23,7 @@ Instead, we will focus on the above elements and incrementally build an extensiv
 
 Motivating as many Rhetos community members to contribute to this point is critical to its success.
 
-## 3. Read/write predeclared object trees
+## 3. Complex web API methods
 
 The existing REST service exposes only simple objects by default. For example, if developer needs to read or write a master-detail object in a single request, a custom code must be developed, sometimes with custom data serialization within already serialized web requests.
 
