@@ -17,6 +17,7 @@ If the web application must be accessed from outside of Windows Domain (for exam
 ### Additional authentication options
 
 A custom authentication plugin may be added by implementing the [IUserInfo](https://github.com/Rhetos/Rhetos/blob/master/Source/Rhetos.Utilities/IUserInfo.cs) interface and registering the new implementation as the Rhetos server plugin.
+See [Implementing Rhetos authentication plugins](https://github.com/Rhetos/Rhetos/wiki/Implementing-Rhetos-authentication-plugins) article for more details on the topic.
 
 ## Authorization
 
@@ -28,7 +29,3 @@ There are two subsystems available for the authorization of user access in the R
 2. [Row permissions](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
     * Programmable permissions.
     * The access rights are implemented on an entity to allow some users access **a subset** of the entity's records.
-
-## See also
-
-* [Implementing Rhetos authentication plugins](https://github.com/Rhetos/Rhetos/wiki/Implementing-Rhetos-authentication-plugins) is an article focused on the framework development.

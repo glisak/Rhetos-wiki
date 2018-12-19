@@ -10,7 +10,9 @@ business layer object model (C#) and web API (REST, SOAP, OData, etc.).
 * [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos), an overview of the Rhetos architecture and principles
 * [Roadmap](https://github.com/Rhetos/Rhetos/wiki/Rhetos-platform-roadmap)
 
-## Application development
+Contributions are very welcome, both in learning resources (wiki articles and code samples) or framework and plugins development. See [How to Contribute](How-to-Contribute) for more information.
+
+## Application development with Rhetos
 
 Get started:
 
@@ -38,11 +40,11 @@ Fundamentals:
 * [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
 * [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
 * [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
-* [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md) for each version
 
 Support:
 
 * Feel free to ask questions on the [Issues](https://github.com/Rhetos/Rhetos/issues) page by searching the existing ones or adding a new issue.
+* [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md)
 
 ## Recommended plugins
 
@@ -60,6 +62,4 @@ Support:
 ## Framework development
 
 * [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
-* [Implementing Rhetos authentication plugins](https://github.com/Rhetos/Rhetos/wiki/Implementing-Rhetos-authentication-plugins)
-* [Backward compatible feature implementation](https://github.com/Rhetos/Rhetos/wiki/Backward-compatible-feature-implementation-in-Rhetos-and-CommonConcepts)
-* [Releasing a new Rhetos version](https://github.com/Rhetos/Rhetos/wiki/Releasing-a-new-Rhetos-version)
+* [Releasing a new Rhetos version](Releasing-a-new-Rhetos-version)
