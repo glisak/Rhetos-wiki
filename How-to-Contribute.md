@@ -1,6 +1,6 @@
 ## Development
 
-* Contributions are very welcome. The easiest way is to fork the repository, make changes and then make a pull request from your fork. The first time you make a pull request, you may be asked to sign a Contributor Agreement. A detailed documentation is available on GitHub: [Collaborating with issues and pull requests](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/).
+* Contributions are very welcome. The easiest way is to fork the repository, make changes and then make a pull request from your fork. A detailed documentation is available on GitHub: [Collaborating with issues and pull requests](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/). The first time you make a pull request, you may be asked to sign a Contributor Agreement.
 * Please run the unit tests before sending the pull request. Rhetos contains two types of unit tests: standard unit tests (in Rhetos.sln), and integration tests (in CommonConceptsTest.sln) that can be run only after a successful deployment.
 
 ## Writing tutorial articles
