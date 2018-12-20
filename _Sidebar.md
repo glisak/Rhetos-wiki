@@ -6,6 +6,6 @@
 
 **Application development with Rhetos**
 
-* [Tutorials and samples](https://github.com/Rhetos/Rhetos-wiki/blob/master/Home.md#application-development-with-rhetos)
-* [Recommended plugins](https://github.com/Rhetos/Rhetos-wiki/blob/master/Home.md#recommended-plugins)
+* [Tutorials and samples](https://github.com/Rhetos/Rhetos/wiki/Home#application-development-with-rhetos)
+* [Recommended plugins](https://github.com/Rhetos/Rhetos/wiki/Home#recommended-plugins)
 * [Support](https://github.com/Rhetos/Rhetos/issues) - Questions and Issues
