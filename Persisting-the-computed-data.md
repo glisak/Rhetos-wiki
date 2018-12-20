@@ -4,90 +4,94 @@ and saving the result into the database table.
 Rhetos contains concepts that help automate the implementation:
 `KeepSynchronized`, `ChangesOnLinkedItems`, `ChangesOnChangedItems`, `ChangesOnBaseItem` and `ChangesOnReferenced`.
 
-Example:
+## Examples
 
-**Rhetos:**
-```
-Module Demo
-{
-    SqlQueryable SubjectDs
-    "
-        SELECT
-            s.ID,
-            NrlCode = g.Code + '.' + CAST(s.NrlCode AS NVARCHAR(100)),
-            subjectLastVersion.RnkAsc,
-            subjectLastVersion.RnkDesc,
-            IsFirstVersion = CAST(CASE WHEN subjectLastVersion.RnkAsc = 1 THEN 1 ELSE 0 END AS BIT),
-            IsLastVersion = CAST(CASE WHEN subjectLastVersion.RnkDesc = 1 THEN 1 ELSE 0 END AS BIT),
-            StatusSubjectID = ss.ID
-        FROM
-            Demo.Subject s
-            LEFT JOIN
-            (
+The following examples are taken from [Bookstore](https://github.com/Rhetos/Bookstore) demo application, available on GitHub.
+
+Example 1:
+
+    Module Bookstore
+    {
+        // ComputeBookInfo computes some information about the book by using SQL query.
+        // The result is persisted (as a cache) in Entity BookInfo, and updated automatically.
+
+        SqlQueryable ComputeBookInfo
+            "
                 SELECT
-                    s.ID,
-                    RnkAsc = ROW_NUMBER() OVER (PARTITION BY s.NrlCode ORDER BY s.Version ASC),
-                    RnkDesc = ROW_NUMBER() OVER (PARTITION BY s.NrlCode ORDER BY s.Version DESC),
-                    StatusProductID =
-                        (SELECT TOP 1
-                            ssh.StatusSubjectID
-                        FROM
-                            Demo.StatusSubjectHistory ssh
-                        WHERE
-                            s.ID = ssh.SubjectID AND ssh.EntityType = 'Subject'
-                        ORDER BY
-                            ssh.SetupTime DESC)
+                    b.ID,
+                    NumberOfComments = COUNT(bc.ID)
                 FROM
-                    Demo.Subject s
-            ) subjectLastVersion ON subjectLastVersion.ID = s.ID
-            LEFT JOIN Demo.Group g ON s.GroupID = g.ID
-            LEFT JOIN Demo.StatusProduct ss
-                WITH (INDEX(IX_StatusProduct_ID_Includes))
-                ON ss.ID = subjectLastVersion.StatusProductID
-            LEFT JOIN Demo.NrlCountry country ON country.ID = s.NrlCountryID
-    "
-    {
-        Extends Demo.Subject;
-
-        ChangesOnReferenced 'Base.Group';
-        
-        ChangesOnLinkedItems Demo.StatusSubjectHistory.Subject;
-
-        ChangesOnChangedItems Demo.Subject 'Guid[]' ' changedItems =>
+                    Bookstore.Book b
+                    LEFT JOIN Bookstore.Comment bc ON bc.BookID = b.ID
+                GROUP BY
+                    b.ID
+            "
         {
-            var changedItemIds = changedItems.Select(item => item.ID).ToList();
-            var nrlCodes = _domRepository.Demo.Subject.Query()
-                .Where(s => changedItemIds.Contains(s.ID))
-                .Select(s => s.NrlCode)
-                .Distinct()
-                .ToList();
+            Extends Bookstore.Book;
+            Integer NumberOfComments;
 
-            return _domRepository.Demo.Subject.Query()
-                .Where(item => nrlCodes.Contains(item.NrlCode))
-                .Select(item => item.ID)
-                .ToArray();
-        }';
-        
-        ShortString NrlCode;
-        Integer RnkAsc;
-        Integer RnkDesc;
-        Bool IsFirstVersion;
-        Bool IsLastVersion;
-        Reference StatusSubject Demo.StatusProduct;
-    }
-}
-```
+            ChangesOnLinkedItems Bookstore.Comment.Book;
+        }
 
-```
-Module Demo
-{
-    Entity SubjectPersisted
-    {
-        ComputedFrom Demo.SubjectDs
+        Entity BookInfo
         {
-            AllProperties;
-            KeepSynchronized;
+            ComputedFrom Bookstore.ComputeBookInfo
+            {
+                AllProperties;
+                KeepSynchronized;
+            }
         }
     }
-}
-```
+
+Example 2:
+
+    Module Bookstore
+    {
+        // ComputeBookRating computes some information about the book by using C# implementation from an external dll.
+        // The result is persisted (as a cache) in Entity BookRating, and updated automatically.
+
+        Computed ComputeBookRating 'repository =>
+            {
+                var allBooksIds = repository.Bookstore.Book.Query().Select(b => b.ID).ToArray();
+                return this.Load(allBooksIds).ToArray();
+            }'
+        {
+            Extends Bookstore.Book;
+            Decimal Rating;
+
+            FilterBy 'IEnumerable<Guid>' '(repository, booksIds) =>
+                {
+                    var ratingInput = repository.Bookstore.Book.Query(booksIds)
+                        .Select(b =>
+                            new Bookstore.Algorithms.RatingInput
+                            {
+                                BookId = b.ID,
+                                Title = b.Title,
+                                IsForeign = b.Extension_ForeignBook.ID != null
+                            });
+
+                    var ratingSystem = new Bookstore.Algorithms.RatingSystem();
+                    var ratings = ratingSystem.ComputeRating(ratingInput);
+
+                    return ratings.Select(rating => new ComputeBookRating { ID = rating.BookId, Rating = rating.Value }).ToArray();
+                }';
+            
+            ChangesOnBaseItem;
+            ChangesOnChangedItems Bookstore.ForeignBook 'IEnumerable<Guid>' 'changedItems => changedItems.Select(fb => fb.ID)';
+        }
+
+        ExternalReference 'Bookstore.Algorithms.RatingSystem, Bookstore.Algorithms'; // One class per assembly is enough for external reference.
+
+        Entity BookRating
+        {
+            ComputedFrom Bookstore.ComputeBookRating
+            {
+                AllProperties;
+                KeepSynchronized;
+            }
+        }
+    }
+
+## See also
+
+* [Bookstore](https://github.com/Rhetos/Bookstore) demo application

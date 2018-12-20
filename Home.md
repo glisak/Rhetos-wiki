@@ -32,6 +32,10 @@ Tutorials:
 * Row permissions business rules: [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
 * Reports: [TemplaterReport](https://github.com/Rhetos/Rhetos/wiki/TemplaterReport)
 
+Sample application:
+
+* [Bookstore](https://github.com/Rhetos/Bookstore)
+
 Fundamentals:
 
 * [Rhetos DSL syntax](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-syntax)

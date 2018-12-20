@@ -226,3 +226,4 @@ The following DSL keywords are available for relationships between entities (and
 
 * [Rhetos DSL syntax](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-syntax)
 * [Data structure properties](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties)
+* [Bookstore](https://github.com/Rhetos/Bookstore) demo application
