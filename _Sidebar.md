@@ -2,6 +2,7 @@
 
 * [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos)
 * [Roadmap](https://github.com/Rhetos/Rhetos/wiki/Rhetos-platform-roadmap)
+* [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md)
 * [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
 
 **Application development with Rhetos**
