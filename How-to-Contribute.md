@@ -4,7 +4,7 @@ GitHub provides a detailed documentation on this process ([Fork a repo](https://
 
 ## Wiki articles
 
-Our documentation is stored on [wiki](https://github.com/Rhetos/Rhetos/wiki) pages. Contributions are done by creating a fork from the separate [Rhetos-wiki](https://github.com/Rhetos/Rhetos-wiki) repository, and submitting the pull requests there (see the GitHub notes above).
+Our documentation is stored on [wiki](https://github.com/Rhetos/Rhetos/wiki) pages. Contributions are done by creating a fork from the [Rhetos-wiki](https://github.com/Rhetos/Rhetos-wiki) repository, and submitting the pull requests there (see the GitHub notes above).
 
 How to write documentation:
 
