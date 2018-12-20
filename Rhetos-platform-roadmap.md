@@ -35,6 +35,11 @@ With .NET Core gaining so much momentum, especially in the open-source space, we
 
 We want to fully migrate Rhetos and all its components to .NET Core platform. Expected benefits are: better performance, modern tooling and cross-platform support.
 
-# Timeline
+## Timeline
 
 This roadmap provides only high-level priorities and plans and does not include a specific timeline. As development on these points gets planned we will post further information.
+
+## Related resources
+
+* [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md) for previous releases
+* Short-term [Milestones](https://github.com/Rhetos/Rhetos/milestones)
