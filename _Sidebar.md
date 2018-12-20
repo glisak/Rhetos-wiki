@@ -8,4 +8,4 @@
 
 * [Tutorials and samples](https://github.com/Rhetos/Rhetos-wiki/blob/master/Home.md#application-development-with-rhetos)
 * [Recommended plugins](https://github.com/Rhetos/Rhetos-wiki/blob/master/Home.md#recommended-plugins)
-* [Support](https://github.com/Rhetos/Rhetos/issues) - questions and issues
+* [Support](https://github.com/Rhetos/Rhetos/issues) - Questions and Issues
