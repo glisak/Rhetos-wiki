@@ -3,7 +3,7 @@ This article describes how to setup the development environment for developing a
 Table of contents:
 
 * [Prerequisites](#prerequisites)
-* [Working folder](#working-folder)
+* [Create a working folder](#create-a-working-folder)
 * [Get Rhetos server binaries](#get-rhetos-server-binaries)
 * [Database setup](#database-setup)
 * [Packages configuration](#packages-configuration)
@@ -17,16 +17,16 @@ Before following the instructions in this article, **make sure that all the [Pre
 ## Create a working folder
 
 1. Create a development folder for your business application.
-2. Inside your application's development folder, create a subfolder named "&lt;MyApplicationName&gt;RhetosServer" or "RhetosServer", where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "RhetosServer folder".
+2. Inside your application's development folder, create a subfolder `dist\<MyApplicationName>RhetosServer`, where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "**RhetosServer** folder".
 
 Example:
 
 > For a tutorial application "Bookstore", create the following folder structure.
-> 
+>
 > * Bookstore
->   * Output
+>   * dist
 >     * BookstoreRhetosServer
->   * Source
+>   * src
 >     * DslScripts
 
 ## Get Rhetos server binaries
@@ -42,12 +42,12 @@ Build the binaries from source:
 1. Use git to clone the repository <https://github.com/Rhetos/Rhetos.git> to a new source folder on your disk:
     * In the command prompt run `git clone https://github.com/Rhetos/Rhetos.git RhetosSource`
 2. Open the command prompt in the created Rhetos source folder and run `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
-3. The Rhetos server binaries are created in the subfolder **Install\Rhetos**. Copy the content of **Install\Rhetos** to your application's RhetosServer folder.
+3. The Rhetos server binaries are created in the subfolder `Install\Rhetos`. Copy the content of `Install\Rhetos` to your application's RhetosServer folder.
 
 ## Database setup
 
-1. Create an empty database (SQL Server 2008 or newer, Developer Edition is recommended) named "Rhetos" or "&lt;MyApplicationName&gt;Rhetos".
-2. Open folder **RhetosServer\bin** and copy the template file "Template.ConnectionStrings.config" to "ConnectionStrings.config" in the same folder.
+1. Create an empty database (SQL Server 2008 or newer, Developer Edition is recommended) named `Rhetos` or `<MyApplicationName>Rhetos`.
+2. Open folder `RhetosServer\bin` and copy the template file "Template.ConnectionStrings.config" to "ConnectionStrings.config" in the same folder.
 3. Edit the existing configuration line in the **ConnectionStrings.config** file to reference the created database. For example, if your database is named "Rhetos" on the local SQL Server with default instance name, simply replace "theServer" to "localhost" and "theDatabase" to "Rhetos".
 
 ## Packages configuration
@@ -57,7 +57,7 @@ Rhetos packages define the content of the Rhetos server. This section describes 
 1. In the **RhetosServer** folder:
     * Copy "Template.RhetosPackages.config" file to "RhetosPackages.config", if the target file does not already exist.
     * Copy "Template.RhetosPackageSources.config" file to "RhetosPackageSources.config", if the target does not already exist.
-2. Verify that the RhetosServer is configured correctly by opening command prompt at **RhetosServer\bin** folder and running `DeployPackages.exe`.
+2. Verify that the RhetosServer is configured correctly by opening command prompt at `RhetosServer\bin` folder and running `DeployPackages.exe`.
     * The last printed line should be "*[Trace] DeployPackages: Done.*".
     * The output may include "*[Error] DeploymentConfiguration: No packages*" and "*[Error] DeployPackages: WARNING: Empty assembly...*", because no packages are provided in the "RhetosPackages.config".
       This is ok for now.
@@ -107,6 +107,8 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
 
 Follow the steps in this chapter if using IIS Express instead of IIS.
 IIS is recommended (see the previous chapter), but IIS Express can be useful if a restricted environment is needed on the development machine.
+
+The following instructions use tools from the Rhetos source repository.
 
 `SetupRhetosServer.bat` will set up web environment for IIS Express.
 It requires few parameters based on which it sets up database, configures
