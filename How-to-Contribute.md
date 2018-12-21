@@ -25,7 +25,7 @@ Please see the specific guidelines for [Writing tutorial articles](Writing-tutor
 
 ## Framework and plugins development
 
-When deciding on what to change and how to implement the change, use our [Issues list](https://github.com/Rhetos/Rhetos/issues) for **ideas, community requests and discussion on the implementation details**. Additionally, [Roadmap](Rhetos-platform-roadmap) contains information on our long-term goals and the general direction of development.
+When deciding on what to change and how to implement the change, use our [Issues list](https://github.com/Rhetos/Rhetos/issues) for **ideas**, **community requests** and **discussion on the implementation details**. Additionally, [Roadmap](Rhetos-platform-roadmap) contains information on our long-term goals and the general direction of development.
 
 Contributions are done by [creating a fork]((https://help.github.com/articles/fork-a-repo/)) from the source repository (Rhetos or any [plugin](https://github.com/Rhetos)), and submitting the pull request after completing the changes. The first time you make a pull request, you may be asked to sign a Contributor Agreement.
 
