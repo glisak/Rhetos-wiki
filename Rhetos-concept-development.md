@@ -164,24 +164,6 @@ namespace Htz.RhetosConcepts
 
             codeBuilder.InsertCode(code, WritableOrmDataStructureCodeGenerator.OldDataLoadedTag, info.Deactivatable.Entity);
         }
-
-        private static string ImplementationSnippet(DeactivateOnDeleteInfo info)
-        {
-            return String.Format(@"
-    var deactivated = deleted.ToList();
-
-    foreach(var item in deleted)
-        item.Active = false;
-
-    updated = updated.Concat(deleted).ToArray();
-    updatedNew = updatedNew.Concat(deleted).ToArray();
-
-    deleted = new Common.Queryable.{0}_{1}[]{{}};
-    deletedIds = new {0}.{1}[]{{}};
-", info.Deactivatable.Entity.Module.Name, info.Deactivatable.Entity.Name
-                );
-        }
-
     }
 }
 ```
