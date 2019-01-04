@@ -24,6 +24,7 @@ Tutorials:
 * How to create a data model:
   * [Data structures and relationships](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-relationships)
   * [Implementing simple business rules](https://github.com/Rhetos/Rhetos/wiki/Implementing-simple-business-rules)
+* Extend Rhetos DSL with you own keywords: [Rhetos concept development](Rhetos-concept-development)
 * [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
 * Implementing entity inheritance and common interfaces: [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
 * Low-level database development: [Database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects)
@@ -39,6 +40,7 @@ Sample application:
 Fundamentals:
 
 * [Rhetos DSL syntax](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-syntax)
+* [Creating Rhetos package](Creating-Rhetos-package)
 * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
 * [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization)
 * [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)

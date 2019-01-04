@@ -12,13 +12,12 @@ Table of contents:
 
 ## What is Rhetos DSL concept
 
-As stated before, Rhetos DSL concept is the base of the Rhetos DSL platform. From an application develpers perspective Rhetos DSL concept is a DSL keyword which assumes some syntax and functionality, and can be used to declare some data structure, business rule, etc.
+As stated before, Rhetos DSL concept is the base of the Rhetos DSL platform. From an application developer's perspective Rhetos DSL concept is a DSL keyword which assumes some syntax and functionality, and can be used to declare some data structure, business rule, etc.
 
-From a platform developmers perspective Rhetos DSL concept is a structured way to develop some functionality and bring it to the application develper. This new functionality can then be used any number of times only by stating specific keyword in users DSL script.
+From a platform developer's perspective Rhetos DSL concept is a structured way to develop some functionality and bring it to the application developer. This new functionality can then be used any number of times only by stating specific keyword in the application's DSL script.
 
 For example, let's say that we need to ensure all the phone numbers in our application must be stated in a structured way. We can do that by adding a regex validation to all the properties which contains a phone number. Something like this:
 
-```
     Module Bookstore
     {
         Entity Employee
@@ -29,11 +28,9 @@ For example, let's say that we need to ensure all the phone numbers in our appli
             ShortString MobileNumber { RegexMatch "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" "Invalid phone number format."; }
         }
     }
-```
 
 The DSL way of implementing the same feature is to write a new concept and use that concept, instead of repetitive copying the same code. After writing such a concept (let's say we call it PhoneNumber), we can then use it our DSL script like this:
 
-```
     Module Bookstore
     {
         Entity Employee
@@ -44,7 +41,6 @@ The DSL way of implementing the same feature is to write a new concept and use t
             PhoneNumber MobileNumber;
         }
     }
-```
 
 Implementing functionality this way is not only more elegant and human readable, but also easier to test and change in the future, since the implementation is centralized.
 
