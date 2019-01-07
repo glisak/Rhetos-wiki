@@ -34,7 +34,7 @@ Example requirements:
 
 Solution:
 
-```cs
+```c
 Module DemoRowPermissions1
 {
     Entity Division
@@ -98,7 +98,7 @@ Example requirements:
 
 Solution:
 
-```cs
+```c
 Module DemoRowPermissions2
 {
     Entity Region
@@ -188,7 +188,7 @@ Example requirements:
 
 Add this script to the previous example's solution.
 
-```cs
+```c
 Module DemoRowPermissions2
 {
     AutoInheritRowPermissions;
@@ -239,7 +239,7 @@ By using `AutoInheritRowPermissions`, the row permissions from `Document` entity
 
 Instead of using `AutoInheritRowPermissions` (see the previous solution), row permissions inheritance may be explicitly set for selected entities.
 
-```cs
+```c
 Module DemoRowPermissions2
 {
     // NOT USING AutoInheritRowPermissions;
@@ -293,7 +293,7 @@ Consider the following example:
 `DocumentInfo` is an extension of the `Document` entity,
 and inherits the row permissions from the `Document`.
 
-```cs
+```c
 SqlQueryable DocumentInfo
     "SELECT
         ID,
