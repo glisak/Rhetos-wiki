@@ -13,17 +13,17 @@ Row permissions are based on filters that are applied when reading and writing e
 
 Contents:
 
-* [Simple row permission rules](#simple-row-permission-rules)
-* [Combining multiple rules](#combining-multiple-rules)
-* [Inheriting row permissions](#inheriting-row-permissions)
-    * [Solution 1](#solution-1)
-    * [Solution 2](#solution-2)
-    * [Optimizing inherited row permissions](#optimizing-inherited-row-permissions)
-* [Client code - Reading data with row permissions](#client-code---reading-data-with-row-permissions)
-    * [Reading all documents (access denied)](#reading-all-documents-access-denied)
-    * [Reading the user's documents](#reading-the-users-documents)
-* [Server code - Manually verifying row permissions](#server-code---manually-verifying-row-permissions)
-* [See also](#see-also)
+1. [Simple row permission rules](#simple-row-permission-rules)
+2. [Combining multiple rules](#combining-multiple-rules)
+3. [Inheriting row permissions](#inheriting-row-permissions)
+   1. [Solution 1](#solution-1)
+   2. [Solution 2](#solution-2)
+   3. [Optimizing inherited row permissions](#optimizing-inherited-row-permissions)
+4. [Client code - Reading data with row permissions](#client-code---reading-data-with-row-permissions)
+   1. [Reading all documents (access denied)](#reading-all-documents-access-denied)
+   2. [Reading the user's documents](#reading-the-users-documents)
+5. [Server code - Manually verifying row permissions](#server-code---manually-verifying-row-permissions)
+6. [See also](#see-also)
 
 ## Simple row permission rules
 
@@ -34,38 +34,40 @@ Example requirements:
 
 Solution:
 
-    Module DemoRowPermissions1
+```cs
+Module DemoRowPermissions1
+{
+    Entity Division
     {
-        Entity Division
-        {
-            ShortString Name;
-        }
+        ShortString Name;
+    }
 
-        Entity Employee
-        {
-            ShortString UserName;
-            Reference Division;
-        }
+    Entity Employee
+    {
+        ShortString UserName;
+        Reference Division;
+    }
 
-        Entity Document
-        {
-            ShortString Title;
-            DateTime Created { CreationTime; }
-            Reference Division;
+    Entity Document
+    {
+        ShortString Title;
+        DateTime Created { CreationTime; }
+        Reference Division;
 
-            RowPermissions
-            {
-                Allow WithinDivision 'context =>
-                    {
-                        Guid myDivisionId = context.Repository.DemoRowPermissions1.Employee.Query()
-                            .Where(e => e.UserName == context.UserInfo.UserName)
-                            .Select(e => e.Division.ID)
-                            .SingleOrDefault();
-                        return item => item.Division.ID == myDivisionId;
-                    }';
-            }
+        RowPermissions
+        {
+            Allow WithinDivision 'context =>
+                {
+                    Guid myDivisionId = context.Repository.DemoRowPermissions1.Employee.Query()
+                        .Where(e => e.UserName == context.UserInfo.UserName)
+                        .Select(e => e.Division.ID)
+                        .SingleOrDefault();
+                    return item => item.Division.ID == myDivisionId;
+                }';
         }
     }
+}
+```
 
 *This solution is implemented in Rhetos unit tests, see `RowPermissionsDemo.rhe` and `RowPermissionsDemo.cs` in the Rhetos source repository.*
 
@@ -96,69 +98,71 @@ Example requirements:
 
 Solution:
 
-    Module DemoRowPermissions2
+```cs
+Module DemoRowPermissions2
+{
+    Entity Region
     {
-        Entity Region
+        ShortString Name;
+    }
+
+    Entity Division
+    {
+        ShortString Name;
+        Reference Region;
+    }
+
+    Entity Employee
+    {
+        ShortString UserName;
+        Reference Division;
+    }
+
+    Entity RegionSupervisor
+    {
+        Reference Employee;
+        Reference Region;
+    }
+
+    Entity Document
+    {
+        ShortString Title;
+        DateTime Created { CreationTime; }
+        Reference Division;
+
+        RowPermissions
         {
-            ShortString Name;
-        }
+            Allow WithinDivision 'context =>
+                {
+                    Guid myDivisionId = context.Repository.DemoRowPermissions2.Employee.Query()
+                        .Where(e => e.UserName == context.UserInfo.UserName)
+                        .Select(e => e.Division.ID)
+                        .SingleOrDefault();
+                    return item => item.Division.ID == myDivisionId;
+                }';
 
-        Entity Division
-        {
-            ShortString Name;
-            Reference Region;
-        }
+            AllowRead SupervisedRegions 'context =>
+                {
+                    List<Guid> myRegionIds = context.Repository
+                        .DemoRowPermissions2.RegionSupervisor.Query()
+                        .Where(rs => rs.Employee.UserName == context.UserInfo.UserName)
+                        .Select(rs => rs.Region.ID)
+                        .ToList();
 
-        Entity Employee
-        {
-            ShortString UserName;
-            Reference Division;
-        }
+                    if (myRegionIds.Count == 0)
+                        return item => false; // Minor optimization.
 
-        Entity RegionSupervisor
-        {
-            Reference Employee;
-            Reference Region;
-        }
+                    return item => myRegionIds.Contains(item.Division.Region.ID);
+                }';
 
-        Entity Document
-        {
-            ShortString Title;
-            DateTime Created { CreationTime; }
-            Reference Division;
-
-            RowPermissions
-            {
-                Allow WithinDivision 'context =>
-                    {
-                        Guid myDivisionId = context.Repository.DemoRowPermissions2.Employee.Query()
-                            .Where(e => e.UserName == context.UserInfo.UserName)
-                            .Select(e => e.Division.ID)
-                            .SingleOrDefault();
-                        return item => item.Division.ID == myDivisionId;
-                    }';
-
-                AllowRead SupervisedRegions 'context =>
-                    {
-                        List<Guid> myRegionIds = context.Repository
-                          .DemoRowPermissions2.RegionSupervisor.Query()
-                            .Where(rs => rs.Employee.UserName == context.UserInfo.UserName)
-                            .Select(rs => rs.Region.ID)
-                            .ToList();
-
-                        if (myRegionIds.Count == 0)
-                            return item => false; // Minor optimization.
-
-                        return item => myRegionIds.Contains(item.Division.Region.ID);
-                    }';
-
-                DenyWrite PreviousYears 'context =>
-                    {
-                        return item => item.Created < new DateTime(DateTime.Today.Year, 1, 1);
-                    }';
-            }
+            DenyWrite PreviousYears 'context =>
+                {
+                    return item => item.Created < new DateTime(DateTime.Today.Year, 1, 1);
+                }';
         }
     }
+}
+```
 
 *This solution is implemented in Rhetos unit tests, see `RowPermissionsDemo.rhe` and `RowPermissionsDemo.cs` in the Rhetos source repository.*
 
@@ -184,42 +188,44 @@ Example requirements:
 
 Add this script to the previous example's solution.
 
-    Module DemoRowPermissions2
+```cs
+Module DemoRowPermissions2
+{
+    AutoInheritRowPermissions;
+
+    Browse DocumentBrowse DemoRowPermissions2.Document
     {
-        AutoInheritRowPermissions;
+        Take 'Title';
+        Take 'Division.Name';
+    }
 
-        Browse DocumentBrowse DemoRowPermissions2.Document
+    Entity DocumentComment
+    {
+        Reference Document { Detail; }
+        ShortString Comment;
+    }
+
+    Entity DocumentApproval
+    {
+        Extends DemoRowPermissions2.Document;
+        Reference ApprovedBy DemoRowPermissions2.Employee;
+        ShortString Note;
+
+        RowPermissions
         {
-            Take 'Title';
-            Take 'Division.Name';
-        }
-
-        Entity DocumentComment
-        {
-            Reference Document { Detail; }
-            ShortString Comment;
-        }
-
-        Entity DocumentApproval
-        {
-            Extends DemoRowPermissions2.Document;
-            Reference ApprovedBy DemoRowPermissions2.Employee;
-            ShortString Note;
-
-            RowPermissions
-            {
-                // This rule is joined with the inherited rules from DemoRowPermissions2.Document.
-                DenyWrite ApprovedByCurrentUser 'context =>
-                    {
-                        var myEmployeeId = context.Repository.DemoRowPermissions2.Employee.Query()
-                            .Where(e => e.UserName == context.UserInfo.UserName)
-                            .Select(e => e.ID)
-                            .SingleOrDefault();
-                        return item => item.ApprovedBy.ID != myEmployeeId;
-                    }';
-            }
+            // This rule is joined with the inherited rules from DemoRowPermissions2.Document.
+            DenyWrite ApprovedByCurrentUser 'context =>
+                {
+                    var myEmployeeId = context.Repository.DemoRowPermissions2.Employee.Query()
+                        .Where(e => e.UserName == context.UserInfo.UserName)
+                        .Select(e => e.ID)
+                        .SingleOrDefault();
+                    return item => item.ApprovedBy.ID != myEmployeeId;
+                }';
         }
     }
+}
+```
 
 *This solution is implemented in Rhetos unit tests, see `RowPermissionsDemo.rhe` and `RowPermissionsDemo.cs` in the Rhetos source repository.*
 
@@ -233,48 +239,50 @@ By using `AutoInheritRowPermissions`, the row permissions from `Document` entity
 
 Instead of using `AutoInheritRowPermissions` (see the previous solution), row permissions inheritance may be explicitly set for selected entities.
 
-    Module DemoRowPermissions2
+```cs
+Module DemoRowPermissions2
+{
+    // NOT USING AutoInheritRowPermissions;
+
+    Browse DocumentBrowse DemoRowPermissions2.Document
     {
-        // NOT USING AutoInheritRowPermissions;
+        Take 'Title';
+        Take 'Division.Name';
 
-        Browse DocumentBrowse DemoRowPermissions2.Document
+        RowPermissions { InheritFromBase; }
+    }
+
+    Entity DocumentComment
+    {
+        Reference Document { Detail; }
+        ShortString Comment;
+
+        RowPermissions { InheritFrom DemoRowPermissions2.DocumentComment.Document; }
+    }
+
+    Entity DocumentApproval
+    {
+        Extends DemoRowPermissions2.Document;
+        Reference ApprovedBy DemoRowPermissions2.Employee;
+        ShortString Note;
+
+        RowPermissions
         {
-            Take 'Title';
-            Take 'Division.Name';
+            InheritFromBase;
 
-            RowPermissions { InheritFromBase; }
-        }
-
-        Entity DocumentComment
-        {
-            Reference Document { Detail; }
-            ShortString Comment;
-
-            RowPermissions { InheritFrom DemoRowPermissions2.DocumentComment.Document; }
-        }
-
-        Entity DocumentApproval
-        {
-            Extends DemoRowPermissions2.Document;
-            Reference ApprovedBy DemoRowPermissions2.Employee;
-            ShortString Note;
-
-            RowPermissions
-            {
-                InheritFromBase;
-
-                // This rule is joined with the inherited rules from DemoRowPermissions2.Document.
-                DenyWrite ApprovedByCurrentUser 'context =>
-                    {
-                        var myEmployeeId = context.Repository.DemoRowPermissions2.Employee.Query()
-                            .Where(e => e.UserName == context.UserInfo.UserName)
-                            .Select(e => e.ID)
-                            .SingleOrDefault();
-                        return item => item.ApprovedBy.ID != myEmployeeId;
-                    }';
-            }
+            // This rule is joined with the inherited rules from DemoRowPermissions2.Document.
+            DenyWrite ApprovedByCurrentUser 'context =>
+                {
+                    var myEmployeeId = context.Repository.DemoRowPermissions2.Employee.Query()
+                        .Where(e => e.UserName == context.UserInfo.UserName)
+                        .Select(e => e.ID)
+                        .SingleOrDefault();
+                    return item => item.ApprovedBy.ID != myEmployeeId;
+                }';
         }
     }
+}
+```
 
 * **InheritFromBase** can be used on a **Browse** data structures and on entities with **Extends** concept.
 * **InheritFrom** concept's parameter is the full name of `DocumentComment` entity's reference property (`Reference Document`) that references the "parent" entity with row permissions that will be inherited.
@@ -285,23 +293,28 @@ Consider the following example:
 `DocumentInfo` is an extension of the `Document` entity,
 and inherits the row permissions from the `Document`.
 
-    SqlQueryable DocumentInfo
-        "SELECT
-            ID,
-            Title2 = Title + '_2',
-            Division2ID = DivisionID
-        FROM
-            DemoRowPermissions2.Document"
+```cs
+SqlQueryable DocumentInfo
+    "SELECT
+        ID,
+        Title2 = Title + '_2',
+        Division2ID = DivisionID
+    FROM
+        DemoRowPermissions2.Document"
+{
+    Extends DemoRowPermissions2.Document;
+    ShortString Title2;
+    Reference Division2 DemoRowPermissions2.Division
     {
-        Extends DemoRowPermissions2.Document;
-        ShortString Title2;
-        Reference Division2 DemoRowPermissions2.Division
-        {
-            SamePropertyValue 'Base' DemoRowPermissions2.Document.Division;
-        }
-
-        RowPermissions { InheritFromBase; }
+        SamePropertyValue 'Base.Division';
+        
+        // Old syntax, before Rhetos v2.10:
+        // SamePropertyValue 'Base' DemoRowPermissions2.Document.Division;
     }
+
+    RowPermissions { InheritFromBase; }
+}
+```
 
 When querying the `DocumentInfo` with row permissions, the generated SQL query should `JOIN` the `DocumentInfo` view to the `Document` table, and use the `Document.DivisionID` column to check the row permissions as seen before.
 
@@ -330,18 +343,7 @@ Add the `Common.RowPermissionsReadItems` filter to read only documents that a us
 
     http://localhost/Rhetos/rest/DemoRowPermissions1/Document/?filters=[{"Filter":"Common.RowPermissionsReadItems"}]
 
-Response example:
-
-    {
-        "Records": [
-            {
-                "Created": "/Date(1421326381787+0100)/",
-                "DivisionID": "0734c084-7427-4b13-9101-8e8e200131de",
-                "ID": "8353d88d-ee2e-479c-a3cb-f574ee0ea8c1",
-                "Title": "doc1"
-            }
-        ]
-    }
+This web request will return only the records that the current user has permission to read; it will never fail with "Insufficient permissions" error.
 
 Note that if multiple filters are given, the RowPermissionsReadItems filter should be listed last for performance reasons. If the filter is applied last, it will guarantee that the returned records all pass the filter, and the server will skip the permissions verification of the returned records.
 
