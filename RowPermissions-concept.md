@@ -308,7 +308,7 @@ SqlQueryable DocumentInfo
     {
         SamePropertyValue 'Base.Division';
         
-        // Old syntax, before Rhetos v2.10:
+        // Old syntax, before Rhetos v2.11:
         // SamePropertyValue 'Base' DemoRowPermissions2.Document.Division;
     }
 
