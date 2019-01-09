@@ -68,4 +68,4 @@ Support:
 ## Framework development
 
 * [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
-* [Releasing a new Rhetos version](Releasing-a-new-Rhetos-version)
+* [Release management](Release-management)
