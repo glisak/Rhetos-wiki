@@ -37,9 +37,11 @@ We want to fully migrate Rhetos and all its components to .NET Core platform. Ex
 
 ## Timeline
 
-This roadmap provides only high-level priorities and plans and does not include a specific timeline. As development on these points gets planned we will post further information.
+This roadmap provides only high-level priorities and plans and does not include a specific timeline.
+As development on these points gets planned we will post further information.
 
-The short-term release plan is described with [Milestones](https://github.com/Rhetos/Rhetos/milestones). See [Release management](Release-management) article for other information on release planning and publishing.
+The short-term release plan is described with [Milestones](https://github.com/Rhetos/Rhetos/milestones?direction=asc&sort=title&state=open).
+See [Release management](Release-management) article for other information on release planning and publishing.
 
 ## Related resources
 
