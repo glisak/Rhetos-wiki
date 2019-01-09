@@ -149,18 +149,20 @@ namespace Htz.RhetosConcepts
         {
             var info = (DeactivateOnDeleteInfo)conceptInfo;
 
-            var code = String.Format(@"
-    var deactivated = deleted.ToList();
+            var code = String.Format(
+            @"var deactivated = deleted.ToList();
 
-    foreach(var item in deleted)
-        item.Active = false;
+            foreach(var item in deleted)
+                item.Active = false;
 
-    updated = updated.Concat(deleted).ToArray();
-    updatedNew = updatedNew.Concat(deleted).ToArray();
+            updated = updated.Concat(deleted).ToArray();
+            updatedNew = updatedNew.Concat(deleted).ToArray();
 
-    deleted = new Common.Queryable.{0}_{1}[]{{}};
-    deletedIds = new {0}.{1}[]{{}};
-", info.Deactivatable.Entity.Module.Name, info.Deactivatable.Entity.Name);
+            deleted = new Common.Queryable.{0}_{1}[]{{}};
+            deletedIds = new {0}.{1}[]{{}};
+            ",
+                info.Deactivatable.Entity.Module.Name,
+                info.Deactivatable.Entity.Name);
 
             codeBuilder.InsertCode(code, WritableOrmDataStructureCodeGenerator.OldDataLoadedTag, info.Deactivatable.Entity);
         }
