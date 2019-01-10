@@ -11,15 +11,24 @@ Our [Issues list](https://github.com/Rhetos/Rhetos/issues) is a place to **ask q
 
 When creating a new issue, you will be asked to select the issue type: question, bug or feature.
 
-## Wiki articles
+## Writing tutorials and other wiki articles
+
+Tutorials are the most needed content in our community.
+If you are looking for inspiration on topics to write on, check out the **planned documentation**
+under [Learning resources](https://github.com/Rhetos/Rhetos/issues/118), or any open issues with the [documentation](https://github.com/Rhetos/Rhetos/labels/documentation) tag.
 
 Our documentation is stored on GitHub [wiki](https://github.com/Rhetos/Rhetos/wiki) pages.
 Contributions are done by [creating a fork]((https://help.github.com/articles/fork-a-repo/)) from the **[Rhetos-wiki](https://github.com/Rhetos/Rhetos-wiki) repository**, and submitting the pull requests there.
 
 How to write documentation:
 
-* The wiki pages are written in [markdown format](https://guides.github.com/features/mastering-markdown/). Use an offline text editor with spell checker and markdown lint tool to make sure there are no issues with the test formatting. For example, use **VS Code** with plugins: "Spell Right", "markdownlint" and "Markdown All in One" to write the documents.
-* Skip the first-level heading in the article, because the GitHub wiki adds it automatically.
+* The wiki pages are written in [markdown format](https://guides.github.com/features/mastering-markdown/).
+  * Use an offline text editor with **spell checker** and **markdown lint tool** to make sure there are no issues with the test formatting. For example, use *VS Code* with plugins: "Spell Right", "markdownlint" and "Markdown All in One" to write the documents.
+  * Skip the first-level heading in the article, because the GitHub wiki adds it automatically.
+* Rhetos **DSL code snippets (.rhe)** should be written as a
+  [fenced code block](https://help.github.com/articles/creating-and-highlighting-code-blocks/),
+  marked with "C" language identifier.
+  This will get us at least a minimal syntax highlighting that shows comments and strings.
 
 Please see the specific guidelines for [Writing tutorial articles](Writing-tutorial-articles).
 

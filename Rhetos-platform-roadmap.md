@@ -10,6 +10,8 @@ We want to significantly improve overall experience of developing Rhetos based a
 
 We would also like developers to be able to seamlessly run (and debug) their Rhetos based applications from within IDE in the same way they can run a regular C# application.
 
+Please discuss this topic on [Rhetos#49](https://github.com/Rhetos/Rhetos/issues/49).
+
 ## 2. Learning resources
 
 * Code samples
@@ -23,17 +25,23 @@ Instead, we will focus on the above elements and incrementally build an extensiv
 
 Motivating as many Rhetos community members to contribute to this point is critical to its success.
 
+Please discuss this topic on [Rhetos#118](https://github.com/Rhetos/Rhetos/issues/118).
+
 ## 3. Complex web API methods
 
 The existing REST service exposes only simple objects by default. For example, if developer needs to read or write a master-detail object in a single request, a custom code must be developed, sometimes with custom data serialization within already serialized web requests.
 
 Our goal is to allow developers to simply create view-models or DTOs, including complex hierarchical objects, using only declarative code, without need for developing middleware service or custom web methods.
 
+Please discuss this topic on [Rhetos#50](https://github.com/Rhetos/Rhetos/issues/50).
+
 ## 4. Migration to .NET Core
 
 With .NET Core gaining so much momentum, especially in the open-source space, we feel it is a natural next step for Rhetos platform.
 
 We want to fully migrate Rhetos and all its components to .NET Core platform. Expected benefits are: better performance, modern tooling and cross-platform support.
+
+Please discuss this topic on [Rhetos#119](https://github.com/Rhetos/Rhetos/issues/119).
 
 ## Timeline
 
