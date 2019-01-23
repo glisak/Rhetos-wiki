@@ -1,12 +1,10 @@
-# Title
-
 1. [Property value constraints](#property-value-constraints)
 2. [Deny data modifications](#deny-data-modifications)
 3. [See also](#see-also)
 
 ## Property value constraints
 
-These simple business rules can be declared beside the property in the .rhe script.
+Property value constraints are simple business rules that can be declared beside the property in the .rhe script.
 The following concepts are available in CommonConcepts package:
 
 * `MinValue` - Limit the smallest allowed value of the property.

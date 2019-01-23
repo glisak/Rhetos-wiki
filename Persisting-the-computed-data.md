@@ -193,7 +193,7 @@ There are different ways to do it:
 
 1. *DeployPackages.exe* `/SkipRecompute` command-line switch.
    * Skip all computations for the current deployment.
-2. Adding `SkipRecomputeOnDeploy` concept to the `ComputedFrom`.
+2. Adding `SkipRecomputeOnDeploy` concept to the `ComputedFrom`. (v2.11+)
    * Skip this specific computation in all deployments.
 3. Adding a data-migration script (described above) that updates the computation's `Context` to 'NORECOMPUTE'.
    * Skip this specific computation in the next deployment.
