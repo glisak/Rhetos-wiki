@@ -8,12 +8,12 @@ Prerequisites:
 
 Contents:
 
-* [Entities and properties](#entities-and-properties)
-* [One-to-many relationship (master-detail)](#one-to-many-relationship-master-detail)
-* [One-to-one relationship (extensions)](#one-to-one-relationship-extensions)
-* [Many-to-many relationship (join table)](#many-to-many-relationship-join-table)
-* [Relationships summary](#relationships-summary)
-* [See also](#see-also)
+1. [Entities and properties](#entities-and-properties)
+2. [One-to-many relationship (master-detail)](#one-to-many-relationship-master-detail)
+3. [One-to-one relationship (extensions)](#one-to-one-relationship-extensions)
+4. [Many-to-many relationship (join table)](#many-to-many-relationship-join-table)
+5. [Relationships summary](#relationships-summary)
+6. [See also](#see-also)
 
 ## Entities and properties
 
@@ -128,7 +128,7 @@ The **simplified syntax** can be used for Reference (without the referenced modu
 * This will automatically add `Required` (detail cannot exist without parent), `CascadeDelete` and `SqlIndex` on the Reference property.
 * Some other features also act differently on the part-of relationship type: for example the row permissions are automatically inherited from base to dependent entity.
 
-Note: The Detail concept does not change the data model or the web API of the parent entity. The parent and detail can each be loaded and saved as separate entities. This is compliant with Rhetos principle to keep features decoupled where possible. The parent entity could be extended by the [LinkedItems](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties) concept to include details in the LINQ queries.
+Note: The `Detail` concept does not change the data model or the web API of the parent entity. The parent and detail can each be loaded and saved as separate entities. This is compliant with Rhetos principle to keep features decoupled where possible. The parent entity could be extended by the [LinkedItems](https://github.com/Rhetos/Rhetos/wiki/Data-structure-properties) concept to include details in the LINQ queries.
 
 ## One-to-one relationship (extensions)
 
@@ -182,7 +182,7 @@ Data modelling considerations:
 Extends vs UniqueReference:
 
 * The Extends concept behaves as a "part-of" relationship to the base entity, similar to the Detail on Reference (see the description of Detail concept above). This means that from the business perspective, the extension is considered a part of the base entity, its data is probably displayed and entered by user on the same form. Alternatively, if one-to-one relationship is needed on some entities, but the extended entity should not be considered as a part of the base entity (for example, if the row permissions should not be automatically inherited from base to dependent entity), than `UniqueReference` concept can be used instead of the Extends concept.
-* The syntax is same, and both concepts create the same foreign key from the extended table's ID to the base table. The only difference in CommonConcepts DSL is automatic inheritance of row permissions and on-delete-cascade relationship on Extends concept.
+* The syntax is same, and both concepts create the same foreign key from the extended table's ID to the base table. The only difference in CommonConcepts DSL is that Extends concept creates automatic inheritance of row permissions and CascadeDelete.
 
 ## Many-to-many relationship (join table)
 

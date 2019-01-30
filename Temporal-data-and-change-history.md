@@ -11,7 +11,7 @@ The following objects are created in the database:
 * "\_ChangesActiveUntil" view - Computed the active range for the records in "\_Changes" table
 * "\_AtTime(@ContextTime DATETIME)" function - Returns the record that was active at the specified time.
 
-**Rhetos:**
+## Example
 
 ```
 Module Demo
@@ -25,102 +25,16 @@ Module Demo
 }
 ```
 
-**SQL:**
+The `History` concept works in a backward-compatible way:
+The basic table for this entity (`Demo.ContractStatus`) remains unchanged, with rows representing **currently active version** for each item.
+A new *DateTime* property `ActiveSince` is created, it records "since when" is the current value effective.
 
-``` sql
-CREATE TABLE [Demo].[ContractStatus] (
-    [ID] [uniqueidentifier] NOT NULL,
-    [ActiveSince] [datetime] NULL,
-    [Active] [bit] NULL,
-    [Name] [nvarchar](256) NULL,
-    CONSTRAINT [PK_ContractStatus] PRIMARY KEY NONCLUSTERED ([ID] ASC)
-)
-GO
-ALTER TABLE [Demo].[ContractStatus] ADD  CONSTRAINT [DF_ContractStatus_ID]  DEFAULT (newid()) FOR [ID]
-GO
-```
+A new database table is created `Demo.ContractStatus_Changes`, that contains previous versions for the items.
+It has all properties from `Demo.ContractStatus`, and additionally a column (property) `EntityID` that references `Demo.ContractStatus`.
+`ID` in the `Demo.ContractStatus_Changes` is just an internal ID of a history record, `EntityID` contains the ID value from `Demo.ContractStatus`.
 
-``` sql
-CREATE TABLE [Demo].[ContractStatus_Changes] (
-    [ID] [uniqueidentifier] NOT NULL,
-    [EntityID] [uniqueidentifier] NULL,
-    [ActiveSince] [datetime] NULL,
-    [Active] [bit] NULL,
-    [Name] [nvarchar](256) NULL,
-    CONSTRAINT [PK_ContractStatus_Changes] PRIMARY KEY NONCLUSTERED ([ID] ASC)
-) ON [PRIMARY]
-GO
-ALTER TABLE [Demo].[ContractStatus_Changes] ADD  CONSTRAINT [DF_ContractStatus_Changes_ID]  DEFAULT (newid()) FOR [ID]
-GO
-ALTER TABLE [Demo].[ContractStatus_Changes]  WITH CHECK ADD  CONSTRAINT [FK_ContractStatus_Changes_ContractStatus_EntityID] FOREIGN KEY([EntityID])
-REFERENCES [Demo].[ContractStatus] ([ID])
-ON DELETE CASCADE
-GO
-ALTER TABLE [Demo].[ContractStatus_Changes] CHECK CONSTRAINT [FK_ContractStatus_Changes_ContractStatus_EntityID]
-GO
-```
+View `Demo.ContractStatus_History` is created that contains all versions of the ContractStatus items.
+It is a union of `ContractStatus` and `ContractStatus_Changes`.
+Additionally it contains a computed property `ActiveUntil`, that returns `ActiveSince` from the next version of the record.
 
-``` sql
-CREATE VIEW [Demo].[ContractStatus_History] AS
-SELECT
-    ID = entity.ID,
-    EntityID = entity.ID,
-    ActiveUntil = CAST(NULL AS DateTime),
-    ActiveSince = entity.ActiveSince,
-    Active = entity.Active,
-    Name = entity.Name/*EntityHistoryInfo SelectEntityProperties Demo.ContractStatus*/
-FROM
-    Demo.ContractStatus entity
-
-UNION ALL
-
-SELECT
-    ID = history.ID,
-    EntityID = history.EntityID,
-    au.ActiveUntil,
-    ActiveSince = history.ActiveSince,
-    Active = history.Active,
-    Name = history.Name/*EntityHistoryInfo SelectHistoryProperties Demo.ContractStatus*/
-FROM
-    Demo.ContractStatus_Changes history
-    LEFT JOIN Demo.ContractStatus_ChangesActiveUntil au ON au.ID = history.ID
-GO
-```
-
-``` sql
-ALTER VIEW [Demo].[ContractStatus_ChangesActiveUntil] AS
-SELECT
-    history.ID,
-    ActiveUntil = COALESCE(MIN(newerVersion.ActiveSince), MIN(currentItem.ActiveSince))
-FROM
-    Demo.ContractStatus_Changes history
-    LEFT JOIN Demo.ContractStatus_Changes newerVersion ON newerVersion.EntityID = history.EntityID AND newerVersion.ActiveSince > history.ActiveSince
-    INNER JOIN Demo.ContractStatus currentItem ON currentItem.ID = history.EntityID
-GROUP BY
-    history.ID
-GO
-```
-
-``` sql
-CREATE FUNCTION [Demo].[ContractStatus_AtTime] (@ContextTime DATETIME)
-RETURNS TABLE
-AS
-RETURN
-SELECT
-    ID = history.EntityID,
-    ActiveUntil,
-    EntityID = history.EntityID,
-    ActiveSince = history.ActiveSince,
-    Active = history.Active,
-    Name = history.Name/*EntityHistoryInfo SelectHistoryProperties Demo.ContractStatus*/
-FROM
-    Demo.ContractStatus_History history
-    INNER JOIN
-    (
-        SELECT EntityID, Max_ActiveSince = MAX(ActiveSince)
-        FROM Demo.ContractStatus_History
-        WHERE ActiveSince <= @ContextTime
-        GROUP BY EntityID
-    ) last ON last.EntityID = history.EntityID AND last.Max_ActiveSince = history.ActiveSince
-GO
-```
+An inline table-valued function `Demo.ContractStatus_AtTime` is created, with a `DATETIME` parameter, that returns versions of all records that where active at the given time.
