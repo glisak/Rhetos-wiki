@@ -17,7 +17,7 @@ This article describes the release process for both Rhetos framework (<https://g
     * [ ] Verity that the build is successful: the console output should end with "Test.bat SUCCESSFULLY COMPLETED.".
     * [ ] [Framework only] In the *Install* subfolder: zip the *RhetosServer* folder to *RhetosServer.&lt;NEW VERSION&gt;.zip* (for example RhetosServer.1.2.0.zip).
 3. Publish:
-    * [ ] [Private builds only] Copy the generated files from the Install folder to your company's shared network storage (ask your system administrator for the location).
+    * [ ] [Private builds only] Copy the generated files from the Install folder to your company's shared storage.
       * Rhetos framework build creates 1 zip and 2 nupkg files. A Rhetos package build creates 1 nupkg file.
     * [ ] Commit your repository changes, **except Build.bat file**, with comment "Release &lt;NEW VERSION&gt;.".
         For example "Release 1.2.0.".
