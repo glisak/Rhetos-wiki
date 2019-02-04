@@ -22,7 +22,7 @@ Note that **any new property type** can be created and implemented as a reusable
 
 ## Reference property
 
-**Reference** property represents the "N : 1" relation in the data model, and usually a lookup field in the user interface.
+**Reference** property represents the "N : 1" relation in the data model, and often a lookup field in the user interface.
 
 * In the generated C# code it creates
   * a [navigation property](https://docs.microsoft.com/en-us/ef/ef6/fundamentals/relationships)
