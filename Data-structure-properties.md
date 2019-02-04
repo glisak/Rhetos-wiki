@@ -8,7 +8,7 @@ The following concepts are available in CommonConcepts DSL:
 | DSL keyword | C# type | SQL Server column | Notes |
 | --- | --- | --- | --- |
 | **ShortString** | string | nvarchar(256) | Intended for short single-line text.
-| **LongString** | string | nvarchar(max) | Intended for longer multi-line text 1GB limit in practice on .NET. |
+| **LongString** | string | nvarchar(max) | Intended for longer multi-line text. 1GB limit in practice on .NET. |
 | **Integer** | int? | integer |
 | **Decimal** | decimal? | decimal(28,10) | Intended for any decimal numbers where fixed-point arithmetic is needed. Percentages. Note: Floating-point arithmetic is rare in enterprise business applications. |
 | **Money** | decimal? | money | SQL constraint for 2 decimal precision. |
