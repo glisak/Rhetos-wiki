@@ -105,7 +105,7 @@ If is is not possible to use Windows domain account, the Rhetos service can be s
 
 ## IIS Express setup
 
-Follow the steps in this chapter if using IIS Express instead of IIS.
+Follow the steps in this chapter **only if using IIS Express instead of IIS**.
 IIS is recommended (see the previous chapter), but IIS Express can be useful if a restricted environment is needed on the development machine.
 
 The following instructions use tools from the Rhetos source repository.
