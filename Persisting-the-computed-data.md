@@ -18,18 +18,20 @@ in two distinct categories:
 1. Data that is directly entered by user.
 2. Data that is computed by the system.
 
-It would be cleaner to separate this data into distinct data structure,
-even though Rhetos supports working with mixed data structures when needed,
-for example it is possible to have an entity with some properties entered by user
+It would be cleaner to separate this data into distinct data structures,
+even though Rhetos supports working with mixed data structures when needed.
+For example it is possible to have an entity with some properties entered by user
 and some properties automatically computed.
+
 An extreme case would be a property that is both automatically computed and entered by the user,
 depending on some condition.
-We recommend against it, since this kind of code and data is difficult to maintain.
+We strongly recommend against it, since this kind of code and data is difficult to maintain in general:
+In such systems the bugs are difficult to fix and the data corrupted by a bug is difficult to reconstruct.
 
 The computed data usually comes in two forms:
 
-1. Computed on-the-fly, on each request (for example, implemented as a database view).
-2. Persisted (precomputed, cached in a database table, and automatically synchronized).
+1. **Computed on-the-fly**, on each request. For example, implemented as a database view.
+2. **Persisted**. For example, precomputed and cached in a database table, and automatically synchronized.
 
 A decision between these two options can be changes easily, and should be mostly
 based on the performance considerations.
@@ -49,7 +51,7 @@ Persisting the computed data is done by developing the data source that computes
 (usually an `SqlQueryable`), and saving the result into the database table.
 
 Rhetos contains concepts that help automate the implementation:
-`KeepSynchronized`, `ChangesOnLinkedItems`, `ChangesOnChangedItems`, `ChangesOnBaseItem` and `ChangesOnReferenced`.
+`KeepSynchronized`, `KeyProperties`, `ChangesOnLinkedItems`, `ChangesOnChangedItems`, `ChangesOnBaseItem` and `ChangesOnReferenced`.
 
 The following examples are taken from [Bookstore](https://github.com/Rhetos/Bookstore)
 demo application, available on GitHub.
