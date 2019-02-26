@@ -90,7 +90,7 @@ This packages will be downloaded into the BookstoreRhetosServer from different s
 * CommonConcepts and RestGenerator will be downloaded automatically as NuGet packages from the public online gallery <https://nuget.org>. See `dist\BookstoreRhetosServer\RhetosPackageSources.config` file to check that it contains nuget.org in the default download location list.
 * The third package, "Bookstore", is not published as a NuGet package. To make the development easier, Rhetos can read a package directly from the source folder without need to "pack" it to a .nupkg file. Rhetos will detect DslScripts subfolder by convention.
 
-Open command prompt and run `dist\BookstoreRhetosServer\bin\DeployPackages.exe`.
+Open command prompt and run `dist\BookstoreRhetosServer\bin\DeployPackages.exe`. This utility will rebuild the BookstoreRhetosServer web application, based on the included plugins. See [What is Rhetos](What-is-Rhetos) article for an overview of this process.
 
 * Check the begging of the output to see that all three packages are included.
 * If completed successfully (last line of output is "[Trace] DeployPackages: Done."), it has generated the web application.
