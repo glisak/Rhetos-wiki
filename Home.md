@@ -7,31 +7,28 @@ After an application developer describes the application in that language (DSL s
 use it to generate the application server, including the application's database,
 business layer object model (C#) and web API (REST, SOAP, OData, etc.).
 
-* [What is Rhetos](https://github.com/Rhetos/Rhetos/wiki/What-is-Rhetos), an overview of the Rhetos architecture and principles
-* [Roadmap](https://github.com/Rhetos/Rhetos/wiki/Rhetos-platform-roadmap)
+* [What is Rhetos](What-is-Rhetos), an overview of the Rhetos architecture and principles
+* [Roadmap](Rhetos-platform-roadmap)
 
 Contributions are very welcome, both in learning resources (wiki articles and code samples) or framework and plugins development. See [How to Contribute](How-to-Contribute) for more information.
 
 ## Application development with Rhetos
 
-Get started:
-
-1. [Prerequisites](https://github.com/Rhetos/Rhetos/wiki/Prerequisites)
-2. [Development environment setup](https://github.com/Rhetos/Rhetos/wiki/Development-Environment-Setup)
-
 Tutorials:
 
+* [Create your first Rhetos application](Create-your-first-Rhetos-application)
 * How to create a data model:
-  * [Data structures and relationships](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-relationships)
-  * [Implementing simple business rules](https://github.com/Rhetos/Rhetos/wiki/Implementing-simple-business-rules)
+  * [Data structures and relationships](Data-structures-and-relationships)
+  * [Basic property types](Data-structure-properties)
+  * [Implementing simple business rules](Implementing-simple-business-rules)
 * Extend Rhetos DSL with you own keywords: [Rhetos concept development](Rhetos-concept-development)
-* [Persisting the computed data](https://github.com/Rhetos/Rhetos/wiki/Persisting-the-computed-data)
-* Implementing entity inheritance and common interfaces: [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
-* Low-level database development: [Database objects](https://github.com/Rhetos/Rhetos/wiki/Database-objects)
-* How to implement complex server commands: [Action concept](https://github.com/Rhetos/Rhetos/wiki/Action-concept)
-* [Temporal data and change history](https://github.com/Rhetos/Rhetos/wiki/Temporal-data-and-change-history)
-* Row permissions business rules: [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
-* Reports: [TemplaterReport](https://github.com/Rhetos/Rhetos/wiki/TemplaterReport)
+* [Persisting the computed data](Persisting-the-computed-data)
+* Implementing entity inheritance and common interfaces: [Polymorphic concept](Polymorphic-concept)
+* Low-level database development: [Database objects](Database-objects)
+* How to implement complex server commands: [Action concept](Action-concept)
+* [Temporal data and change history](Temporal-data-and-change-history)
+* Row permissions business rules: [RowPermissions concept](RowPermissions-concept)
+* Reports: [TemplaterReport](TemplaterReport)
 
 Sample application:
 
@@ -39,13 +36,15 @@ Sample application:
 
 Fundamentals:
 
-* [Rhetos DSL syntax](https://github.com/Rhetos/Rhetos/wiki/Rhetos-DSL-syntax)
+* [Prerequisites](Prerequisites)
+* [Development environment setup](Development-Environment-Setup)
+* [Rhetos DSL syntax](Rhetos-DSL-syntax)
 * [Creating Rhetos package](Creating-Rhetos-package)
 * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
-* [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization)
-* [Using the Domain Object Model](https://github.com/Rhetos/Rhetos/wiki/Using-the-Domain-Object-Model)
-* [Data migration](https://github.com/Rhetos/Rhetos/wiki/Data-migration)
-* [Rhetos coding standard](https://github.com/Rhetos/Rhetos/wiki/Rhetos-coding-standard)
+* [User authentication and authorization](User-authentication-and-authorization)
+* [Using the Domain Object Model](Using-the-Domain-Object-Model)
+* [Data migration](Data-migration)
+* [Rhetos coding standard](Rhetos-coding-standard)
 
 Support:
 
@@ -67,5 +66,5 @@ Support:
 
 ## Framework development
 
-* [How to Contribute](https://github.com/Rhetos/Rhetos/wiki/How-to-Contribute)
+* [How to Contribute](How-to-Contribute)
 * [Release management](Release-management)
