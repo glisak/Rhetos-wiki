@@ -111,7 +111,7 @@ Open command prompt and run `dist\BookstoreRhetosServer\bin\DeployPackages.exe`.
       * Body:
         ```
         {
-        "Code": "+++",
+        "Code": "B+++",
         "NumberOfPages": 123,
         "Title": "The curiousity"
         }
@@ -120,4 +120,4 @@ Open command prompt and run `dist\BookstoreRhetosServer\bin\DeployPackages.exe`.
       * Troubleshooting: If you are using Postman, note that it sometimes has trouble with Windows Authentication.
 5. Correct the request body by replacing "The curiousity" with "The curiosity", and set the request again.
 6. The expected response is "200 OK" with the generated ID in the response body.
-7. Check in the database that the inserted has an automatically generated three-digit code (by *AutoCode* concept).
+7. Check in the database that the inserted has an automatically generated three-digit code with prefix "B" (by *AutoCode* concept).
