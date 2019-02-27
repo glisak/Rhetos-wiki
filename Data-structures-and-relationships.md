@@ -167,7 +167,12 @@ Solution:
   * `Extension_<ExtensionName>` property on base entity that references the extension.
     If the extended entity is in a different module, the property name is `Extension_<ModuleName>_<EntityName>`.
 
-For example, the *Book* entity has *Extension_ChildrensBook* and *Extension_ForeignBook* navigation properties for easy navigation from book to the extensions.
+For example, the *Book* entity has *Extension_ChildrensBook* and *Extension_ForeignBook* navigation properties for easy navigation from book to the extensions. If we want to access the Translator from the Book in the C# code, we can write:
+
+```C#
+var translators = repository.Bookstore.Book.Query()
+    .Select(book => book.Extension_ForeignBook.Translator.Name);
+```
 
 The extension may exist for each base record ("1 : 1" relationship) or for a subset of base records ("0..1 : 1" relationship), there is no distinction in the data model.
 
