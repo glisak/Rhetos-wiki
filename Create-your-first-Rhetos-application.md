@@ -14,9 +14,9 @@ Contents:
 ## Setup
 
 1. Make sure that you have all the [Prerequisites](Prerequisites) installed.
-2. Follow the instructions in [Development environment setup](Development-environment-setup), to setup the development environment for the Bookstore applications. 
+2. Follow the instructions in [Development environment setup](Development-environment-setup), to setup the development environment for the Bookstore applications.
 The resulting folder structure should look like this:
-    ```
+    ```Text
     * Bookstore\
         * dist\
             * BookstoreRhetosServer\
@@ -24,9 +24,9 @@ The resulting folder structure should look like this:
             * DslScripts\
     ```
 3. Initialize the Git repository:
-   1. Download the "[.gitignore](https://raw.githubusercontent.com/Rhetos/Bookstore/master/.gitignore)" file and place it in the Bookstore root folder (it is a default Visual Studio gitignore file with added Project build output).
+   1. Download the ".gitignore" from <https://raw.githubusercontent.com/Rhetos/Bookstore/master/.gitignore>, and place it in the Bookstore root folder (it is a default Visual Studio gitignore file with added `dist` subfolder that contains this project's output binaries).
    2. Open command prompt in the Bookstore folder and run the following commands:
-      ```
+      ```Text
       git init
       git add .
       git commit -m "Initial project structure"

@@ -28,20 +28,22 @@ For example, consider the following task:
 
 Solution:
 
-    Module Bookstore
+```C
+Module Bookstore
+{
+    Entity Book
     {
-        Entity Book
-        {
-            ShortString Code { Unique; Required; }
-            ShortString Title { Required; }
-            Integer NumberOfPages;
-        }
-
-        Entity Person
-        {
-            ShortString Name;
-        }
+        ShortString Code { Unique; Required; }
+        ShortString Title { Required; }
+        Integer NumberOfPages;
     }
+
+    Entity Person
+    {
+        ShortString Name;
+    }
+}
+```
 
 Place this code in the *DslScripts\Books.rhe*  file, and run *RhetosServer\bin\DeployPackages.exe*.
 Review the generated database objects in SSMS.
@@ -88,27 +90,29 @@ For example, expand the previous task solution with the following requirements:
 
 Solution:
 
-    Module Bookstore
+```C
+Module Bookstore
+{
+    Entity Book
     {
-        Entity Book
-        {
-            ShortString Code { Unique; Required; }
-            ShortString Title { Required; }
-            Integer NumberOfPages;
-            Reference Author Bookstore.Person;
-        }
-
-        Entity Person
-        {
-            ShortString Name;
-        }
-
-        Entity Comment
-        {
-            Reference Book { Detail; }
-            LongString Text;
-        }
+        ShortString Code { Unique; Required; }
+        ShortString Title { Required; }
+        Integer NumberOfPages;
+        Reference Author Bookstore.Person;
     }
+
+    Entity Person
+    {
+        ShortString Name;
+    }
+
+    Entity Comment
+    {
+        Reference Book { Detail; }
+        LongString Text;
+    }
+}
+```
 
 `Reference` property represents the "N : 1" relationship in the data model, and usually a lookup field in the user interface.
 
@@ -142,22 +146,24 @@ For example, expand the previous task solution with the following requirements:
 
 Solution:
 
-    Entity ChildrensBook
-    {
-        Extends Bookstore.Book;
+```C
+Entity ChildrensBook
+{
+    Extends Bookstore.Book;
 
-        Integer AgeFrom;
-        Integer AgeTo;
-        IntegerRange AgeFrom AgeTo; // A simple validation.
-    }
+    Integer AgeFrom;
+    Integer AgeTo;
+    IntegerRange AgeFrom AgeTo; // A simple validation.
+}
 
-    Entity ForeignBook
-    {
-        Extends Bookstore.Book;
+Entity ForeignBook
+{
+    Extends Bookstore.Book;
 
-        ShortString OriginalLanguage;
-        Reference Translator Bookstore.Person;
-    }
+    ShortString OriginalLanguage;
+    Reference Translator Bookstore.Person;
+}
+```
 
 `Extends` concept is used when the dependent entity is an extension of the base entity. For example, the extension may contain a group of properties that are applied only to some records of the base entity, so it could be wasteful to include them in the base entity's table.
 
@@ -201,18 +207,20 @@ For example, expand the previous task solution with the following requirements:
 
 Solution:
 
-    Entity Topic
-    {
-        ShortString Name { Unique; Required; }
-    }
+```C
+Entity Topic
+{
+    ShortString Name { Unique; Required; }
+}
 
-    Entity BookTopic
-    {
-        Reference Book { Detail; }
-        Reference Topic { Required; }
+Entity BookTopic
+{
+    Reference Book { Detail; }
+    Reference Topic { Required; }
 
-        UniqueMultiple 'Book Topic';
-    }
+    UniqueMultiple 'Book Topic';
+}
+```
 
 Currently there is no high-level concept in Rhetos CommonConcepts that would represent a many-to-many relationship.
 This kind of relationship is usually implemented with an standard [associative entity](https://en.wikipedia.org/wiki/Associative_entity) pattern:

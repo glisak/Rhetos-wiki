@@ -24,40 +24,31 @@ Create a development folder for your business application.
 2. Add a subfolder `src\DslScripts`, here we will write DSL scripts that describe features of our application.
 3. Add a subfolder `dist\<MyApplicationName>RhetosServer`, where the Rhetos server binaries will be placed. The following documentation will refer to this folder as "**RhetosServer folder**".
 
-Example:
-
-For the tutorial application "Bookstore", the folder structure should look like this:
-
-```
-* Bookstore\
-    * dist\
-        * BookstoreRhetosServer\
-    * src\
-        * DslScripts\
-```
-
 Note that this folder structure is not required by Rhetos, but it is recommended.
 It is used in different Rhetos tutorial articles, it conforms to Microsoft's new projects, and is easy to extend with new services and Rhetos components.
 
 ## Get Rhetos server binaries
 
-**Option A:** (recommended)
-Download the RhetosServer zip file from the [latest release](https://github.com/Rhetos/Rhetos/releases) (not the source code).
+1. Download the RhetosServer zip file from the [latest release](https://github.com/Rhetos/Rhetos/releases) (not the source code).
+2. Unpack the zip to the RhetosServer folder.
 
-1. Unpack the zip to the RhetosServer folder.
+For example, the tutorial application "Bookstore" should have the following folder structure after the previous steps:
 
-**Option B:**
-Build the binaries from source:
+```Text
+* Bookstore\
+    * dist\
+        * BookstoreRhetosServer\
+            * bin\
+    * src\
+        * DslScripts\
+```
 
-1. Use git to clone the repository <https://github.com/Rhetos/Rhetos.git> to a new source folder on your disk:
-    * In the command prompt run `git clone https://github.com/Rhetos/Rhetos.git RhetosSource`
-2. Open the command prompt in the created Rhetos source folder and run `Build.bat`. Verify that the last printed line is "Build.bat SUCCESSFULLY COMPLETED".
-3. The Rhetos server binaries are created in the subfolder `Install\Rhetos`. Copy the content of `Install\Rhetos` to your application's RhetosServer folder.
+Alternatively, you could build the Rhetos server binaries from the latest version of the source code, but this is not recommended: see the [article](Build-binaries-from-source).
 
 ## Database setup
 
 1. Create an empty database (SQL Server 2008 or newer, Developer Edition is recommended) named `Rhetos` or `<MyApplicationName>Rhetos`.
-2. Open folder `RhetosServer\bin` and copy the template file "Template.ConnectionStrings.config" to "ConnectionStrings.config" in the same folder.
+2. In the folder `RhetosServer\bin` create a copy of the template file "Template.ConnectionStrings.config", and rename the copy to "ConnectionStrings.config".
 3. Edit the existing configuration line in the **ConnectionStrings.config** file to reference the created database. For example, if your database is named "Rhetos" on the local SQL Server with default instance name, simply replace "theServer" to "localhost" and "theDatabase" to "Rhetos".
 
 ## Packages configuration
@@ -65,12 +56,12 @@ Build the binaries from source:
 Rhetos packages define the content of the Rhetos server. This section describes **the initialization of the packages configuration files**, but with no packages selected. That will result with an *empty* Rhetos server being deployed.
 
 1. In the **RhetosServer** folder:
-    * Copy "Template.RhetosPackages.config" file to "RhetosPackages.config", if the target file does not already exist.
-    * Copy "Template.RhetosPackageSources.config" file to "RhetosPackageSources.config", if the target does not already exist.
+    * Create a copy if the "Template.RhetosPackages.config" file and rename the copy to "RhetosPackages.config", if the target file does not already exist.
+    * Create a copy if the "Template.RhetosPackageSources.config" file and rename the copy to "RhetosPackageSources.config", if the target does not already exist.
 2. Verify that the RhetosServer is configured correctly by opening command prompt at `RhetosServer\bin` folder and running `DeployPackages.exe`.
-    * The last printed line should be "*[Trace] DeployPackages: Done.*".
     * The output may include "*[Error] DeploymentConfiguration: No packages*" and "*[Error] DeployPackages: WARNING: Empty assembly...*", because no packages are provided in the "RhetosPackages.config".
       This is ok for now.
+    * The last printed line should be "*[Trace] DeployPackages: Done.*".
 
 ## IIS setup
 
@@ -81,7 +72,7 @@ Follow the steps in this chapter if using IIS (recommended) instead of IIS Expre
     * Name: "RhetosAppPool"
     * NET framework version: "v4.x"
     * Managed pipeline mode: "Integrated"
-3. Open "RhetosAppPool" => "Advanced settings" => Change "Identity" => Select "Custom account" => Enter a domain user account that will be used for Rhetos server (on a development computer enter the **developer's account**). If you are **not using** a Windows domain account, see the next paragraph for setting the custom account.
+3. Open "RhetosAppPool" => "Advanced settings" => Change "Identity" => Select "Custom account" => Enter a domain user account that will be used for Rhetos server (on a development computer enter your full account name; to find it type `whoami` in the command prompt). If you are **not using** a Windows domain account, see the next paragraph for setting the custom account.
     * Note: This account must have *db_owner* rights for the Rhetos database (see Database setup).
 4. *Only for older versions*: If using Rhetos v1.1 or older, "RhetosAppPool" => "Advanced settings" => check "Enable 32-Bit Application".
 5. Select "Sites" => Right click "Default Web Site" => "Add application...", enter the following data:
@@ -91,7 +82,7 @@ Follow the steps in this chapter if using IIS (recommended) instead of IIS Expre
 6. Select the created "RhetosServer" web application => Open "Authentication" icon:
     * Enable "Windows Authentication"
     * *Disable* all other authentication options.
-7. Start your browser, and type address "http://localhost/&lt;MyApplicationName&gt;RhetosServer/"
+7. Start your browser, and type address `http://localhost/<MyApplicationName>RhetosServer/`
    (for example <http://localhost/BookstoreRhetosServer/>).
    Verify that the web site is working and the Rhetos server status is displayed on the web page.
     * Troubleshooting: If you are getting an error "Access is denied." in browser, with the message "Error message 401.3: You do not have permission to view this directory ...", it is probably caused by working from  development folder instead of "inetpub". To fix this, execute the **step 4.** in the following paragraph, that contains running the `ICACLS` commands.
