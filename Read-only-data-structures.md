@@ -24,10 +24,11 @@ Contents:
 2. [SqlQueryable concept](#sqlqueryable-concept)
 3. [External SQL scripts](#external-sql-scripts)
 4. [Using the computed data in Browse](#using-the-computed-data-in-browse)
+5. [Computed concept](#computed-concept)
 
 ## Browse concept
 
-Browse concept is used for simple data queries, when we only need to select some properties from an entity and from other data structures related to the base entity (directly or indirectly).
+The Browse concept is used for simple data queries, when we only need to select some properties from an entity and from other data structures related to the base entity (directly or indirectly).
 
 For example:
 
@@ -72,7 +73,7 @@ Because of its simplicity and extensibility, Browse is a preferred concept to us
 
 ## SqlQueryable concept
 
-Most commonly used way of extending an entity with the computed data is `SqlQueryable` concept, using an SQL query to define the computation.
+Most commonly used way of extending an entity with the computed data is the `SqlQueryable` concept, using an SQL query to define the computation.
 
 It is also often used to provide the data for grid and lookup components in the user interface, if a simple `Browse` will not suffice.
 
@@ -102,10 +103,10 @@ SqlQueryable BookInfo
 }
 ```
 
-The `SqlQueryable` concept creates a view in the database, a class in the object model mapped to the view, and a web API.
+The **SqlQueryable** concept creates a view in the database, a class in the object model mapped to the view, and a web API.
 In the object model and in the web API, SqlQueryable is used in a same way as Browse or Entity.
 
-The example above shows a typical usage of the `Extends` concept in the computed data.
+The example above shows a typical usage of the **Extends** concept in the computed data.
 
 * It is not required, but is very useful to mark this data structure as an extension of the Book
   (more info [here](Data-structures-and-relationships#one-to-one-relationship-extensions)).
@@ -114,7 +115,7 @@ The example above shows a typical usage of the `Extends` concept in the computed
 * The Extends concept creates an relation between the entities in the object model.
   This extension can be accessed from the base entity using the property `book.Extension_BookInfo`.
 
-The `AutodetectSqlDependencies` statement will result with automatic detection of the dependencies by analyzing the SQL query.
+The **AutodetectSqlDependencies** statement will result with automatic detection of the dependencies by analyzing the SQL query.
 This view depends on the Book and Comment entities.
 That information is needed for Rhetos to know in what order these database objects should be created:
 The Book table must be created before BookInfo view because the view depends on the table. See [Dependencies between database objects](Database-objects#dependencies-between-database-objects) for more information on this topic.
@@ -182,3 +183,62 @@ Browse BookGrid Bookstore.Book
 ```
 
 `SqlQueryable BookInfo` is an extension of the Book (see `Extends` concept above), therefore it is easily accessible in the LINQ query from the Book by using the navigation property `Extension_BookInfo`.
+
+## Computed concept
+
+The Computed concept allows developer to create a data source that is implemented with a C# code.
+It is usually used for data processing when an SQL query is not an efficient solution, and the algorithm it often implemented in an external dll.
+
+Task:
+
+> An application should provide the expected ratings for all books, based on some basic information on the books.
+> The rating algorithm is the following: If the title contains text "super", add 100 point. If it contains "great", add 50 point. It the book is foreign, add 20%.
+
+Solution:
+
+```C
+Module Bookstore
+{
+    Computed BookRating 'repository =>
+        {
+            var books = repository.Bookstore.Book.Query()
+                .Select(b =>
+                    new
+                    {
+                        b.ID,
+                        b.Title,
+                        IsForeign = b.Extension_ForeignBook.ID != null
+                    })
+                .ToList();
+            var ratings = new List<BookRating>();
+            foreach (var book in books)
+            {
+                decimal rating = 0;
+
+                if (book.Title?.IndexOf("super", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    rating += 100;
+
+                if (book.Title?.IndexOf("great", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    rating += 50;
+
+                if (book.IsForeign)
+                    rating *= 1.2m;
+
+                ratings.Add(new BookRating { ID = book.ID, Rating = rating });
+            }
+            return ratings.ToArray();
+        }'
+    {
+        Extends Bookstore.Book;
+        Decimal Rating;
+    }
+}
+```
+
+The **Computed** concept create classes in object model similar to Browse or SqlQueryable, but its data is not mapped to database (or Entity Framework).
+
+In the object model and in the web API, Computed is used in a same way as other data structures (Browse, SqlQueryable or Entity) for reading the data. For example, <http://localhost/Rhetos/rest/Bookstore/BookRating/> will return the list of book ratings.
+
+In the example above, the C# code snippet uses the generated object model to query the books from the database with `repository.Bookstore.Book.Query()`. For more info on this topic see [Using the Domain Object Model](Using-the-Domain-Object-Model).
+
+The Computed concept can also be useful if you need to read the data from other systems and provide it as a Rhetos data structure.

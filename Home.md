@@ -20,7 +20,9 @@ Tutorials:
 * How to create a data model:
   * [Data structures and relationships](Data-structures-and-relationships)
   * [Basic property types](Data-structure-properties)
+* Add simple features to your application:
   * [Implementing simple business rules](Implementing-simple-business-rules)
+  * [Read-only data structures](Read-only-data-structures)
 * Extend Rhetos DSL with you own keywords: [Rhetos concept development](Rhetos-concept-development)
 * [Persisting the computed data](Persisting-the-computed-data)
 * Implementing entity inheritance and common interfaces: [Polymorphic concept](Polymorphic-concept)
