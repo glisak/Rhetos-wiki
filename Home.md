@@ -23,14 +23,16 @@ Tutorials:
 * Add simple features to your application:
   * [Implementing simple business rules](Implementing-simple-business-rules)
   * [Read-only data structures](Read-only-data-structures)
-* Extend Rhetos DSL with you own keywords: [Rhetos concept development](Rhetos-concept-development)
-* [Persisting the computed data](Persisting-the-computed-data)
-* Implementing entity inheritance and common interfaces: [Polymorphic concept](Polymorphic-concept)
-* Low-level database development: [Database objects](Database-objects)
-* How to implement complex server commands: [Action concept](Action-concept)
-* [Temporal data and change history](Temporal-data-and-change-history)
-* Row permissions business rules: [RowPermissions concept](RowPermissions-concept)
-* Reports: [TemplaterReport](TemplaterReport)
+* Develop new features:
+  * [Using the Domain Object Model](Using-the-Domain-Object-Model)
+  * Implement new server commands: [Action concept](Action-concept)
+  * Extend Rhetos DSL with you own keywords: [Rhetos concept development](Rhetos-concept-development)
+  * Low-level database development: [Database objects](Database-objects)
+* Business processes:
+  * [Persisting the computed data](Persisting-the-computed-data)
+  * Implementing entity inheritance and common interfaces: [Polymorphic concept](Polymorphic-concept)
+  * [Temporal data and change history](Temporal-data-and-change-history)
+  * Row permissions business rules: [RowPermissions concept](RowPermissions-concept)
 
 Sample application:
 
@@ -44,8 +46,8 @@ Fundamentals:
 * [Creating Rhetos package](Creating-Rhetos-package)
 * [Rhetos RESTful web API plugin](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)
 * [User authentication and authorization](User-authentication-and-authorization)
-* [Using the Domain Object Model](Using-the-Domain-Object-Model)
 * [Data migration](Data-migration)
+* [TemplaterReport](TemplaterReport)
 * [Rhetos coding standard](Rhetos-coding-standard)
 
 Support:
