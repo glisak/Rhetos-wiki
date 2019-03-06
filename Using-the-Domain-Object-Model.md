@@ -3,11 +3,19 @@ The **Domain Object Model** is a set of C# classes that implement the applicatio
 It is automatically generated from the application's DSL model (from the *.rhe* scripts) and compiled to *ServerDom.dll*.
 The DOM classes are typically used in C# code snippets when implementing business logic with concepts such as Action and ComposableFilterBy.
 
-ServerDom.dll can be directly referenced and used from a simple Visual Studio project or a [LinqPad](https://www.linqpad.net/) script.
+ServerDom.dll can be directly referenced and used from a simple Visual Studio project or a [LINQPad](https://www.linqpad.net/) script.
 
 ## How to execute the examples
 
-The examples from this article can be executed within LinqPad script `Rhetos Server DOM.linq`, available in Rhetos server folder.
+The examples from this article can be executed within LINQPad script `Rhetos Server DOM.linq`, available in Rhetos server folder,
+or create a playground console app in Visual Studio.
+
+Options:
+
+* LINQPad - Simple to use (no setup), nicer output format, but IntelliSense (autocomplete) requires buying a license.
+* Playground console app in Visual Studio - 10 minutes setup, IntelliSense included.
+
+In both cases, to run any example from this article, copy the code snippet from the example to the marked position in the Main method:
 
 ```C#
 void Main()
@@ -19,18 +27,18 @@ void Main()
     {
         var context = container.Resolve<Common.ExecutionContext>();
         var repository = context.Repository;
-        
-        // ... Copy-paste the example code here ...
+
+        // <<< Copy-paste the example code here >>>
     }
 }
 ```
 
-### LinqPad notes
+### LINQPad notes
 
-* Downloaded LinqPad from <https://www.linqpad.net/>.
-* The examples use the LinqPad's method `Dump()` to print the results in a grid.
-* LinqPad keeps the Rhetos server's process active between executions. This improves performance, but you will need to stop the LinqPad process ("Cancel All Thread and Reset" menu option) before calling DeployPackages.exe, to unlock the dll files.
-* Instead of using LinqPad, the following code examples can be executed with Visual Studio project referencing ServerDom.*.dll (and the dlls it uses) if the `Dump()` method is removed.
+* Downloaded LINQPad from <https://www.linqpad.net/>.
+* The examples use the LINQPad's method `Dump()` to print the results in a grid.
+* LINQPad keeps the Rhetos server's process active between executions. This improves performance, but you will need to stop the LINQPad process ("Cancel All Thread and Reset" menu option) before calling DeployPackages.exe, to unlock the dll files.
+* Instead of using LINQPad, the following code examples can be executed with Visual Studio project referencing ServerDom.*.dll (and the dlls it uses) if the `Dump()` method is removed.
 
 ### Rhetos notes
 
