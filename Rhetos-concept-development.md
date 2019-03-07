@@ -110,7 +110,10 @@ With those two classes you have just created your first macro concept.
 
 Defining the IConceptInfo implementation for the basic concept is the same as for the macro concept. Now we have to define a code generator in which we will implement wanted functionality. This is done by implementing IConceptCodeGenerator interface (defined in Rhetos.Compiler.Interfaces assembly).
 
-Let's say we have to implement functionality that Entity with Deactivatable concept defined needs to be deactivated instead of deleted when Delete function is called on it. First, we will implement ConceptInfo for this new concept:
+Let's say we have to implement functionality that Entity with Deactivatable concept defined needs to be deactivated instead of deleted when Delete function is called on it. See the article [Implementing simple business rules](Implementing-simple-business-rules.md) for more info on the 
+Deactivatable concept.
+
+First, we will implement ConceptInfo for this new concept:
 
 ``` csharp
 using System.ComponentModel.Composition;
@@ -171,6 +174,19 @@ namespace Htz.RhetosConcepts
 ```
 
 As you can see, this is where it gets a bit tricky. In order to write a code generator you have to now exactly where to place your code and the context in which your code will be run. There is no other way of finding that out but to browse already  generated code (e.g.. ServerDom.Repositories.cs that can be found in Generated subfolder of your Rhetos server), and Rhetos core source code itself. Best way of doing this is to find similar functionality in [CommonConcepts](#https://github.com/Rhetos/Rhetos/tree/master/CommonConcepts) and work from there. After a while you will get a hang of it and navigate through code generators and generated relatively easy.
+
+Now that we have created a new concept **DeactivateOnDelete**, we can use it in a DSL script, for example:
+
+```C
+Entity Book
+{
+    ShortString Code { Unique; Required; }
+    ShortString Title { Required; }
+    Integer NumberOfPages;
+
+    Deactivatable { DeactivateOnDelete };
+}
+```
 
 ## How to deploy created concept
 
