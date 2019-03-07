@@ -199,7 +199,7 @@ Solution:
 ```C
 Module Bookstore
 {
-    Computed BookRating 'repository =>
+    Computed ExpectedBookRating 'repository =>
         {
             var books = repository.Bookstore.Book.Query()
                 .Select(b =>
@@ -210,7 +210,8 @@ Module Bookstore
                         IsForeign = b.Extension_ForeignBook.ID != null
                     })
                 .ToList();
-            var ratings = new List<BookRating>();
+
+            var ratings = new List<ExpectedBookRating>();
             foreach (var book in books)
             {
                 decimal rating = 0;
@@ -224,8 +225,9 @@ Module Bookstore
                 if (book.IsForeign)
                     rating *= 1.2m;
 
-                ratings.Add(new BookRating { ID = book.ID, Rating = rating });
+                ratings.Add(new ExpectedBookRating { ID = book.ID, Rating = rating });
             }
+
             return ratings.ToArray();
         }'
     {
@@ -241,4 +243,25 @@ In the object model and in the web API, Computed is used in a same way as other 
 
 In the example above, the C# code snippet uses the generated object model to query the books from the database with `repository.Bookstore.Book.Query()`. For more info on this topic see [Using the Domain Object Model](Using-the-Domain-Object-Model).
 
-The Computed concept can also be useful if you need to read the data from other systems and provide it as a Rhetos data structure.
+The Computed concept can also be useful if you need to read the data from other systems and provide it as a Rhetos data structure. For example:
+
+```C
+Module Bookstore
+{
+    Computed ExternalCustomer 'repository =>
+        {
+            // Gets a list of users from another web API and returns it as a Rhetos data structure.
+            var httpClient = new System.Net.Http.HttpClient();
+            var usersJson = httpClient.GetStringAsync("https://jsonplaceholder.typicode.com/users").Result;
+            var users = Newtonsoft.Json.JsonConvert.DeserializeObject<List<System.Dynamic.ExpandoObject>>(usersJson);
+            var names = users.Select((dynamic user) => user.name);
+            return names.Select(name => new ExternalCustomer { Name = name }).ToArray();
+        }'
+    {
+        ShortString Name;
+    }
+
+    ExternalReference 'Newtonsoft.Json.JsonConvert, Newtonsoft.Json';
+    ExternalReference 'System.Net.Http.HttpClient, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a';
+}
+```

@@ -152,6 +152,8 @@ Module Bookstore
 
 ## Automatic recompute on deployment
 
+"Recompute" in Rhetos refers to the process of updating (also inserting and deleting) the persisted data in a table to match the new data provided by the source.
+
 On each deployment (running *DeployPackages.exe*), for each computation that is marked with **KeepSynchronized**,
 Rhetos checks if a sources for the computed data has been modified.
 It if detects that the source has changed, it will automatically update (recompute) the persisted data.
