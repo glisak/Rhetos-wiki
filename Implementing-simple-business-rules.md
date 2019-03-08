@@ -1,6 +1,8 @@
 Rhetos CommonConcepts package contains some simple business rules that are common in many applications.
 Then can often be used by simply declaring them on an entity or a property.
 
+Contents:
+
 1. [Property value constraints](#property-value-constraints)
 2. [Deny data modifications](#deny-data-modifications)
 3. [Automatically generated data](#automatically-generated-data)
