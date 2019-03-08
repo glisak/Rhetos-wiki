@@ -105,7 +105,7 @@ Module Demo
         {
             Log Demo.Person.FirstName;
             Log Demo.Person.LastName;
-            // Description is long and not interesting, so we don't want to log it's values.
+            // 'Description' property is long and not interesting, so we don't want to log it's values.
         }
     }
 
@@ -124,13 +124,11 @@ Module Demo
 * `Deactivatable` - Allows tracking of active and deactivated records.
   * Internally, it adds a `Bool Active` property to the entity with the default value True.
   * It creates a composable filter `ActiveItems`, with an optional parameter `ItemID`. It returns all active items and additionally the item with the given ID. This is a common patter for lookup that needs to display the current item whether it is active or not.
-
-Code example is available in DSL script [SimpleBusinessLogic.rhe](https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/CommonConceptsTest/DslScripts/SimpleBusinessLogic.rhe).
+  * Code example is available in DSL script [SimpleBusinessLogic.rhe](https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/CommonConceptsTest/DslScripts/SimpleBusinessLogic.rhe).
 
 * `PessimisticLocking` - Enables automatic verification of explicit client locks when saving a record. A user can change a records only when there is no ExclusiveLock from another user on this record. When editing detail records, only master needs to be locked.
   * A client application can manage the locks with actions Common.SetLock i Common.ReleaseLock, with parameters ResourceType (full entity name) and ResourceID (GUID).
-
-Code example is available in DSL script [PessimisticLocking.rhe](https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/CommonConceptsTest/DslScripts/PessimisticLocking.rhe).
+  * Code example is available in DSL script [PessimisticLocking.rhe](https://github.com/Rhetos/Rhetos/blob/master/CommonConcepts/CommonConceptsTest/DslScripts/PessimisticLocking.rhe).
 
 ## See also
 

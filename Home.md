@@ -52,8 +52,9 @@ Fundamentals:
 
 Support:
 
-* Feel free to ask questions on the [Issues](https://github.com/Rhetos/Rhetos/issues) page by searching the existing ones or adding a new issue.
-* [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md)
+* Feel free to **ask questions** on the [Issues](https://github.com/Rhetos/Rhetos/issues) page by searching the existing ones or adding a new issue.
+* [Release notes](https://github.com/Rhetos/Rhetos/blob/master/ChangeLog.md) -
+  new features and breaking changes.
 
 ## Recommended plugins
 
