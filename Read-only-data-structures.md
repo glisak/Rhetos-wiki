@@ -16,7 +16,7 @@ that use C# code or LINQ queries to read the data with specific parameters.
 
 Prerequisites:
 
-* The examples in this article are based on examples form the **previous tutorial article**: [Data structures and relationships](Data-structures-and-relationships).
+* The examples in this article are based on examples form the **previous tutorial article**: [Data model and relationships](Data-model-and-relationships).
 
 Contents:
 
@@ -32,7 +32,7 @@ The Browse concept is used for simple data queries, when we only need to select 
 
 For example:
 
-> Write a data source that returns a list of books (see the previous tutorial [article](Data-structures-and-relationships)) for the grid that is displayed to the user in the web application.
+> Write a data source that returns a list of books (see the previous tutorial [article](Data-model-and-relationships)) for the grid that is displayed to the user in the web application.
 The grid should contain the following columns:
 >
 > * Code
@@ -58,7 +58,7 @@ The **Take** concept selects the properties, starting from the base entity (`Boo
 
 * `Code` and `Title` are taken directly from the Book.
 * Author's name is taken from the referenced entity by a path `Author.Name`. This property will be automatically named by simple concatenation: "AuthorName".
-* Translator's name is declared with a similar path. The property's name is manually set to `TranslatorName`. Note that an extended entity ForeignBook (see the [Extends](Data-structures-and-relationships) concept) creates the navigation property `Extension_ForeignBook`, from the base entity "Book" to the extension.
+* Translator's name is declared with a similar path. The property's name is manually set to `TranslatorName`. Note that an extended entity ForeignBook (see the [Extends](Data-model-and-relationships) concept) creates the navigation property `Extension_ForeignBook`, from the base entity "Book" to the extension.
 * Browse will also include the ID property from the base entity (`Book`).
 
 Technical notes:
@@ -109,7 +109,7 @@ In the object model and in the web API, SqlQueryable is used in a same way as Br
 The example above shows a typical usage of the **Extends** concept in the computed data.
 
 * It is not required, but is very useful to mark this data structure as an extension of the Book
-  (more info [here](Data-structures-and-relationships#one-to-one-relationship-extensions)).
+  (more info [here](Data-model-and-relationships#one-to-one-relationship-extensions)).
 * Because of the Extends concept, it is important for the SQL query to return the `ID` of the book,
   so that the computed data can be connected to the base entity.
 * The Extends concept creates an relation between the entities in the object model.

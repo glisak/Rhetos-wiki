@@ -18,7 +18,7 @@ Tutorials:
 
 * [Create your first Rhetos application](Create-your-first-Rhetos-application)
 * How to create a data model:
-  * [Data structures and relationships](Data-structures-and-relationships)
+  * [Data model and relationships](Data-model-and-relationships)
   * [Basic property types](Data-structure-properties)
 * Add simple features to your application:
   * [Implementing simple business rules](Implementing-simple-business-rules)

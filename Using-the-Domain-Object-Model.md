@@ -364,7 +364,7 @@ but the additional navigation properties will be ignored.
 
 [Action](Action-concept.md) concept in Rhetos represents a custom server-side command that returns no data.
 
-Using LINQPad, or a playground console app, write a code for the Bookstore demo application
+In LINQPad or in the playground console app, write a code for the Bookstore demo application
 that **inserts five books**.
 
 ```C#
@@ -398,10 +398,14 @@ Module Bookstore
 This example uses the [Action](Action-concept.md) created in the previous example.
 Don't forget to run `DeployPackages.exe` after implementing Action in the DSL script.
 
+In LINQPad or in the playground console app, execute the Insert5Books action.
+
 ```C#
 // Null argument is send because this action has no parameters.
 repository.Bookstore.Insert5Books.Execute(null);
 ```
+
+Check that the five books have been generated in the database (if you have `commitChanges: true`).
 
 ### Execute action with parameters
 

@@ -35,6 +35,6 @@ The text in *square brackets* should be replaced, and the brackets omitted.
 
 These tutorial articles follow the given structure, and are a good example for writing new articles:
 
-* [Data structures and relationships](https://github.com/Rhetos/Rhetos/wiki/Data-structures-and-relationships)
+* [Data model and relationships](https://github.com/Rhetos/Rhetos/wiki/Data-model-and-relationships)
 * [Polymorphic concept](https://github.com/Rhetos/Rhetos/wiki/Polymorphic-concept)
 * [RowPermissions concept](https://github.com/Rhetos/Rhetos/wiki/RowPermissions-concept)
