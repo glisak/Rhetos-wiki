@@ -1,4 +1,4 @@
-This article shows how to implement business entities and other data structures,
+This article shows how to implement entities,
 how to define entity relationships and what backend technologies are readily available
 (database table, business layer C# classes, JSON web API).
 
