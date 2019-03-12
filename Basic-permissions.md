@@ -10,10 +10,15 @@ The following diagram shows the Rhetos entities in the *Common* module that dete
 
 All administration activities are performed by modifying the data in the entities from the diagram above. For example:
 
-* To create a new user, insert the record in the *Common.Principal* entity.
-* To configure the user's permissions, enter the data in *Common.PrincipalHasRole* or *Common.PrincipalPermission*.
-* The roles and the role permissions are usually preconfigured by the development team (entering the data in *Common.Role* and *Common.RolePermission*).
-* If the forms authentication is used, instead of the Windows authentication, check for the additional administration activities in the [AspNetFormsAuth documentation](https://github.com/Rhetos/AspNetFormsAuth/blob/master/Readme.md).
+* To create a **new user**, insert the record in the *Common.Principal* entity.
+* To create **new roles** and define the **role permissions**, enter the data in *Common.Role* and *Common.RolePermission*.
+  Some roles and the role permissions are usually preconfigured by the development team while developing the application.
+* To configure the **user's permissions**, enter the data in *Common.PrincipalHasRole*
+  (this will provide the permissions from the selected roles).
+  Alternatively, a user can have  or *Common.PrincipalPermission*.
+* If the forms authentication is used, instead of the Windows authentication,
+  check for the additional administration activities in the
+  [AspNetFormsAuth documentation](https://github.com/Rhetos/AspNetFormsAuth/blob/master/Readme.md).
 
 ## Claims
 
