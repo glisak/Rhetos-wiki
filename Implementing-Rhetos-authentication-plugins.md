@@ -1,4 +1,6 @@
-This article is focused on the framework development. See [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization) article for more information on business application development.
+This article is focused on the framework development.
+See [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization) article
+for more information on business application development.
 
 ## Overview
 
