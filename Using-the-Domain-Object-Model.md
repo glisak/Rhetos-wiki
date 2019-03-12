@@ -12,6 +12,9 @@ Prerequisites:
 
 * To follow the examples in this tutorial article, you need a working Rhetos application.
   You can use any existing application or create a new one from [Create your first Rhetos application](Create-your-first-Rhetos-application.md).
+* Some example use the entities from the [Bookstore](https://github.com/Rhetos/Bookstore) demo application.
+  You can review the bookstore data model in its [DSL scripts](https://github.com/Rhetos/Bookstore/tree/master/src/DslScripts).
+  For example, see the `Entity Book` in the *Book.rhe* file.
 
 Contents:
 
@@ -23,7 +26,8 @@ Contents:
    1. [Load data](#load-data)
    2. [Query data](#query-data)
    3. [Filters](#filters)
-   4. [Overview of the read methods](#overview-of-the-read-methods)
+   4. [Subqueries](#subqueries)
+   5. [Overview of the read methods](#overview-of-the-read-methods)
 4. [Modifying the data](#modifying-the-data)
    1. [Save data](#save-data)
    2. [Sketch a code snippet when developing a new Action](#sketch-a-code-snippet-when-developing-a-new-action)
@@ -290,6 +294,60 @@ There are different kinds of filters that can be used here.
 
 Note that the examples above will work on both **Load** and **Query** methods.
 
+### Subqueries
+
+The query in the following example is expected to return the books that have at least one comment,
+but these is an issue with the query interpretation.
+
+```C#
+var booksWithComments = repository.Bookstore.Book.Query()
+    .Where(book => repository.Bookstore.Comment.Query()
+        .Any(comment => comment.BookID == book.ID));
+
+booksWithComments.Select(book => book.Title).Dump();
+```
+
+The code above will result with **NotSupportedException**:
+"LINQ to Entities does not recognize the method ... Query() ...". The Entity Framework 6.1 does not support usage of custom methods (`Comment.Query()`) for a subquery.
+
+There are two approaches to solve this with the subquery:
+
+**Option A)** Separate the inner query to a variable. For example:
+
+```C#
+var comments = repository.Bookstore.Comment.Query();
+var booksWithComments = repository.Bookstore.Book.Query()
+    .Where(book => comments
+        .Any(comment => comment.BookID == book.ID));
+```
+
+**Option B)** Use the `Subquery` property to avoid the limitation:
+
+```C#
+var booksWithComments = repository.Bookstore.Book.Query()
+    .Where(book => repository.Bookstore.Comment.Subquery
+        .Any(comment => comment.BookID == book.ID));
+```
+
+Note that in both solutions above, this code will execute a *single* SQL query in the database:
+
+```SQL
+SELECT
+    [Extent1].[ID] AS [ID],
+    [Extent1].[Code] AS [Code],
+    [Extent1].[Title] AS [Title],
+    [Extent1].[NumberOfPages] AS [NumberOfPages],
+    [Extent1].[AuthorID] AS [AuthorID]
+FROM
+    [Bookstore].[Book] AS [Extent1]
+WHERE
+    EXISTS (SELECT
+        1 AS [C1]
+        FROM [Bookstore].[Comment] AS [Extent2]
+        WHERE [Extent2].[BookID] = [Extent1].[ID]
+    )
+```
+
 ### Overview of the read methods
 
 The repository class for Entity, SqlQueryable or Browse, contains the following methods for reading and filtering the data:
@@ -364,8 +422,8 @@ but the additional navigation properties will be ignored.
 
 [Action](Action-concept.md) concept in Rhetos represents a custom server-side command that returns no data.
 
-In LINQPad or in the playground console app, write a code for the Bookstore demo application
-that **inserts five books**.
+For example, in LINQPad or the playground app,
+write a code for the Bookstore demo application that **inserts five books**.
 
 ```C#
 for (int i = 0; i < 5; i++)
@@ -384,7 +442,7 @@ Module Bookstore
     Action Insert5Books
         '(parameter, repository, userInfo) =>
         {
-            for (int i=0; i<5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var newBook = new Bookstore.Book { Code = "+++", Title = "New book" };
                 repository.Bookstore.Book.Insert(newBook);
@@ -405,30 +463,45 @@ In LINQPad or in the playground console app, execute the Insert5Books action.
 repository.Bookstore.Insert5Books.Execute(null);
 ```
 
-Check that the five books have been generated in the database (if you have `commitChanges: true`).
+The check the results in the database, make sure that you have `commitChanges: true`.
 
 ### Execute action with parameters
 
-The code below uses `Common.SetLock` as an example of the [Action](Action-concept.md) concept
-that is included in the CommonConcepts Rhetos package.
+For example:
+
+> Write an action that inserts books, with the following parameters:
+> The number of books that should be generated,
+> and the title for the generated book.
+> Add numbers to the generated titles starting from 1.
+
+Solution:
+
+```C
+Action InsertManyBooks
+    '(parameter, repository, userInfo) =>
+    {
+        for (int i = 0; i < parameter.NumberOfBooks; i++)
+        {
+            string newTitle = parameter.TitlePrefix + " - " + (i + 1);
+            var newBook = new Bookstore.Book { Code = "+++", Title = newTitle };
+            repository.Bookstore.Book.Insert(newBook);
+        }
+    }'
+{
+    Integer NumberOfBooks;
+    ShortString TitlePrefix;
+}
+```
+
+To test the action, execute it in LINQPad or in the playground console app:
 
 ```C#
-// Execute the `Common.SetLock` action:
-
-var parameter = new Common.SetLock
+var actionParameter = new Bookstore.InsertManyBooks
 {
-    ResourceType = "some resource",
-    ResourceID = new Guid("12341234-1234-1234-1234-123412341234")
+    NumberOfBooks = 7,
+    TitlePrefix = "A Song of Ice and Fire"
 };
-repository.Common.SetLock.Execute(parameter);
-
-// Test that the action generated a record:
-
-repository.Common.ExclusiveLock.Query()
-    .OrderByDescending(item => item.LockStart)
-    .ToSimple()
-    .First()
-    .Dump("Common.ExclusiveLock last item");
+repository.Bookstore.InsertManyBooks.Execute(actionParameter);
 ```
 
 ### Execute recompute (ComputedFrom)

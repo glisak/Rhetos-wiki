@@ -87,13 +87,13 @@ Solution:
 SqlQueryable BookInfo
     "
         SELECT
-            k.ID,
-            NumberOfComments = COUNT(kom.ID)
+            b.ID,
+            NumberOfComments = COUNT(c.ID)
         FROM
-            Bookstore.Book k
-            LEFT JOIN Bookstore.Comment kom ON kom.BookID = k.ID
+            Bookstore.Book b
+            LEFT JOIN Bookstore.Comment c ON c.BookID = b.ID
         GROUP BY
-            k.ID
+            b.ID
     "
 {
     Extends Bookstore.Book;
@@ -142,15 +142,15 @@ SqlQueryable BookInfo <SQL\BookInfo.sql>
 
 Create a file "BookInfo.sql" in the folder `DslScripts\SQL\`, with the following content:
 
-```C
+```SQL
 SELECT
-    k.ID,
-    NumberOfComments = COUNT(kom.ID)
+    b.ID,
+    NumberOfComments = COUNT(c.ID)
 FROM
-    Bookstore.Book k
-    LEFT JOIN Bookstore.Comment kom ON kom.BookID = k.ID
+    Bookstore.Book b
+    LEFT JOIN Bookstore.Comment c ON c.BookID = b.ID
 GROUP BY
-    k.ID
+    b.ID
 ```
 
 "SQL" subfolder is used here as a convention to improve code structure.
