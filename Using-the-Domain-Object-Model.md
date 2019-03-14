@@ -26,8 +26,9 @@ Contents:
    1. [Load data](#load-data)
    2. [Query data](#query-data)
    3. [Filters](#filters)
-   4. [Subqueries](#subqueries)
-   5. [Overview of the read methods](#overview-of-the-read-methods)
+   4. [Applying multiple filters](#applying-multiple-filters)
+   5. [Subqueries](#subqueries)
+   6. [Overview of the read methods](#overview-of-the-read-methods)
 4. [Modifying the data](#modifying-the-data)
    1. [Save data](#save-data)
    2. [Sketch a code snippet when developing a new Action](#sketch-a-code-snippet-when-developing-a-new-action)
@@ -166,14 +167,18 @@ Fore each entity, three classes are generated:
 var allBooks = repository.Bookstore.Book.Load();
 allBooks.Dump();
 
-var someBooks = repository.Bookstore.Book.Load(b => b.Title.StartsWith("B"));
+var someBooks = repository.Bookstore.Book.Load(book => book.Title.StartsWith("The"));
 someBooks.Dump();
 ```
 
 The **Load** method does not return a LINQ query.
-It returns array of simple objects (as IEnumerable), loaded from the database, without references to other objects.
+It returns array of simple objects (as IEnumerable), loaded from the database,
+without references to other objects.
+For example, loaded books contain simple `AuthorID` Guid property,
+but not `Author` property that would reference the entity Person.
 
-* For example, loaded books contain simple `AuthorID` Guid property, but not `Author` property that would reference the entity Person.
+The Load method can have a **filter** as a parameter.
+More information on using filters is available in the chapters below.
 
 ### Query data
 
@@ -201,6 +206,8 @@ that can be used to include the data from other related objects (reference, exte
 
 * For example, the class in the query contains both `AuthorID` Guid property and the `Author` property that references the entity Person.
 * The data will be loaded from the database when a `ToList()` method is executed on the query, or any other method that requires the data (First(), Any(), ...).
+
+The Query method can have a **filter** as a parameter, same as the Load method.
 
 **ToSimple** is a Rhetos method that removes ORM navigation properties from the query:
 
@@ -269,14 +276,20 @@ There are different kinds of filters that can be used here.
     repository.Bookstore.Book.Query(filterParameter).ToString().Dump();
     ```
 
-2. Predefined filter - **Get by ID**.
+2. **Lambda** expression.
+
+    ```C#
+    repository.Bookstore.Book.Load(book => book.Title.StartsWith("The"));
+    ```
+
+3. Predefined filter - **Get by ID**.
 
     ```C#
     Guid id = new Guid("c9860617-7e3e-4158-9d57-bbf4dd1f986e");
     repository.Bookstore.Book.Load(new[] { id }).Single().Dump();
     ```
 
-3. Predefined filter - **Generic property filter**
+4. Predefined filter - **Generic property filter**
 (for available operations see [filters](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md#filters) documentation from the RestGenerator)
 
     ```C#
@@ -293,6 +306,46 @@ There are different kinds of filters that can be used here.
     ```
 
 Note that the examples above will work on both **Load** and **Query** methods.
+
+### Applying multiple filters
+
+You can use the repository's `Filter` method to add a filter to the existing LINQ query.
+
+The following example applies three filters when loading the Book records.
+The result is the intersection of the result sets for each filter (AND).
+
+```C#
+var filter1 = new FilterCriteria("Title", "StartsWith", "The"); // Generic property filter.
+var filter2 = new Bookstore.CommonMisspelling(); // ItemFilter in a DSL script.
+var filter3 = new Guid[] { // Predefined IEnumerable<Guid> filter.
+    new Guid("9b1dd9c7-6e78-4ea0-a24c-9e812a8c15d5"),
+    new Guid("57b50538-c599-4629-8941-d2d996822c61") };
+
+var query = repository.Bookstore.Book.Query(filter1);
+query = repository.Bookstore.Book.Filter(query, filter2);
+query = repository.Bookstore.Book.Filter(query, filter3);
+query.ToString().Dump();
+```
+
+The code above will result with the following SQL query.
+Not that all the filter are included in a single database request.
+
+```SQL
+SELECT
+    [Extent1].[ID] AS [ID],
+    [Extent1].[Code] AS [Code],
+    [Extent1].[Title] AS [Title],
+    [Extent1].[NumberOfPages] AS [NumberOfPages],
+    [Extent1].[AuthorID] AS [AuthorID]
+FROM
+    [Bookstore].[Book] AS [Extent1]
+WHERE
+    ([Extent1].[Title] LIKE N'A' + '%')
+    AND ([Extent1].[Title] LIKE N'%curiousity%')
+    AND ([Extent1].[ID] IN (
+            cast('9b1dd9c7-6e78-4ea0-a24c-9e812a8c15d5' as uniqueidentifier),
+            cast('57b50538-c599-4629-8941-d2d996822c61' as uniqueidentifier)))
+```
 
 ### Subqueries
 
