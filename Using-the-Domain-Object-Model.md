@@ -430,7 +430,7 @@ By default, if commitChanges is false, all the changes **will be rolled back** a
 
 ### Save data
 
-Entity's repository class has a `Save(...)` method, that receives a list of records to insert, update and delete. There are also simples extension methods available for those operations (Insert, Update, Delete) that will internally call the Save method.
+Entity's repository class has a `Save(...)` method, that receives a list of records to insert, update and delete. There are also simples extension methods available for those operations (`Insert`, `Update`, `Delete`) that will internally call the Save method.
 
 This example uses the table `Common.Principal`, that is available in the CommonConcept package.
 

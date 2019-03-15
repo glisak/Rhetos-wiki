@@ -119,6 +119,11 @@ Module Demo
 }
 ```
 
+Note: When reading data from the Common.Log, make sure to use the view **Common.LogReader**, instead of reading from Common.Log directly.
+
+* LogReader ensures that reading log will not block any write operations (WITH NOLOCK). This is important if the database does not use read committed snapshot, to allow other users to work while analyzing the log.
+* LogReader can include archived logs from other tables or databases.
+
 ## Other features
 
 * `Deactivatable` - Allows tracking of active and deactivated records.
