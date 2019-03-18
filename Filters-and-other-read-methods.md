@@ -13,7 +13,7 @@ This article explains **how to write filters** when developing a Rhetos applicat
 Prerequisites:
 
 * [Entities and relationships](Data-model-and-relationships).
-* Learn how to use the Rhetos Domain Object Model method to [Read the data](Using-the-Domain-Object-Model#reading-the-data).
+* Learn how to use the Rhetos Domain Object Model methods to [Read the data](Using-the-Domain-Object-Model#reading-the-data).
 
 Contents:
 
