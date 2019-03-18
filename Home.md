@@ -25,7 +25,7 @@ Tutorials:
   * [Read-only data structures](Read-only-data-structures)
 * Develop new features:
   * [Using the Domain Object Model](Using-the-Domain-Object-Model)
-  * [Developing filters and other read methods](Filters-and-other-read-methods)
+  * [Filters and other read methods](Filters-and-other-read-methods)
   * Implement new server commands: [Action concept](Action-concept)
   * Extend Rhetos DSL with you own keywords: [Rhetos concept development](Rhetos-concept-development)
   * Low-level database development: [Database objects](Database-objects)
