@@ -67,7 +67,7 @@ Module Bookstore
 }
 ```
 
-**ItemFilter** has to parameters: filter name and lambda expression.
+The **ItemFilter** has two parameters: filter name and lambda expression.
 
 * The **lambda expression** is a C# code snippet that will be internally
   used in the Entity Framework LINQ query to load the data.
@@ -81,7 +81,7 @@ Module Bookstore
   For convention, we usually use `item`.
 
 The `CommonMisspelling` filter is additionally used for a data validation
-that will deny Save operation to the end user if entered an invalid book name.
+that will deny the *save* operation if the user enters an invalid book name.
 **Both filters** can be used by a client application (or in the object model)
 to query a subset of the books.
 
@@ -98,9 +98,9 @@ to query a subset of the books.
 
 The following articles show how to **test this filter**, or use it in your application:
 
-1. From the REST web API (see [specification](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md)):
+1. Reading the filtered data from the REST web API is described in the [specification](https://github.com/Rhetos/RestGenerator/blob/master/Readme.md). For example:
    * <http://localhost/BookstoreRhetosServer/rest/Bookstore/Book/?filters=[{"Filter":"Bookstore.LongBooks"}]>
-2. From the C# code (see [Using the Domain Object Model](Using-the-Domain-Object-Model#Filters))
+2. Using the filter from the C# code is described in [Using the Domain Object Model](Using-the-Domain-Object-Model#Filters). For example:
     ```C#
     var filterParameter = new Bookstore.LongBooks();
     var query = repository.Bookstore.Book.Query(filterParameter);
@@ -108,7 +108,7 @@ The following articles show how to **test this filter**, or use it in your appli
     query.ToSimple().ToList().Dump(); // Load and print the books.
     ```
 
-Run the code snippet above to see the SQL query that will be executed on the database when filtering the data.
+Run the code snippet above to **review the SQL query** that will be executed on the database when filtering the data.
 If you are testing the filter with REST web API, run SQL Server Profiler, to check the executed SQL query.
 
 ### ItemFilter with related data and subquery
@@ -117,9 +117,9 @@ ItemFilters are also useful when you need to query data from the
 **related entities**. For example:
 
 > Write a filter that will return books that are foreign
-> (if record exists in the **extension** entity ForeignBook),
+> (if a record exists in the **extension** entity ForeignBook),
 > but only if the author's name starts with X (see the referenced entity Person)
-> and only if the book has at least 3 comments entered (in detail entity Comment).
+> and only if the book has at least 3 comments entered (in the **detail** entity Comment).
 
 Solution:
 
@@ -161,7 +161,7 @@ Module Bookstore
 * The expression `item.Author.Name` uses `Reference Author` from the book to read the `Name` from the `Entity Person`.
 * The expression `item.Extension_ForeignBook.ID` references the extended `Entity ForeignBook`.
   See [Entities and relationships](Data-model-and-relationships) for more info on these features.
-* Data from the detail entity `Comment` is aggregated with a subquery.
+* Data from the detail entity `Comment` is aggregated with a **subquery**.
   Note that the `Subquery` property is used here, instead of the `Query()` method.
   Read more on subqueries in [Using the Domain Object Model](Using-the-Domain-Object-Model#subqueries).
 * The filter's code snippet has access to the `_domRepository` and `_executionContext` members
@@ -172,7 +172,7 @@ Test the filter (see the chapter above) to review the SQL query that is executed
 ### ComposableFilterBy concept
 
 The following simple example is an alternative implementation of the `ItemFilter LongBooks`
-(see the examples above), but with the ComposableFilterBy concept.
+from the example above, but with the ComposableFilterBy concept.
 
 > Write a filter "LongBooks2" that returns all books with 500 pages or longer.
 
