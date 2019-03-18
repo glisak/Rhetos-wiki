@@ -114,6 +114,7 @@ Module Bookstore
 
         FilterBy 'IEnumerable<Guid>' '(repository, booksIds) =>
             {
+                // Collecting the input data from the database:
                 var ratingInput = repository.Bookstore.Book.Query(booksIds)
                     .Select(b =>
                         new Bookstore.Algorithms.RatingInput
@@ -123,9 +124,11 @@ Module Bookstore
                             IsForeign = b.Extension_ForeignBook.ID != null
                         });
 
+                // Calling the algorithm implemented in the external class "RatingSystem":
                 var ratingSystem = new Bookstore.Algorithms.RatingSystem();
                 var ratings = ratingSystem.ComputeRating(ratingInput);
 
+                // Mapping the results to the "ComputeBookRating" output:
                 return ratings
                     .Select(rating => new ComputeBookRating { ID = rating.BookId, Rating = rating.Value })
                     .ToArray();

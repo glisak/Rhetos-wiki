@@ -47,10 +47,10 @@ Module Bookstore
         ShortString Title;
         Integer NumberOfPages;
 
-        ItemFilter CommonMisspelling
-            'item => item.Title.Contains("curiousity")';
-        InvalidData CommonMisspelling
-            'It is not allowed to enter misspelled word "curiousity".';
+        ItemFilter CommonMisspelling 'book => book.Title.Contains("curiousity")';
+        InvalidData CommonMisspelling 'It is not allowed to enter misspelled word "curiousity".';
+
+        Logging;
     }
 }
 ```

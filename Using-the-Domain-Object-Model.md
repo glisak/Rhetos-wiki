@@ -21,7 +21,7 @@ Contents:
 1. [How to execute the examples](#how-to-execute-the-examples)
    1. [Option A: LINQPad](#option-a-linqpad)
    2. [Option B: Creating a "playground" console app](#option-b-creating-a-playground-console-app)
-2. [Understand the generated object model](#understand-the-generated-object-model)
+2. [Understanding the generated object model](#understanding-the-generated-object-model)
 3. [Reading the data](#reading-the-data)
    1. [Load data](#load-data)
    2. [Query data](#query-data)
@@ -125,7 +125,7 @@ Notes:
 * For the end result, see the example of the created playground app for the Bookstore demo application
 at <https://github.com/Rhetos/Bookstore/tree/master/test/Bookstore.Playground>.
 
-## Understand the generated object model
+## Understanding the generated object model
 
 When you run *DeployPackages.exe*, it will read DSL scripts and generated the web application. Most of the application's business features are implemented in the three generated source files: "ServerDom.Model.cs", "ServerDom.Orm.cs" and "ServerDom.Repositories.cs". You can find them in the Rhetos server subfolder `bin\Generated\` (for example, `Bookstore\dist\BookstoreRhetosServer\bin\Generated\`).
 

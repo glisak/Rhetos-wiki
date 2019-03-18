@@ -43,7 +43,8 @@ Entity Employee
     Integer TestPeriod { MinValue 1; MaxValue 12; }
     ShortString Iban { Required; MinLength 21; MaxLength 21; }
 
-    ItemFilter FinishBeforeStart 'item => item.WorkFinished != null && item.WorkFinished.Value < item.WorkStarted.Value';
+    ItemFilter FinishBeforeStart 'employee => employee.WorkFinished != null
+        && employee.WorkFinished.Value < employee.WorkStarted.Value';
     InvalidData FinishBeforeStart 'It is not allowed to enter a WorkFinished time before the WorkStarted time.';
 }
 ```
