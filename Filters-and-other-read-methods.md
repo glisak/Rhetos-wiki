@@ -27,7 +27,7 @@ Contents:
 2. [Other read methods](#other-read-methods)
    1. [FilterBy concept](#filterby-concept)
    2. [Query concept](#query-concept)
-3. [Development guidelines and advances topics](#development-guidelines-and-advances-topics)
+3. [Development guidelines and advanced topics](#development-guidelines-and-advanced-topics)
    1. [When not to write filters](#when-not-to-write-filters)
    2. [Additional data from other repositories and the context](#additional-data-from-other-repositories-and-the-context)
    3. [Filter name is the parameter type](#filter-name-is-the-parameter-type)
@@ -531,7 +531,7 @@ Use ComposableFilterBy instead, whenever possible.
   If implemented on Computed data structure, the requests will not support
   generic property filters and paging.
 
-## Development guidelines and advances topics
+## Development guidelines and advanced topics
 
 ### When not to write filters
 
