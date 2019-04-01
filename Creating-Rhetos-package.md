@@ -1,4 +1,6 @@
-﻿Rhetos is plugin based platform, therefore the Rhetos package is fundamental part of development on Rhetos platform. Rhetos package is the only way to publish your application on the Rhetos server.
+﻿Rhetos is plugin based platform, therefore the Rhetos package
+is fundamental part of development on Rhetos platform.
+Rhetos package is the only way to publish your application on the Rhetos server.
 
 Table of contents:
 
@@ -9,7 +11,8 @@ Table of contents:
 
 ## What is Rhetos package
 
-Rhetos package is a plugin for Rhetos platform. It is essentially a special type of NuGet package that Rhetos platform can recognize and absorb your application.
+Rhetos package is a plugin for Rhetos platform.
+It is essentially a special type of NuGet package that Rhetos platform can recognize and absorb your application.
 It can contain:
 
 * DSL scripts
@@ -19,15 +22,21 @@ It can contain:
 
 ## How to create Rhetos package
 
-Rhetos package being a special type of NuGet package, you have to crate a nuspec file which describes your package. Rhetos platform supports four type of files that can be deployed. Accordingly, NuGet package is organized in four targets that contains your application:
+Rhetos package being a special type of NuGet package,
+you have to create a nuspec file which describes your package.
+Rhetos platform supports four type of files that can be deployed.
+Accordingly, NuGet package is organized in four targets
+that contains your application:
 
 * DslScripts - target for all the .rhe files
 * DataMigration - target for all the sql data migration scripts
 * Resources - target for all additional resources used in your application (.eg report templates)
 * lib\net451 - target for all the binaries(.dll, .pdb)
 
-Like any other NuGet package, package can include standard metadata for the package (id, version, author, etc.) and list of dependencies.
-All of the mentioned targets can be populated by subfolders for better separation of the code and the resources.
+Like any other NuGet package, package can include standard metadata
+for the package (id, version, author, etc.) and list of dependencies.
+All of the mentioned targets can be populated by subfolders
+for better separation of the code and the resources.
 
 Here is the example of nuspec file for a Rhetos package:
 
@@ -56,11 +65,13 @@ Here is the example of nuspec file for a Rhetos package:
 </package>
 ```
 
+Remove from this nuspec file any files/src folders that you are not using in you application.
+
 ## Folder structure of your Rhetos package source
 
 Following the Rhetos package structure, the best practice for folder structure looks like this:
 
-```
+```Text
 MyRhetosPackage
     DslScripts
     DataMigration
@@ -72,4 +83,6 @@ MyRhetosPackage
 
 ## Example
 
-For a complete Rhetos applications see the [Bookstore](https://github.com/Rhetos/Bookstore) example. Its `src` folder has the source structure as described above, with the nuspec file and the corresponding subfolders.
+For a complete Rhetos applications see the [Bookstore](https://github.com/Rhetos/Bookstore) example.
+Its `src` folder has the source structure as described above,
+with the nuspec file and the corresponding subfolders.

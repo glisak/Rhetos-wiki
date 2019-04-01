@@ -1,8 +1,23 @@
-## Users and roles
+Contents:
 
-By using a hierarchy of roles, the administrator can create groups of users and permissions, or connect them directly.
+1. [Users, roles and permissions](#users-roles-and-permissions)
+   1. [Common administration activities](#common-administration-activities)
+   2. [Claims](#claims)
+   3. [Permissions](#permissions)
+2. [Development](#development)
+   1. [Inserting the permissions on deployment](#inserting-the-permissions-on-deployment)
+   2. [Automatic user management](#automatic-user-management)
+   3. [Suppressing permissions in a development environment](#suppressing-permissions-in-a-development-environment)
+3. [See also](#see-also)
 
-The following diagram shows the Rhetos entities in the *Common* module that determine the user's roles and permissions. The diamond shapes represent the associative entities.
+## Users, roles and permissions
+
+By using a hierarchy of roles, the administrator can create
+groups of users and permissions, or connect them directly.
+
+The following diagram shows the Rhetos entities in the *Common* module
+that determine the user's roles and permissions.
+The diamond shapes represent the associative entities.
 
 [[images/claims.png|Roles and Claims]]
 
@@ -20,9 +35,10 @@ All administration activities are performed by modifying the data in the entitie
   check for the additional administration activities in the
   [AspNetFormsAuth documentation](https://github.com/Rhetos/AspNetFormsAuth/blob/master/Readme.md).
 
-## Claims
+### Claims
 
-Each record in a *Common.Claim* entity represents a basic element of access. is an operation on an entity (read/insert/update/delete) or an action.
+Each record in a *Common.Claim* entity represents a basic element of access permission:
+an operation on a resource (entity, action, ...) that can be allowed or denied.
 
 The list of claims is created on deployment, and does not change during run-time.
 There are claims generated for each of the following objects:
@@ -32,13 +48,17 @@ There are claims generated for each of the following objects:
 * For each action: Execute
 * For each report: Download
 
-Please note that the records in *Common.Claim* table are automatically updated on each deployment. If a new custom claim is inserted into the table manually or by a DataMigration script, it will be automatically removed (deactivated) on the next deployment.
+Please note that the records in *Common.Claim* table are automatically updated on each deployment.
+If a new custom claim is inserted into the table manually or by a DataMigration script,
+it will be automatically removed (deactivated) on the next deployment.
 
 A custom claim can be created in a DSL script by using the CustomClaim concept. Example:
 
-    CustomClaim 'SomeModule.SomeResource' 'CustomOperationName';
+```C
+CustomClaim 'SomeModule.SomeResource' 'CustomOperationName';
+```
 
-## Permissions
+### Permissions
 
 User's permissions are defined here a **set of claims** that a certain user has.
 They are represented in the system by connecting principals with the claims, through tables *Common.PrincipalPermission* and *Common.RolePermission*. The end result is a union of all permissions that are assigned to the user directly or from the user's roles.
@@ -50,7 +70,9 @@ Denying permissions:
 * Deny will always override the allowed permissions from other roles, so if the user has a certain permission allowed by one of his roles and denied by some other role, at the and the permission will be denied.
 * Please note that denying permissions should be used as a **rare exception** because it complicates the administration of the permissions in the future.
 
-## Inserting the permissions on deployment
+## Development
+
+### Inserting the permissions on deployment
 
 There is often a need to insert some permissions as the new version of the application is deployed. This usually means inserting or updating the data in tables *Common.Role*, *Common.RolePermission* or *Common.PrincipalPermission*.
 
@@ -62,19 +84,54 @@ Note: The DataMigration scripts are often the first solution that comes to mind,
 * The claims in *Common.Claim* table are generated automatically at the end of each deployment (see the *DeployPackages.log*). The data-migration scripts are executed at the beginning of the deployment, so the inserted permissions will not include the new claims that will be generated at the end. Possible workaround is to insert the claims along with the permissions, but the AfterDeploy script is much better solutions.
 * This recommendation to use AfterDeploy scripts is specific to managing permissions. For most other data that needs to be initialized or hard-coded in the database, the DataMigration scripts are recommended way to go, because they will work well with future changes of the database structure.
 
-### Additional features
+### Automatic user management
 
-1. For **automatic synchronization** of Rhetos user roles with the user groups in **Active Directory**,
-  add the [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin package to the Rhetos application.
-  This will allow the domain administrator to indirectly set the user permissions in the Rhetos application.
-2. The permission check can be turned off in a development environment by setting the following values in the Rhetos server's *web.config* file:
-    * **"Security.AllClaimsForUsers"** - The value should contain a comma-separated list of users with server computer name (formatted `username@servername, ...`) that automatically have full permissions. Examples:
-      * Domain user on a shared server: `<add key="Security.AllClaimsForUsers" value="mydomain\myusername@myserver" />`.
-      * Local windows user without Windows domain: `<add key="Security.AllClaimsForUsers" value="mypc\myusername@mypc" />`.
-      * Forms Authentication user "admin": `<add key="Security.AllClaimsForUsers" value="admin@myserver" />`.
-    * **"BuiltinAdminOverride"** - If set to "True", the user that is a local administrator will have full permissions. This option works only for Windows authentication, and if the web server is able to check the user's Windows groups (usually in development environment). Use the following option otherwise.
-3. If **"AuthorizationAddUnregisteredPrincipals"** is set to "True" (in *web.config* file), an entry will automatically be inserted to the *Common.Principal* table for each new user on the first login. The created user will have no permissions by default, but the additional functionality can be added to automatically initialize the user's roles and permissions ([ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync), for example).
+For back-office business applications, an explicit user management is done
+by system administrator within the Rhetos application
+or any related external source such as Active Directory.
+
+For public web applications, we don't want to manage each user manually.
+For example, we might allow anyone to obtain a system account,
+or setup default permission for all users.
+
+The following built-in features may help with those business requirements:
+
+1. If `AuthorizationAddUnregisteredPrincipals` option is set to "True"
+   in *web.config* file, Rhetos will **automatically add each new user**
+   in table "Common.Principal" on the first login.
+   * The created user will have no permissions by default,
+   but the additional functionality can be added to automatically initialize
+   the user's roles and permissions (for example, by using the
+   [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin,
+   or adding some custom features on entity Common.Principal).
+2. For automatic synchronization of Rhetos user roles with
+   the **user groups in Active Directory**, add the
+   [ActiveDirectorySync](https://github.com/Rhetos/ActiveDirectorySync) plugin package
+   to the Rhetos application.
+   * This will allow the domain administrator to indirectly set the user permissions in the Rhetos application.
+
+### Suppressing permissions in a development environment
+
+The basic permission checking can be turned off in a development environment by setting the following options in the Rhetos server's *web.config* file.
+
+This options are useful only in an early stage of the project, while prototyping.
+They allow developers to test the new features without need to manage user, roles and permissions.
+
+1. **"Security.AllClaimsForUsers"** - The value should contain a comma-separated
+   list of users with server computer name (formatted `username@servername, ...`)
+   that will automatically have full permissions. Examples:
+   * Domain user on a shared server:
+     `<add key="Security.AllClaimsForUsers" value="mydomain\myusername@myserver" />`.
+   * Local windows user without Windows domain:
+     `<add key="Security.AllClaimsForUsers" value="mypc\myusername@mypc" />`.
+   * Forms Authentication user "admin":
+     `<add key="Security.AllClaimsForUsers" value="admin@myserver" />`.
+2. **"BuiltinAdminOverride"** - If set to "True",
+   the user that is a local administrator will have full permissions.
+   This option works only for Windows authentication, and if the web server
+   is able to check the user's Windows groups (usually in development environment).
+   Use the AllClaimsForUsers option otherwise.
 
 ## See also
 
-* [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization) - Other options for user authorization.
+* See other options for user authorization in the article [User authentication and authorization](https://github.com/Rhetos/Rhetos/wiki/User-authentication-and-authorization).

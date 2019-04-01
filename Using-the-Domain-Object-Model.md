@@ -25,10 +25,11 @@ Contents:
 3. [Reading the data](#reading-the-data)
    1. [Load data](#load-data)
    2. [Query data](#query-data)
-   3. [Filters](#filters)
-   4. [Applying multiple filters](#applying-multiple-filters)
-   5. [Subqueries](#subqueries)
-   6. [Overview of the read methods](#overview-of-the-read-methods)
+   3. [Understanding Entity Framework queries](#understanding-entity-framework-queries)
+   4. [Filters](#filters)
+   5. [Applying multiple filters](#applying-multiple-filters)
+   6. [Subqueries](#subqueries)
+   7. [Overview of the read methods](#overview-of-the-read-methods)
 4. [Modifying the data](#modifying-the-data)
    1. [Save data](#save-data)
    2. [Sketch a code snippet when developing a new Action](#sketch-a-code-snippet-when-developing-a-new-action)
@@ -223,6 +224,10 @@ query.ToList().Dump("Claims query items"); // With navigation properties.
 query.ToSimple().ToString().Dump("Claims ToSimple SQL"); // Same as above.
 query.ToSimple().ToList().Dump("Claims ToSimple items"); // Without navigation properties.
 ```
+
+* On an entity repository, `Load()` returns the equivalent result to `Query().ToSimple().ToArray()`.
+
+### Understanding Entity Framework queries
 
 To better understand how to write efficient LINQ queries,
 the following example demonstrates how Entity Framework evaluates the LINQ queries,
