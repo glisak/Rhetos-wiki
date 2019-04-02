@@ -15,25 +15,27 @@ Use any of the **SqlDependsOn...** concepts in an **SqlObject** to define other 
 
 If another object (**SqlQueryable**, for example) depends on the **SqlObject**, use **SqlDependsOnSqlObject** to make sure that the **SqlObject** is created in database before the view from the **SqlQueryable**.
 
-    Module Demo
+```C
+Module Demo
+{
+    Entity SomeEntity { Integer I; }
+
+    SqlObject SomeView
+        "CREATE VIEW Demo.V1 AS SELECT ID, I+1 AS I1 FROM Demo.SomeEntity"
+        "DROP VIEW Demo.V1"
     {
-        Entity SomeEntity { Integer I; }
-
-        SqlObject SomeView
-            "CREATE VIEW Demo.V1 AS SELECT ID, I+1 AS I1 FROM Demo.SomeEntity"
-            "DROP VIEW Demo.V1"
-        {
-            SqlDependsOn Demo.SomeEntity;
-        }
-
-        SqlQueryable SomeEntityAdditionalInfo
-            "SELECT ID, I1+1 AS I2 FROM Demo.V1"
-        {
-            Extends Demo.SomeEntity;
-            Integer I2;
-            SqlDependsOnSqlObject Demo.SomeView;
-        }
+        SqlDependsOn Demo.SomeEntity;
     }
+
+    SqlQueryable SomeEntityAdditionalInfo
+        "SELECT ID, I1+1 AS I2 FROM Demo.V1"
+    {
+        Extends Demo.SomeEntity;
+        Integer I2;
+        SqlDependsOnSqlObject Demo.SomeView;
+    }
+}
+```
 
 ## Creating database objects without transaction
 
@@ -43,23 +45,25 @@ By default, Rhetos will execute all SQL scripts in a transaction, unless the scr
 
 This example (from Rhetos unit tests) creates an SQL view, adding the transaction level (`@@TRANCOUNT`) as the suffix to the view name, to prove that the create script is executed without a transaction.
 
-    Module Demo
-    {
-        SqlObject WithoutTransaction
-            "
-                /*DatabaseGenerator:NoTransaction*/
-                DECLARE @createView nvarchar(max);
-                SET @createView = 'CREATE VIEW Demo.WithoutTransaction_' + CONVERT(NVARCHAR(max), @@TRANCOUNT) + ' AS SELECT a=1';
-                EXEC (@createView);
-            "
-            "
-                /*DatabaseGenerator:NoTransaction*/
-                DECLARE @dropView nvarchar(max);
-                SELECT @dropView = name FROM sys.objects o WHERE type = 'V' AND SCHEMA_NAME(schema_id) = 'Demo' AND name LIKE 'WithoutTransaction[_]%';
-                SET @dropView = 'DROP VIEW Demo.' + @dropView;
-                EXEC (@dropView);
-            ";
-    }
+```C
+Module Demo
+{
+    SqlObject WithoutTransaction
+        "
+            /*DatabaseGenerator:NoTransaction*/
+            DECLARE @createView nvarchar(max);
+            SET @createView = 'CREATE VIEW Demo.WithoutTransaction_' + CONVERT(NVARCHAR(max), @@TRANCOUNT) + ' AS SELECT a=1';
+            EXEC (@createView);
+        "
+        "
+            /*DatabaseGenerator:NoTransaction*/
+            DECLARE @dropView nvarchar(max);
+            SELECT @dropView = name FROM sys.objects o WHERE type = 'V' AND SCHEMA_NAME(schema_id) = 'Demo' AND name LIKE 'WithoutTransaction[_]%';
+            SET @dropView = 'DROP VIEW Demo.' + @dropView;
+            EXEC (@dropView);
+        ";
+}
+```
 
 ## Splitting an SQL script to multiple batches
 
@@ -72,19 +76,21 @@ when a single SQL script must be split to multiple batches that are executed sep
 
 Example:
 
-    Module Demo
-    {
-        SqlObject TwoViews
-            "
-                CREATE VIEW Demo.V1 AS SELECT C = 1;
-                {SPLIT SCRIPT}
-                CREATE VIEW Demo.V2 AS SELECT C FROM V1;
-            "
-            "
-                DROP VIEW Demo.V2;
-                DROP VIEW Demo.V1;
-            ";
-    }
+```C
+Module Demo
+{
+    SqlObject TwoViews
+        "
+            CREATE VIEW Demo.V1 AS SELECT C = 1;
+            {SPLIT SCRIPT}
+            CREATE VIEW Demo.V2 AS SELECT C FROM V1;
+        "
+        "
+            DROP VIEW Demo.V2;
+            DROP VIEW Demo.V1;
+        ";
+}
+```
 
 ## See also
 
